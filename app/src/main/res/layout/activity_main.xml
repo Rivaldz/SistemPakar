@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <CheckBox
+                android:id="@+id/checkBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Apakah Menyerang Pelepah" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Masukan Nilai Kepercayaan?"
+                />
+
+            <CheckBox
+                android:id="@+id/checkBox2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Apakah Menyerang Malai?" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Masukan Nilai Kepercayaan?"
+                />
+
+            <CheckBox
+                android:id="@+id/checkBox3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Apakah Menyerang Buah Yang Baru Tumbuh?" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:hint="Masukan Nilai Kepercayaan?"
+
+                />
+
+            <CheckBox
+                android:id="@+id/checkBox4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Apakah  Kecambah?" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Biji bercak coklat tetapi tepi berisi?" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Biji Kecambah Busuk?" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kecambah Mati?" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Detksi Penyakit" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
