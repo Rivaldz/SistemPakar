@@ -16,13 +16,13 @@
             android:orientation="vertical" >
 
             <CheckBox
-                android:id="@+id/checkBox"
+                android:id="@+id/checkBox1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Apakah Menyerang Pelepah" />
 
             <AutoCompleteTextView
-                android:id="@+id/autoCompleteTextView"
+                android:id="@+id/autoCompleteTextView1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Masukan Nilai Kepercayaan?"
@@ -109,10 +109,17 @@
                 android:hint="Masukan Nilai Kepercayaan?" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/buttonCalculate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Detksi Penyakit" />
+
+            <TextView
+                android:id="@+id/textViewResult"
+                android:textSize="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
