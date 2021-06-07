@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/item1"
+            android:title="Daftar Makanan" />
+        <item
+            android:id="@+id/item2"
+            android:title="Daftar Minuman" />
+        <item
+            android:id="@+id/item3"
+            android:title="Daftar Cemilan" />
+        <item
+            android:id="@+id/item4"
+            android:title="Daftar Polisi" />
+    </group>
+
+    <item android:title="Komunikasi">
+        <menu>
+            <item
+                android:id="@+id/manis1"
+                android:title="Pengaturan" />
+            <item
+                android:id="@+id/manis2"
+                android:title="Bantuan" />
+        </menu>
+    </item>
+
+
+</menu>
