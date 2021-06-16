@@ -10,23 +10,34 @@ public class Fuzzy {
         System.out.println(c);
 
         //Ringan
-        if (a >= 0.3);
+        double hasilRingan;
+        if (a >= 0.4);
+             hasilRingan = 0;
 
         if (0.4 >= a && a >= 0.4){
-            double hasil = (0.4 - a)  / (0.4 - 0.3);
+            hasilRingan = (0.4 - a)  / (0.4 - 0.3);
         }
-        if (a < 0.4);
+        if (a <= 0.4);
+            hasilRingan = 1;
 
         //Sedang
-        if ();
-        if ();
-        if ();
-        if ();
+        double hasilSedang;
+        if (a <= 0.3 || a >= 0.7);
+            hasilSedang = 0;
+
+        if (0.3 < a && a < 0.4){
+           hasilSedang = (a - 0.3)/0.3;
+        }
+        if (0.4 < a && a < 0.7){
+           hasilSedang = (0.7 - a)/0.3;
+        }
+        if (a == 0.4);
+            hasilSedang = 0;
 
         //Parah
-        if ();
-        if ();
-        if ();
+        if (a < 0.4 );
+        if (0.6 < a && a < 1);
+        if (a >= 1);
     }
 
 }
