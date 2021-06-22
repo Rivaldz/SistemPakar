@@ -278,7 +278,7 @@ public class MainActivity extends AppCompatActivity {
                    // logic for fuzzy mamdani
 
                    Fuzzy fuzzy= new Fuzzy();
-                   fuzzy.diseaseBla(valueUserGejala1, valueUserGejala2, valueUserGejala4);
+                   fuzzy.diseaseBla(valueUserGejala1);
                    String severity = "Tingakt keparahan Penyakit " + "\n" + endResult + " %";
                }
 
