@@ -8,7 +8,9 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.DialogInterface;
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -20,10 +22,29 @@ import android.widget.Toast;
 
 import com.example.model.Fuzzy;
 
+import com.example.model.Gejala;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String TAG = "MainActivity";
+
+//    private  DatabaseReference reference;
+
+    private ArrayList<Gejala> dataGejala;
+//    private ArrayList<Gejala> listGejala;
+    ArrayList<String> showDataArray= new ArrayList<String>();
+
+
     // this navigation layout
+
     private DrawerLayout draw;
 
     //this CF
@@ -43,8 +64,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         //this drawable layout
         if (getSupportActionBar() != null) {
@@ -286,6 +311,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        getData();
+        showData();
+
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -308,5 +336,41 @@ public class MainActivity extends AppCompatActivity {
     private void openDrawer() {
         draw.setDrawerListener(null);
         draw.openDrawer(GravityCompat.START);
+    }
+
+    private void getData(){
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference();
+
+
+
+        myRef.child("students").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                dataGejala = new ArrayList<>();
+                for ( DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    System.out.println("test broww" + dataSnapshot.getKey());
+                    Gejala gejala  = dataSnapshot.getValue(Gejala.class);
+
+//                    showDataArray.add(gejala.getName());
+//                    showDataArray.add(gejala.getNis());
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void showData(){
+//        listGejala = new ArrayList<>();
+//        String namaGejala = showDataArray.get(0);
+        Gejala gejalaShow = new Gejala();
+        System.out.println("ini data" + gejalaShow.getName());
     }
 }
