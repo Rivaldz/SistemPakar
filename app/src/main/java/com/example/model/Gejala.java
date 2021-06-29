@@ -1,7 +1,16 @@
 package com.example.model;
 
 public class Gejala {
-    private String name, nis;
+    private String age, name, nis;
+
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
 
     public String getName() {
         return name;
@@ -22,7 +31,8 @@ public class Gejala {
     public Gejala() {
     }
 
-    public Gejala(String name, String nis) {
+    public Gejala(String age, String name, String nis) {
+        this.age = age;
         this.name = name;
         this.nis = nis;
     }
@@ -30,7 +40,8 @@ public class Gejala {
     @Override
     public String toString() {
         return "Gejala{" +
-                "name='" + name + '\'' +
+                "age='" + age + '\'' +
+                ", name='" + name + '\'' +
                 ", nis='" + nis + '\'' +
                 '}';
     }

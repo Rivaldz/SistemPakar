@@ -1,6 +1,7 @@
 package com.example.diagnosahamapadi;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +25,7 @@ import com.example.model.Fuzzy;
 
 import com.example.model.Gejala;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,6 +33,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,9 +41,12 @@ public class MainActivity extends AppCompatActivity {
 
 //    private  DatabaseReference reference;
 
-    private ArrayList<Gejala> dataGejala;
+//    private ArrayList<Gejala> dataGejala;
 //    private ArrayList<Gejala> listGejala;
-    ArrayList<String> showDataArray= new ArrayList<String>();
+    List<Gejala> gejalaList = new ArrayList<>();
+    DatabaseReference databaseReference;
+
+
 
 
     // this navigation layout
@@ -286,7 +292,11 @@ public class MainActivity extends AppCompatActivity {
                    double valueGejala2 = 0.6;
                    double valueGejala4 = 0.8;
 
-                   double valueUserGejala1 = Double.parseDouble(txxtNilaiGejala1.getText().toString());
+                   double valueUserGejala1 = 0;
+
+                   valueUserGejala1 = Double.parseDouble(txxtNilaiGejala1.getText().toString());
+
+
                    double valueUserGejala2 = Double.parseDouble(txxtNilaiGejala2.getText().toString());
                    double valueUserGejala4 = Double.parseDouble(txxtNilaiGejala4.getText().toString());
 
@@ -312,7 +322,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         getData();
-        showData();
+//        showData();
 
     }
 
@@ -340,24 +350,18 @@ public class MainActivity extends AppCompatActivity {
 
     private void getData(){
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference();
-
-
-
-        myRef.child("students").addValueEventListener(new ValueEventListener() {
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("students");
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                dataGejala = new ArrayList<>();
-                for ( DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    System.out.println("test broww" + dataSnapshot.getKey());
-                    Gejala gejala  = dataSnapshot.getValue(Gejala.class);
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
 
-//                    showDataArray.add(gejala.getName());
-//                    showDataArray.add(gejala.getNis());
-
-
+                    Gejala gejala = dataSnapshot.getValue(Gejala.class);
+                    gejalaList.add(gejala);
                 }
+
+                showData();
+
             }
 
             @Override
@@ -365,12 +369,58 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+//        databaseReference.addValueEventListener(new ChildEventListener() {
+//            @Override
+//            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+//
+//                    Gejala gejala = dataSnapshot.getValue(Gejala.class);
+//                    gejalaList.add(gejala);
+//                }
+//
+//                showData();
+//
+////                for (int j = 0; j < 3; j++) {
+////                    System.out.println("ini data ke " + j + gejalaList.get(j).getName());
+////                }
+//
+//            }
+//
+//            @Override
+//            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+////                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+////
+////                    Gejala gejala = dataSnapshot.getValue(Gejala.class);
+////                    gejalaList.add(gejala);
+////                }
+////
+////                showData();
+//            }
+//
+//            @Override
+//            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+//
+//            }
+//
+//            @Override
+//            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+
+
     }
 
     private void showData(){
-//        listGejala = new ArrayList<>();
-//        String namaGejala = showDataArray.get(0);
-        Gejala gejalaShow = new Gejala();
-        System.out.println("ini data" + gejalaShow.getName());
+        for (int j = 0; j < 3; j++) {
+            System.out.println("ini data ke " + j + gejalaList.get(j).getName());
+        }
+//        System.out.println("ini data " + gejalaList.get(2).getName());
     }
 }
