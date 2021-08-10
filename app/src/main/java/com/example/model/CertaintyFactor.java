@@ -37,8 +37,8 @@ public class CertaintyFactor {
             namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
             // logic for fuzzy mamdani
 
-            Fuzzy fuzzy= new Fuzzy();
-            fuzzy.diseaseBla(valueUserGejala1);
+//            Fuzzy fuzzy= new Fuzzy();
+//            fuzzy.diseaseBla(valueUserGejala1);
             String severity = "Tingakt keparahan Penyakit " + "\n" + endResult + " %";
         }
     }

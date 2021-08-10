@@ -428,6 +428,7 @@ public class MainActivity extends AppCompatActivity {
                            String endResult = String.valueOf((combine_CFold_CF4 * 100));
 
                            Fuzzy fuzzy = new Fuzzy();
+                           fuzzy.penyakitH001(valueGejala1, valueGejala2, valueGejala4);
 
                            namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
                            Log.i("This value gejala",stringBobotPenyakit1.get(2));
