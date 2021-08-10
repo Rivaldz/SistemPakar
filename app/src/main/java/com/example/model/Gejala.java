@@ -1,48 +1,39 @@
 package com.example.model;
 
+
 public class Gejala {
-    private String age, name, nis;
+    String BobotGejala,KodeGejala,NamaGejala;
 
-
-    public String getAge() {
-        return age;
-    }
-
-    public void setAge(String age) {
-        this.age = age;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getNis() {
-        return nis;
-    }
-
-    public void setNis(String nis) {
-        this.nis = nis;
+    public Gejala( String kodeGejala, String namaGejala) {
+//        BobotGejala = bobotGejala;
+        KodeGejala = kodeGejala;
+        NamaGejala = namaGejala;
     }
 
     public Gejala() {
     }
 
-    public Gejala(String age, String name, String nis) {
-        this.age = age;
-        this.name = name;
-        this.nis = nis;
+//    public String getBobotGejala() {
+//        return BobotGejala;
+//    }
+
+//    public void setBobotGejala(String bobotGejala) {
+//        BobotGejala = bobotGejala;
+//    }
+
+    public String getKodeGejala() {
+        return KodeGejala;
     }
 
-    @Override
-    public String toString() {
-        return "Gejala{" +
-                "age='" + age + '\'' +
-                ", name='" + name + '\'' +
-                ", nis='" + nis + '\'' +
-                '}';
+    public void setKodeGejala(String kodeGejala) {
+        KodeGejala = kodeGejala;
+    }
+
+    public String getNamaGejala() {
+        return NamaGejala;
+    }
+
+    public void setNamaGejala(String namaGejala) {
+        NamaGejala = namaGejala;
     }
 }

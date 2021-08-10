@@ -1,7 +1,7 @@
-package com.example.model;
+package com.example.fuzzy;//package com.example.model;
 
 public class Fuzzy {
-    public void diseaseBla(double x){
+    public void penyakitH001(double x){
 
         System.out.println("ini adalah hasil nilai " );
 
@@ -32,11 +32,11 @@ public class Fuzzy {
         }
 
         if (0.4 <= x && x <= 0.6){
-           hasilSedang = (x - 0.4)/(0.6 - 0.4);
+            hasilSedang = (x - 0.4)/(0.6 - 0.4);
         }
 
         if (0.6 <= x && x <= 0.8){
-           hasilSedang = (0.8 - x) / (0.8 - 0.6);
+            hasilSedang = (0.8 - x) / (0.8 - 0.6);
         }
 //        if (a == 0.4);
 //            hasilSedang = 0;

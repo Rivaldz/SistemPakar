@@ -7,6 +7,20 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+<!--    <androidx.recyclerviewiew.widget.RecyclerView-->
+<!--        android:id="@+id/recycler"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:scrollbars="vertical"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        >-->
+
+
+<!--    </androidx.recyclerviewiew.widget.RecyclerView>-->
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -16,11 +30,19 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Button"
+                android:onClick="buttonData"
+                />
+
             <CheckBox
                 android:id="@+id/checkBox1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Apakah Menyerang Pelepah" />
+                android:text="1.Daun pucuk tanaman layu?" />
 
             <AutoCompleteTextView
                 android:id="@+id/autoCompleteTextView1"
@@ -33,7 +55,7 @@
                 android:id="@+id/checkBox2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Apakah Menyerang Malai?" />
+                android:text="2.Daun berwarna putih tinggal lapisan epidermisnya " />
 
             <AutoCompleteTextView
                 android:id="@+id/autoCompleteTextView2"
@@ -46,13 +68,12 @@
                 android:id="@+id/checkBox3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Apakah Menyerang Buah Yang Baru Tumbuh?" />
+                android:text="3.Batang Mudah di cabut" />
 
             <AutoCompleteTextView
                 android:id="@+id/autoCompleteTextView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:hint="Masukan Nilai Kepercayaan?"
 
                 />
@@ -61,7 +82,7 @@
                 android:id="@+id/checkBox4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Apakah  Kecambah?" />
+                android:text="4.Daun mengering" />
 
             <AutoCompleteTextView
                 android:id="@+id/autoCompleteTextView4"
@@ -74,7 +95,7 @@
                 android:id="@+id/checkBox5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Biji bercak coklat tetapi tepi berisi?" />
+                android:text="5.Seluruh batang kering" />
 
             <AutoCompleteTextView
                 android:id="@+id/autoCompleteTextView5"
@@ -87,7 +108,7 @@
                 android:id="@+id/checkBox6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Biji Kecambah Busuk?" />
+                android:text="6.Pucuk daun berwarna coklat dan mudah di cabut" />
 
             <AutoCompleteTextView
                 android:id="@+id/autoCompleteTextView6"
@@ -100,13 +121,166 @@
                 android:id="@+id/checkBox7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Kecambah Mati?" />
+                android:text="7.Adanya warna putih pada daun di pertanaman" />
 
             <AutoCompleteTextView
                 android:id="@+id/autoCompleteTextView7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="Masukan Nilai Kepercayaan?" />
 
+            <CheckBox
+                android:id="@+id/checkBox8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="8.Daun terlipat tubular" />
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="9.Ujung daun adakalanya di ikat ke bagian basal daun" />
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="10.Larva memakan jaringan hijau daun dari dalam" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="11.Bagian bawah daun berwarna putih" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="12.Malai mudah di cabut" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="13.Terdapat bekas gesekan ulat pada pangkal batang" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="14.Daun berwarna kekuningan" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="15.Batang tanaman berwarna kuning" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="16.Seluruh tanaman mengering bagaikan terbakar" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox17"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="17.Tanaman mengalami kerdil" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView17"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="18.Tanaman menguning dan cepat sekali kering" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox19"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="19.Terdapat nimfa muda yang putih dan berubah menjadi hijau" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView19"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="20. Daun padi berwarna kuning sampe orange" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:hint="Masukan Nilai Kepercayaan?" />
 
             <Button

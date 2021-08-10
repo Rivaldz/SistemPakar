@@ -7,9 +7,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
-import android.nfc.Tag;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -21,8 +23,11 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.model.Fuzzy;
 
+import com.example.diagnosahamapadi.adapter.RecyclerViewAdapter;
+//import com.example.model.Fuzzy;
+import com.example.fuzzy.Fuzzy;
+import com.example.model.DataClass;
 import com.example.model.Gejala;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.ChildEventListener;
@@ -32,6 +37,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,25 +45,26 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
-//    private  DatabaseReference reference;
-
-//    private ArrayList<Gejala> dataGejala;
-//    private ArrayList<Gejala> listGejala;
-    List<Gejala> gejalaList = new ArrayList<>();
+    List<DataClass> gejalaList = new ArrayList<>();
     DatabaseReference databaseReference;
+    private ArrayList<Gejala> dataGejala;
 
-
+    private RecyclerView.Adapter adapter;
+    private RecyclerView recyclerView;
 
 
     // this navigation layout
-
     private DrawerLayout draw;
 
     //this CF
     Button btnProsess;
     TextView tcOutput;
-    CheckBox chkGejala1,chkGejala2,chkGejala3,chkGejala4,chkGejala5,chkGejala6,chkGejala7;
-    AutoCompleteTextView txxtNilaiGejala1,txxtNilaiGejala2,txxtNilaiGejala3,txxtNilaiGejala4,txxtNilaiGejala5,txxtNilaiGejala6,txxtNilaiGejala7;
+    public CheckBox chkGejala1,chkGejala2,chkGejala3,chkGejala4,chkGejala5,chkGejala6,chkGejala7,chkGejala8,chkGejala9,chkGejala10,chkGejala11,chkGejala12,chkGejala13
+            ,chkGejala14,chkGejala15,chkGejala16,chkGejala17,chkGejala18,chkGejala19,chkGejala20,chkGejala21,chkGejala22,chkGejala23,chkGejala24,chkGejala25,chkGejala26;
+
+    public AutoCompleteTextView txxtNilaiGejala1,txxtNilaiGejala2,txxtNilaiGejala3,txxtNilaiGejala4,txxtNilaiGejala5,txxtNilaiGejala6,txxtNilaiGejala7,txxtNilaiGejala8
+            ,txxtNilaiGejala9,txxtNilaiGejala10,txxtNilaiGejala11,txxtNilaiGejala12,txxtNilaiGejala13,txxtNilaiGejala14,txxtNilaiGejala15,txxtNilaiGejala16,txxtNilaiGejala17
+            ,txxtNilaiGejala18,txxtNilaiGejala19,txxtNilaiGejala20;
 
 
     String[] trustedValueGej1 = {"","0","0.2","0.4","0.6","0.8","1"};
@@ -67,6 +74,23 @@ public class MainActivity extends AppCompatActivity {
     String[] trustedValueGej5 = {"","0","0.2","0.4","0.6","0.8","1"};
     String[] trustedValueGej6 = {"","0","0.2","0.4","0.6","0.8","1"};
     String[] trustedValueGej7 = {"","0","0.2","0.4","0.6","0.8","1"};
+    String[] trustedValueGej8 = {"","0","0.2","0.4","0.6","0.8","1"};
+    String[] trustedValueGej9 = {"","0","0.2","0.4","0.6","0.8","1"};
+    String[] trustedValueGej10 = {"","0","0.2","0.4","0.6","0.8","1"};
+    String[] trustedValueGej11 = {"","0","0.2","0.4","0.6","0.8","1"};
+    String[] trustedValueGej12 = {"","0","0.2","0.4","0.6","0.8","1"};
+    String[] trustedValueGej13 = {"","0","0.2","0.4","0.6","0.8","1"};
+    String[] trustedValueGej14 = {"","0","0.2","0.4","0.6","0.8","1"};
+    String[] trustedValueGej15 = {"","0","0.2","0.4","0.6","0.8","1"};
+    String[] trustedValueGej16 = {"","0","0.2","0.4","0.6","0.8","1"};
+    String[] trustedValueGej17 = {"","0","0.2","0.4","0.6","0.8","1"};
+    String[] trustedValueGej18 = {"","0","0.2","0.4","0.6","0.8","1"};
+    String[] trustedValueGej19 = {"","0","0.2","0.4","0.6","0.8","1"};
+    String[] trustedValueGej20 = {"","0","0.2","0.4","0.6","0.8","1"};
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,8 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
+//        recyclerView = findViewById(R.id.recycler);
 
         //this drawable layout
         if (getSupportActionBar() != null) {
@@ -138,7 +161,10 @@ public class MainActivity extends AppCompatActivity {
         chkGejala5 = findViewById(R.id.checkBox5);
         chkGejala6 = findViewById(R.id.checkBox6);
         chkGejala7 = findViewById(R.id.checkBox7);
-
+        chkGejala8 = findViewById(R.id.checkBox8);
+        chkGejala9 = findViewById(R.id.checkBox9);
+        chkGejala10 = findViewById(R.id.checkBox10);
+        chkGejala11 = findViewById(R.id.checkBox11);
 
         txxtNilaiGejala1 = findViewById(R.id.autoCompleteTextView1);
         txxtNilaiGejala2 = findViewById(R.id.autoCompleteTextView2);
@@ -147,6 +173,14 @@ public class MainActivity extends AppCompatActivity {
         txxtNilaiGejala5 = findViewById(R.id.autoCompleteTextView5);
         txxtNilaiGejala6 = findViewById(R.id.autoCompleteTextView6);
         txxtNilaiGejala7 = findViewById(R.id.autoCompleteTextView7);
+        txxtNilaiGejala8 = findViewById(R.id.autoCompleteTextView8);
+        txxtNilaiGejala9 = findViewById(R.id.autoCompleteTextView9);
+        txxtNilaiGejala10 = findViewById(R.id.autoCompleteTextView10);
+        txxtNilaiGejala11 = findViewById(R.id.autoCompleteTextView11);
+        txxtNilaiGejala12 = findViewById(R.id.autoCompleteTextView12);
+        txxtNilaiGejala13 = findViewById(R.id.autoCompleteTextView13);
+        txxtNilaiGejala14 = findViewById(R.id.autoCompleteTextView14);
+
 
         final ArrayAdapter<String> adapterGejala1 = new ArrayAdapter<String>
                 (this,android.R.layout.select_dialog_item, trustedValueGej1);
@@ -182,6 +216,41 @@ public class MainActivity extends AppCompatActivity {
                 (this,android.R.layout.select_dialog_item, trustedValueGej1);
         txxtNilaiGejala7.setThreshold(1);
         txxtNilaiGejala7.setAdapter(adapterGejala7);
+
+        final ArrayAdapter<String> adapterGejala8 = new ArrayAdapter<String>
+                (this,android.R.layout.select_dialog_item, trustedValueGej1);
+        txxtNilaiGejala8.setThreshold(1);
+        txxtNilaiGejala8.setAdapter(adapterGejala8);
+
+        final ArrayAdapter<String> adapterGejala9 = new ArrayAdapter<String>
+                (this,android.R.layout.select_dialog_item, trustedValueGej1);
+        txxtNilaiGejala9.setThreshold(1);
+        txxtNilaiGejala9.setAdapter(adapterGejala9);
+
+        final ArrayAdapter<String> adapterGejala10 = new ArrayAdapter<String>
+                (this,android.R.layout.select_dialog_item, trustedValueGej1);
+        txxtNilaiGejala10.setThreshold(1);
+        txxtNilaiGejala10.setAdapter(adapterGejala10);
+
+        final ArrayAdapter<String> adapterGejala11 = new ArrayAdapter<String>
+                (this,android.R.layout.select_dialog_item, trustedValueGej1);
+        txxtNilaiGejala11.setThreshold(1);
+        txxtNilaiGejala11.setAdapter(adapterGejala11);
+
+        final ArrayAdapter<String> adapterGejala12 = new ArrayAdapter<String>
+                (this,android.R.layout.select_dialog_item, trustedValueGej1);
+        txxtNilaiGejala12.setThreshold(1);
+        txxtNilaiGejala12.setAdapter(adapterGejala12);
+
+        final ArrayAdapter<String> adapterGejala13 = new ArrayAdapter<String>
+                (this,android.R.layout.select_dialog_item, trustedValueGej1);
+        txxtNilaiGejala13.setThreshold(1);
+        txxtNilaiGejala13.setAdapter(adapterGejala13);
+
+        final ArrayAdapter<String> adapterGejala14 = new ArrayAdapter<String>
+                (this,android.R.layout.select_dialog_item, trustedValueGej1);
+        txxtNilaiGejala14.setThreshold(1);
+        txxtNilaiGejala14.setAdapter(adapterGejala14);
 
         txxtNilaiGejala1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -281,48 +350,104 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnProsess.setOnClickListener(new View.OnClickListener() {
+         txxtNilaiGejala8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               String namaPentakit = "penyakit";
-                //ex deases 1
-               if (chkGejala1.isChecked() && chkGejala2.isChecked() && chkGejala4.isChecked()){
-
-                   double valueGejala1 = 0.2;
-                   double valueGejala2 = 0.6;
-                   double valueGejala4 = 0.8;
-
-                   double valueUserGejala1 = 0;
-
-                   valueUserGejala1 = Double.parseDouble(txxtNilaiGejala1.getText().toString());
-
-
-                   double valueUserGejala2 = Double.parseDouble(txxtNilaiGejala2.getText().toString());
-                   double valueUserGejala4 = Double.parseDouble(txxtNilaiGejala4.getText().toString());
-
-                   double resultCalculateGej1 = valueGejala1 * valueUserGejala1;
-                   double resultCalculateGej2 = valueGejala2 * valueUserGejala2;
-                   double resultCalculateGej4 = valueGejala4 * valueUserGejala4;
-
-                   double combine_CF1_CF2 = resultCalculateGej1 + resultCalculateGej2 * (1 - resultCalculateGej1);
-                   double combine_CFold_CF4 = combine_CF1_CF2 + resultCalculateGej4 * (1 - combine_CF1_CF2);
-
-                   String endResult = String.valueOf((combine_CFold_CF4 * 100));
-
-                   namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
-                   // logic for fuzzy mamdani
-
-                   Fuzzy fuzzy= new Fuzzy();
-                   fuzzy.diseaseBla(valueUserGejala1);
-                   String severity = "Tingakt keparahan Penyakit " + "\n" + endResult + " %";
-               }
-
-               tcOutput.setText(""+namaPentakit);
+                new AlertDialog.Builder(MainActivity.this).setTitle("Pilihlah Nilai Gejala ").
+                        setAdapter(adapterGejala8, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                txxtNilaiGejala8.setText(trustedValueGej8[i].toString());
+                                dialogInterface.dismiss();
+                            }
+                        }).create().show();;
             }
         });
 
-        getData();
-//        showData();
+         txxtNilaiGejala9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AlertDialog.Builder(MainActivity.this).setTitle("Pilihlah Nilai Gejala ").
+                        setAdapter(adapterGejala9, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                txxtNilaiGejala9.setText(trustedValueGej9[i].toString());
+                                dialogInterface.dismiss();
+                            }
+                        }).create().show();;
+            }
+        });
+
+         txxtNilaiGejala10.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AlertDialog.Builder(MainActivity.this).setTitle("Pilihlah Nilai Gejala ").
+                        setAdapter(adapterGejala10, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                txxtNilaiGejala10.setText(trustedValueGej10[i].toString());
+                                dialogInterface.dismiss();
+                            }
+                        }).create().show();;
+            }
+        });
+
+        btnProsess.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                //Penyakit1
+               if (chkGejala1.isChecked() && chkGejala2.isChecked() && chkGejala4.isChecked()){
+                    List<String>stringBobotPenyakit1 = new ArrayList<>();
+
+                   databaseReference = FirebaseDatabase.getInstance().getReference().child("Database").child("Pentakit T01");
+                   databaseReference.addValueEventListener(new ValueEventListener() {
+                       @Override
+                       public void onDataChange(@NonNull DataSnapshot snapshot) {
+                           for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                               DataClass gejala = dataSnapshot.getValue(DataClass.class);
+                               stringBobotPenyakit1.add(gejala.getBobotGejala());
+
+                           }
+                           String namaPentakit = "penyakit";
+                           double valueUserGejala1 = Double.parseDouble(txxtNilaiGejala1.getText().toString());
+                           double valueUserGejala2 = Double.parseDouble(txxtNilaiGejala2.getText().toString());
+                           double valueUserGejala4 = Double.parseDouble(txxtNilaiGejala4.getText().toString());
+
+                           double valueGejala1 = Double.parseDouble(stringBobotPenyakit1.get(0));
+                           double valueGejala2 = Double.parseDouble(stringBobotPenyakit1.get(1));
+                           double valueGejala4 = Double.parseDouble(stringBobotPenyakit1.get(2));
+
+                           double resultCalculateGej1 = valueGejala1 * valueUserGejala1;
+                           double resultCalculateGej2 = valueGejala2 * valueUserGejala2;
+                           double resultCalculateGej4 = valueGejala4 * valueUserGejala4;
+
+                           double combine_CF1_CF2 = resultCalculateGej1 + resultCalculateGej2 * (1 - resultCalculateGej1);
+                           double combine_CFold_CF4 = combine_CF1_CF2 + resultCalculateGej4 * (1 - combine_CF1_CF2);
+
+                           String endResult = String.valueOf((combine_CFold_CF4 * 100));
+
+                           Fuzzy fuzzy = new Fuzzy();
+
+                           namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
+                           Log.i("This value gejala",stringBobotPenyakit1.get(2));
+                           tcOutput.setText(""+namaPentakit);
+                       }
+
+                       @Override
+                       public void onCancelled(@NonNull DatabaseError error) {
+
+                       }
+                   });
+
+               }
+
+               if (chkGejala1.isChecked()){
+
+               }
+
+            }
+        });
 
     }
 
@@ -348,79 +473,7 @@ public class MainActivity extends AppCompatActivity {
         draw.openDrawer(GravityCompat.START);
     }
 
-    private void getData(){
-
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("students");
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-
-                    Gejala gejala = dataSnapshot.getValue(Gejala.class);
-                    gejalaList.add(gejala);
-                }
-
-                showData();
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-//        databaseReference.addValueEventListener(new ChildEventListener() {
-//            @Override
-//            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-//                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-//
-//                    Gejala gejala = dataSnapshot.getValue(Gejala.class);
-//                    gejalaList.add(gejala);
-//                }
-//
-//                showData();
-//
-////                for (int j = 0; j < 3; j++) {
-////                    System.out.println("ini data ke " + j + gejalaList.get(j).getName());
-////                }
-//
-//            }
-//
-//            @Override
-//            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-////                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-////
-////                    Gejala gejala = dataSnapshot.getValue(Gejala.class);
-////                    gejalaList.add(gejala);
-////                }
-////
-////                showData();
-//            }
-//
-//            @Override
-//            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-//
-//            }
-//
-//            @Override
-//            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-
-
-    }
-
-    private void showData(){
-        for (int j = 0; j < 3; j++) {
-            System.out.println("ini data ke " + j + gejalaList.get(j).getName());
-        }
-//        System.out.println("ini data " + gejalaList.get(2).getName());
+    public void buttonData(View view) {
+        startActivity(new Intent(MainActivity.this, MyListData.class));
     }
 }
