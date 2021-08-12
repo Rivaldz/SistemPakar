@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.example.diagnosahamapadi.adapter.RecyclerViewAdapter;
 //import com.example.model.Fuzzy;
+import com.example.fuzzy.FungsiImplikasi;
 import com.example.fuzzy.Fuzzy;
 import com.example.model.DataClass;
 import com.example.model.Gejala;
@@ -428,8 +429,12 @@ public class MainActivity extends AppCompatActivity {
                            String endResult = String.valueOf((combine_CFold_CF4 * 100));
 
                            Fuzzy fuzzy = new Fuzzy();
-                           fuzzy.penyakitH001(valueGejala1, valueGejala2, valueGejala4);
-
+                           // counting fuzzyfikasi
+                           fuzzy.penyakitH007_User(valueUserGejala1, valueUserGejala2, valueUserGejala4);
+                           fuzzy.penyakitH007_Pakar(valueGejala1, valueGejala2, valueGejala4);
+                           // fungsi implikasi
+                           FungsiImplikasi fungsiImplikasi = new FungsiImplikasi();
+                           fungsiImplikasi.penyakitH007();
                            namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
                            Log.i("This value gejala",stringBobotPenyakit1.get(2));
                            tcOutput.setText(""+namaPentakit);
