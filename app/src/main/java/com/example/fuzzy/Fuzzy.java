@@ -155,7 +155,7 @@ public class Fuzzy {
 
             }
             ModelFuzzyDB modelFuzzyDB = new ModelFuzzyDB(String.valueOf(hasilRingan),String.valueOf(hasilSedang),String.valueOf(hasilParah));
-//            mDatabase.child("Fuzzyfikasi").child("pakar").child(String.valueOf(j)).setValue(modelFuzzyDB);
+            mDatabase.child("Fuzzyfikasi").child("pakar").child(String.valueOf(j)).setValue(modelFuzzyDB);
 
         }
     }

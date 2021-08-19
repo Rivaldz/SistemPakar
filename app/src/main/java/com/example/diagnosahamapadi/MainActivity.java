@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.example.diagnosahamapadi.adapter.RecyclerViewAdapter;
 //import com.example.model.Fuzzy;
+import com.example.fuzzy.Defuzzyfikasi;
 import com.example.fuzzy.FungsiImplikasi;
 import com.example.fuzzy.Fuzzy;
 import com.example.model.DataClass;
@@ -41,6 +42,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -68,26 +70,26 @@ public class MainActivity extends AppCompatActivity {
             ,txxtNilaiGejala18,txxtNilaiGejala19,txxtNilaiGejala20;
 
 
-    String[] trustedValueGej1 = {"","0","0.2","0.4","0.6","0.8","1"};
-    String[] trustedValueGej2 = {"","0","0.2","0.4","0.6","0.8","1"};
-    String[] trustedValueGej3 = {"","0","0.2","0.4","0.6","0.8","1"};
-    String[] trustedValueGej4 = {"","0","0.2","0.4","0.6","0.8","1"};
-    String[] trustedValueGej5 = {"","0","0.2","0.4","0.6","0.8","1"};
-    String[] trustedValueGej6 = {"","0","0.2","0.4","0.6","0.8","1"};
-    String[] trustedValueGej7 = {"","0","0.2","0.4","0.6","0.8","1"};
-    String[] trustedValueGej8 = {"","0","0.2","0.4","0.6","0.8","1"};
-    String[] trustedValueGej9 = {"","0","0.2","0.4","0.6","0.8","1"};
-    String[] trustedValueGej10 = {"","0","0.2","0.4","0.6","0.8","1"};
-    String[] trustedValueGej11 = {"","0","0.2","0.4","0.6","0.8","1"};
-    String[] trustedValueGej12 = {"","0","0.2","0.4","0.6","0.8","1"};
-    String[] trustedValueGej13 = {"","0","0.2","0.4","0.6","0.8","1"};
-    String[] trustedValueGej14 = {"","0","0.2","0.4","0.6","0.8","1"};
-    String[] trustedValueGej15 = {"","0","0.2","0.4","0.6","0.8","1"};
-    String[] trustedValueGej16 = {"","0","0.2","0.4","0.6","0.8","1"};
-    String[] trustedValueGej17 = {"","0","0.2","0.4","0.6","0.8","1"};
-    String[] trustedValueGej18 = {"","0","0.2","0.4","0.6","0.8","1"};
-    String[] trustedValueGej19 = {"","0","0.2","0.4","0.6","0.8","1"};
-    String[] trustedValueGej20 = {"","0","0.2","0.4","0.6","0.8","1"};
+    String[] trustedValueGej1 = {"","0.2","0.4","0.6","0.8","1"};
+    String[] trustedValueGej2 = {"","0.2","0.4","0.6","0.8","1"};
+    String[] trustedValueGej3 = {"","0.2","0.4","0.6","0.8","1"};
+    String[] trustedValueGej4 = {"","0.2","0.4","0.6","0.8","1"};
+    String[] trustedValueGej5 = {"","0.2","0.4","0.6","0.8","1"};
+    String[] trustedValueGej6 = {"","0.2","0.4","0.6","0.8","1"};
+    String[] trustedValueGej7 = {"","0.2","0.4","0.6","0.8","1"};
+    String[] trustedValueGej8 = {"","0.2","0.4","0.6","0.8","1"};
+    String[] trustedValueGej9 = {"","0.2","0.4","0.6","0.8","1"};
+    String[] trustedValueGej10 = {"","0.2","0.4","0.6","0.8","1"};
+    String[] trustedValueGej11 = {"","0.2","0.4","0.6","0.8","1"};
+    String[] trustedValueGej12 = {"","0.2","0.4","0.6","0.8","1"};
+    String[] trustedValueGej13 = {"","0.2","0.4","0.6","0.8","1"};
+    String[] trustedValueGej14 = {"","0.2","0.4","0.6","0.8","1"};
+    String[] trustedValueGej15 = {"","0.2","0.4","0.6","0.8","1"};
+    String[] trustedValueGej16 = {"","0.2","0.4","0.6","0.8","1"};
+    String[] trustedValueGej17 = {"","0.2","0.4","0.6","0.8","1"};
+    String[] trustedValueGej18 = {"","0.2","0.4","0.6","0.8","1"};
+    String[] trustedValueGej19 = {"","0.2","0.4","0.6","0.8","1"};
+    String[] trustedValueGej20 = {"","0.2","0.4","0.6","0.8","1"};
 
 
 
@@ -432,11 +434,26 @@ public class MainActivity extends AppCompatActivity {
                            // counting fuzzyfikasi
                            fuzzy.penyakitH007_User(valueUserGejala1, valueUserGejala2, valueUserGejala4);
                            fuzzy.penyakitH007_Pakar(valueGejala1, valueGejala2, valueGejala4);
+
                            // fungsi implikasi
-                           FungsiImplikasi fungsiImplikasi = new FungsiImplikasi();
-                           fungsiImplikasi.penyakitH007();
+                           try {
+                               TimeUnit.SECONDS.sleep(2);
+                           } catch (InterruptedException e) {
+                               e.printStackTrace();
+                           }
+//                           FungsiImplikasi fungsiImplikasi = new FungsiImplikasi();
+//                           fungsiImplikasi.penyakitH007();
                            namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
-                           Log.i("This value gejala",stringBobotPenyakit1.get(2));
+//                           Log.i("This value gejala",stringBobotPenyakit1.get(2));
+
+                           try {
+                               TimeUnit.SECONDS.sleep(2);
+                           } catch (InterruptedException e) {
+                               e.printStackTrace();
+                           }
+                           Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi();
+                           defuzzyfikasi.defuzzyFikasi();
+
                            tcOutput.setText(""+namaPentakit);
                        }
 

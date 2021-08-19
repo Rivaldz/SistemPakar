@@ -1,12 +1,13 @@
 package com.example.model;
 
 public class FungsiImplikasiModel {
-    String himpunanParah, himpunanSedang, himpunanRingan;
+    String himpunanParah, himpunanSedang, himpunanRingan, key;
 
-    public FungsiImplikasiModel(String himpunanParah, String himpunanSedang, String himpunanRingan) {
+    public FungsiImplikasiModel(String himpunanParah, String himpunanSedang, String himpunanRingan, String key) {
         this.himpunanParah = himpunanParah;
         this.himpunanSedang = himpunanSedang;
         this.himpunanRingan = himpunanRingan;
+        this.key = key;
     }
 
     public FungsiImplikasiModel() {
@@ -34,5 +35,13 @@ public class FungsiImplikasiModel {
 
     public void setHimpunanRingan(String himpunanRingan) {
         this.himpunanRingan = himpunanRingan;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 }
