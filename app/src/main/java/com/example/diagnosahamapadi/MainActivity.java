@@ -436,15 +436,15 @@ public class MainActivity extends AppCompatActivity {
                            fuzzy.penyakitH007_Pakar(valueGejala1, valueGejala2, valueGejala4);
 
                            // fungsi implikasi
-                           try {
-                               TimeUnit.SECONDS.sleep(2);
-                           } catch (InterruptedException e) {
-                               e.printStackTrace();
-                           }
+//                           try {
+//                               TimeUnit.SECONDS.sleep(2);
+//                           } catch (InterruptedException e) {
+//                               e.printStackTrace();
+//                           }
 //                           FungsiImplikasi fungsiImplikasi = new FungsiImplikasi();
 //                           fungsiImplikasi.penyakitH007();
                            namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
-//                           Log.i("This value gejala",stringBobotPenyakit1.get(2));
+                           Log.i("This value gejala",stringBobotPenyakit1.get(2));
 
                            try {
                                TimeUnit.SECONDS.sleep(2);

@@ -21,6 +21,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,6 +45,9 @@ public class Defuzzyfikasi {
     List<DefuzzyfikasiModel> defuzzyfikasiModelsTingddi = new ArrayList<>();
 
     List<ShortDataModel> shortValueSedang = new ArrayList<>();
+    List<ShortDataModel> shortValueRendah = new ArrayList<>();
+
+    Map<String, ArrayList<Double>> multiMap = new HashMap<String, ArrayList<Double>>();
 
     public void defuzzyFikasi(){
 
@@ -105,11 +110,29 @@ public class Defuzzyfikasi {
                         DefuzzyfikasiModel defuzzyfikasiModel = dataSnapshot.getValue(DefuzzyfikasiModel.class);
                         Log.d("Lihat hasil akhir ", defuzzyfikasiModel.getKeanggotaan());
 //                        System.out.println("Hasil akhir gejala " + dataSnapshot.getKey() + "Penyakit : "+ keyGejalaSt.get(finalJ) + " Hasil " + defuzzyfikasiModel.getKeanggotaan());
+
                         if (defuzzyfikasiModel.getKeanggotaan().equalsIgnoreCase("RENDAH")){
 //                            Log.d("Rendah","");
                             System.out.println("Hasil akhir gejala " + dataSnapshot.getKey() + "Penyakit : "+ keyGejalaSt.get(finalJ) +
                                     " Hasil " + defuzzyfikasiModel.getKeanggotaan() + "--Rendah--");
+                            ShortDataModel shortDataModel = new ShortDataModel(Double.parseDouble(defuzzyfikasiModel.getMinFunc()),Double.parseDouble(defuzzyfikasiModel.getZiValue()),keyGejalaSt.get(finalJ));
+                            shortValueRendah.add(shortDataModel);
+                            Log.e("hasil array", String.valueOf(shortValueRendah.size()));
 
+                            if (keyGejalaSt.get(finalJ).equalsIgnoreCase(defuzzyfikasiModel.key)){
+
+                                if (multiMap.containsKey(keyGejalaSt.get(finalJ))){
+                                    ArrayList<Double> list;
+                                    list = multiMap.get(keyGejalaSt.get(finalJ));
+                                    list.add(Double.valueOf(defuzzyfikasiModel.getMinFunc()));
+                                    multiMap.put(keyGejalaSt.get(finalJ),list);
+                                }else {
+                                   ArrayList<Double> list = new ArrayList<Double>();
+                                   list.add(Double.parseDouble(defuzzyfikasiModel.getMinFunc()));
+                                   multiMap.put(keyGejalaSt.get(finalJ),list);
+                                   list=null;
+                                }
+                            }
                         }
                         if (defuzzyfikasiModel.getKeanggotaan().equalsIgnoreCase("SEDANG")){
 //                            Log.d("Sedang","");
@@ -119,16 +142,31 @@ public class Defuzzyfikasi {
                             shortValueSedang.add(shortDataModel);
                             Log.e("hasil array", String.valueOf(shortValueSedang.size()));
 
+                            if (keyGejalaSt.get(finalJ).equalsIgnoreCase(defuzzyfikasiModel.key)){
 
-                        }
+                                if (multiMap.containsKey(keyGejalaSt.get(finalJ))){
+                                    ArrayList<Double> list;
+                                    list = multiMap.get(keyGejalaSt.get(finalJ));
+                                    list.add(Double.valueOf(defuzzyfikasiModel.getMinFunc()));
+                                    multiMap.put(keyGejalaSt.get(finalJ),list);
+                                }else {
+                                    ArrayList<Double> list = new ArrayList<Double>();
+                                    list.add(Double.parseDouble(defuzzyfikasiModel.getMinFunc()));
+                                    multiMap.put(keyGejalaSt.get(finalJ),list);
+                                    list=null;
+                                }
+                            }
+
                         if (defuzzyfikasiModel.getKeanggotaan().equalsIgnoreCase("TINGGI")){
                             System.out.println("Hasil akhir gejala " + dataSnapshot.getKey() + "Penyakit : "+ keyGejalaSt.get(finalJ) +
                                     " Hasil " + defuzzyfikasiModel.getKeanggotaan() + "--Tinggi--");
+                            }
                         }
                         Log.e("hasil array akhir", String.valueOf(shortValueSedang.size()));
                     }
 
-//                    shortDataSedang(shortValueSedang,keyGejalaSt);
+//                    list.clear();
+                    shortDataSedang();
                 }
 
                 @Override
@@ -140,30 +178,32 @@ public class Defuzzyfikasi {
         }
     }
 
-   private void shortDataSedang(List<ShortDataModel>shortValueSedang, List<String>keyGejalaSt){
-        Map<String, ArrayList<String >> multiMap = new HashMap<String, ArrayList<String>>();
-        List<String> list = new ArrayList<String>();
-       for (int j = 0; j < keyGejalaSt.size(); j++) {
-           for (int i = 0; i < shortValueSedang.size(); i++) {
-               Log.e("hasil array akhir", String.valueOf(shortValueSedang.get(i).getNilaiZi()));
-               System.out.println("hasil Zi " + String.valueOf(shortValueSedang.get(i).getNilaiZi()) + "Code gejala "
-                       + shortValueSedang.get(i).getCodeGejala() + "Code gejala snapshot " + keyGejalaSt.get(j));
-
-               if (shortValueSedang.get(i).getCodeGejala().equalsIgnoreCase(keyGejalaSt.get(j))){
-                    Log.d("this ", "Same gejala");
-                    list.add(String.valueOf(shortValueSedang.get(i).getNilaiZi()));
-                    multiMap.put(keyGejalaSt.get(j), (ArrayList<String>) list);
-               }
-           }
-
-       }
-       for (Map.Entry<String, ArrayList<String>> entry : multiMap.entrySet()) {
+   private void shortDataSedang(){
+//        Map<String, ArrayList<String >> multiMap = new HashMap<String, ArrayList<String>>();
+//        List<String> list = new ArrayList<String>();
+//       for (int j = 0; j < keyGejalaSt.size(); j++) {
+//           for (int i = 0; i < shortValueSedang.size(); i++) {
+//               Log.e("hasil array akhir", String.valueOf(shortValueSedang.get(i).getNilaiZi()));
+//               System.out.println("hasil Zi " + String.valueOf(shortValueSedang.get(i).getNilaiZi()) + "Code gejala "
+//                       + shortValueSedang.get(i).getCodeGejala() + "Code gejala snapshot " + keyGejalaSt.get(j));
+//
+//               if (shortValueSedang.get(i).getCodeGejala().equalsIgnoreCase(keyGejalaSt.get(j))){
+//                    Log.d("this ", "Same gejala");
+//                    list.add(String.valueOf(shortValueSedang.get(i).getNilaiZi()));
+//                    multiMap.put(keyGejalaSt.get(j), (ArrayList<String>) list);
+//               }
+//           }
+//
+//       }
+       for (Map.Entry<String, ArrayList<Double>> entry : multiMap.entrySet()) {
 
            String key = entry.getKey();
 
-           List<String> values = entry.getValue();
+           List<Double> values = entry.getValue();
 
-           System.out.println("Value of " + key + " is " + values);
+           double maxValue = (double) Collections.max(values);
+           System.out.println("Value of " + key + " is " + values.toString());
+           System.out.println("this max value " + maxValue + "with keyy " + key);
 
        }
 
