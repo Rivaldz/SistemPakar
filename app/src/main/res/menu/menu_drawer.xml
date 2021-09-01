@@ -5,28 +5,28 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/item1"
-            android:title="Daftar Makanan" />
+            android:title="Home" />
         <item
             android:id="@+id/item2"
-            android:title="Daftar Minuman" />
+            android:title="Deteksi Hama dan Penyakit" />
         <item
             android:id="@+id/item3"
-            android:title="Daftar Cemilan" />
-        <item
-            android:id="@+id/item4"
-            android:title="Daftar Polisi" />
+            android:title="Lihat Riwayat" />
+<!--        <item-->
+<!--            android:id="@+id/item4"-->
+<!--            android:title="Daftar Polisi" />-->
     </group>
 
-    <item android:title="Komunikasi">
-        <menu>
-            <item
-                android:id="@+id/manis1"
-                android:title="Pengaturan" />
-            <item
-                android:id="@+id/manis2"
-                android:title="Bantuan" />
-        </menu>
-    </item>
+<!--    <item android:title="Komunikasi">-->
+<!--        <menu>-->
+<!--            <item-->
+<!--                android:id="@+id/manis1"-->
+<!--                android:title="Pengaturan" />-->
+<!--            <item-->
+<!--                android:id="@+id/manis2"-->
+<!--                android:title="Bantuan" />-->
+<!--        </menu>-->
+<!--    </item>-->
 
 
 </menu>

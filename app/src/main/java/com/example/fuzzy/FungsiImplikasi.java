@@ -16,15 +16,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FungsiImplikasi {
+    public String  namaHama;
     DatabaseReference mDatabaseUser,mDatabasePakar,mDatabase;
     ArrayList<FungsiImplikasiModel> fungsiImplikasiModelsPakar = new ArrayList<>();
     ArrayList<FungsiImplikasiModel> fungsiImplikasiModelsUser = new ArrayList<>();
 
-    public  void penyakitH007(){
-        Log.e("this on ","penyakit007");
+    public FungsiImplikasi(String namaHama) {
+        this.namaHama = namaHama;
+    }
+
+    public  void onPenyakit(){
+//        Log.e("this on ","penyakit007");
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabasePakar = FirebaseDatabase.getInstance().getReference().child("Fuzzyfikasi").child("pakar");
-        mDatabaseUser = FirebaseDatabase.getInstance().getReference().child("Fuzzyfikasi").child("user");
+        mDatabasePakar = FirebaseDatabase.getInstance().getReference().child("Fuzzyfikasi").child(namaHama).child("pakar");
+        mDatabaseUser = FirebaseDatabase.getInstance().getReference().child("Fuzzyfikasi").child(namaHama).child("user");
         mDatabasePakar.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -53,58 +58,68 @@ public class FungsiImplikasi {
                             if (Double.parseDouble(fungsiImplikasiModelsPakar.get(j).getHimpunanRingan()) != 0 && Double.parseDouble(fungsiImplikasiModelsUser.get(j).getHimpunanRingan()) != 0 ){
                                 double minFunction = Math.min(Double.parseDouble(fungsiImplikasiModelsUser.get(j).getHimpunanRingan()),Double.parseDouble(fungsiImplikasiModelsPakar.get(j).getHimpunanRingan()));
                                 CreateDataFI createDataFI = new CreateDataFI(fungsiImplikasiModelsPakar.get(j).getKey(),"R1",fungsiImplikasiModelsPakar.get(j).getHimpunanRingan(),fungsiImplikasiModelsUser.get(j).getHimpunanRingan(),String.valueOf(minFunction),"0.2","RENDAH");
-                                mDatabase.child("Fungsiimplikasi").child(fungsiImplikasiModelsPakar.get(j).getKey()).child("R1").setValue(createDataFI);
+                                mDatabase.child("Fungsiimplikasi").child(namaHama).child(fungsiImplikasiModelsPakar.get(j).getKey()).child("R1").setValue(createDataFI);
                                 Log.e("Implikasi If result R1",String.valueOf(minFunction));
                             }
-//                            if (Double.parseDouble(fungsiImplikasiModelsPakar.get(j).getHimpunanRingan()) != 0 && Double.parseDouble(fungsiImplikasiModelsUser.get(j).getHimpunanSedang()) != 0 ){
-//                                double minFunction = Math.min(Double.parseDouble(fungsiImplikasiModelsUser.get(j).getHimpunanRingan()),Double.parseDouble(fungsiImplikasiModelsPakar.get(j).getHimpunanSedang()));
-//                                CreateDataFI createDataFI = new CreateDataFI("R2",fungsiImplikasiModelsPakar.get(j).getHimpunanRingan(),fungsiImplikasiModelsUser.get(j).getHimpunanSedang(),String.valueOf(minFunction),"0.4");
-//                                mDatabase.child("Fungsiimplikasi").child(fungsiImplikasiModelsPakar.get(j).getKey()).setValue(createDataFI);
-//                                Log.e("Implikasi If result R2",String.valueOf(minFunction));
-//                            }
+//                          R2
+                            if (Double.parseDouble(fungsiImplikasiModelsPakar.get(j).getHimpunanRingan()) != 0 && Double.parseDouble(fungsiImplikasiModelsUser.get(j).getHimpunanSedang()) != 0 ){
+                                double minFunction = Math.min(Double.parseDouble(fungsiImplikasiModelsUser.get(j).getHimpunanSedang()),Double.parseDouble(fungsiImplikasiModelsPakar.get(j).getHimpunanRingan()));
+                                CreateDataFI createDataFI = new CreateDataFI(fungsiImplikasiModelsPakar.get(j).getKey(),"R2",fungsiImplikasiModelsPakar.get(j).getHimpunanRingan(),fungsiImplikasiModelsUser.get(j).getHimpunanSedang(),String.valueOf(minFunction),"0.4","RENDAH");
+                                mDatabase.child("Fungsiimplikasi").child(namaHama).child(fungsiImplikasiModelsPakar.get(j).getKey()).child("R2").setValue(createDataFI);
+                                Log.e("Implikasi If result R2",String.valueOf(minFunction));
+                            }
                             //R3 Ringan && Parah
                             if (Double.parseDouble(fungsiImplikasiModelsPakar.get(j).getHimpunanRingan()) != 0 && Double.parseDouble(fungsiImplikasiModelsUser.get(j).getHimpunanParah()) != 0 ){
-                                double minFunction = Math.min(Double.parseDouble(fungsiImplikasiModelsUser.get(j).getHimpunanRingan()),Double.parseDouble(fungsiImplikasiModelsPakar.get(j).getHimpunanParah()));
-                                CreateDataFI createDataFI = new CreateDataFI(fungsiImplikasiModelsPakar.get(j).getKey(),"R3",fungsiImplikasiModelsPakar.get(j).getHimpunanRingan(),fungsiImplikasiModelsUser.get(j).getHimpunanRingan(),String.valueOf(minFunction),"0.2","SEDANG");
-                                mDatabase.child("Fungsiimplikasi").child(fungsiImplikasiModelsPakar.get(j).getKey()).child("R3").setValue(createDataFI);
+                                double minFunction = Math.min(Double.parseDouble(fungsiImplikasiModelsUser.get(j).getHimpunanParah()),Double.parseDouble(fungsiImplikasiModelsPakar.get(j).getHimpunanRingan()));
+                                CreateDataFI createDataFI = new CreateDataFI(fungsiImplikasiModelsPakar.get(j).getKey(),"R3",fungsiImplikasiModelsPakar.get(j).getHimpunanRingan(),fungsiImplikasiModelsUser.get(j).getHimpunanParah(),String.valueOf(minFunction),"0.6","SEDANG");
+                                mDatabase.child("Fungsiimplikasi").child(namaHama).child(fungsiImplikasiModelsPakar.get(j).getKey()).child("R3").setValue(createDataFI);
                                 Log.e("Implikasi If result R3",String.valueOf(minFunction));
                             }
-//                            if (Double.parseDouble(fungsiImplikasiModelsPakar.get(j).getHimpunanSedang()) != 0 && Double.parseDouble(fungsiImplikasiModelsUser.get(j).getHimpunanRingan()) != 0 ){
-//                                double minFunction = Math.min(Double.parseDouble(fungsiImplikasiModelsUser.get(j).getHimpunanSedang()),Double.parseDouble(fungsiImplikasiModelsPakar.get(j).getHimpunanRingan()));
-//                                CreateDataFI createDataFI = new CreateDataFI("R4",fungsiImplikasiModelsPakar.get(j).getHimpunanSedang(),fungsiImplikasiModelsUser.get(j).getHimpunanRingan(),String.valueOf(minFunction),"0.4");
-//                                mDatabase.child("Fungsiimplikasi").child(fungsiImplikasiModelsPakar.get(j).getKey()).setValue(createDataFI);
-//                                Log.e("Implikasi If result R4 ",String.valueOf(minFunction));
-//                            }
-//                            if (Double.parseDouble(fungsiImplikasiModelsPakar.get(j).getHimpunanSedang()) != 0 && Double.parseDouble(fungsiImplikasiModelsUser.get(j).getHimpunanSedang()) != 0 ){
-//                                double minFunction = Math.min(Double.parseDouble(fungsiImplikasiModelsUser.get(j).getHimpunanSedang()),Double.parseDouble(fungsiImplikasiModelsPakar.get(j).getHimpunanSedang()));
-//                                CreateDataFI createDataFI = new CreateDataFI("R5",fungsiImplikasiModelsPakar.get(j).getHimpunanSedang(),fungsiImplikasiModelsUser.get(j).getHimpunanSedang(),String.valueOf(minFunction),"0.6");
-//                                mDatabase.child("Fungsiimplikasi").child(fungsiImplikasiModelsPakar.get(j).getKey()).setValue(createDataFI);
-//                                Log.e("Implikasi If result R5",String.valueOf(minFunction));
-//                            }
-//                            if (Double.parseDouble(fungsiImplikasiModelsPakar.get(j).getHimpunanSedang()) != 0 && Double.parseDouble(fungsiImplikasiModelsUser.get(j).getHimpunanParah()) != 0 ){
-//                                double minFunction = Math.min(Double.parseDouble(fungsiImplikasiModelsUser.get(j).getHimpunanSedang()),Double.parseDouble(fungsiImplikasiModelsPakar.get(j).getHimpunanParah()));
-//                                CreateDataFI createDataFI = new CreateDataFI("R6",fungsiImplikasiModelsPakar.get(j).getHimpunanSedang(),fungsiImplikasiModelsUser.get(j).getHimpunanParah(),String.valueOf(minFunction),"0.8");
-//                                mDatabase.child("Fungsiimplikasi").child(fungsiImplikasiModelsPakar.get(j).getKey()).setValue(createDataFI);
-//                                Log.e("Implikasi If result R6",String.valueOf(minFunction));
-//                            }
-//                            if (Double.parseDouble(fungsiImplikasiModelsPakar.get(j).getHimpunanParah()) != 0 && Double.parseDouble(fungsiImplikasiModelsUser.get(j).getHimpunanRingan()) != 0 ){
-//                                double minFunction = Math.min(Double.parseDouble(fungsiImplikasiModelsUser.get(j).getHimpunanParah()),Double.parseDouble(fungsiImplikasiModelsPakar.get(j).getHimpunanRingan()));
-//                                CreateDataFI createDataFI = new CreateDataFI("R7",fungsiImplikasiModelsPakar.get(j).getHimpunanParah(),fungsiImplikasiModelsUser.get(j).getHimpunanRingan(),String.valueOf(minFunction),"0.6");
-//                                mDatabase.child("Fungsiimplikasi").child(fungsiImplikasiModelsPakar.get(j).getKey()).setValue(createDataFI);
-//                                Log.e("Implikasi If result R7",String.valueOf(minFunction));
-//                            }
-//                            if (Double.parseDouble(fungsiImplikasiModelsPakar.get(j).getHimpunanParah()) != 0 && Double.parseDouble(fungsiImplikasiModelsUser.get(j).getHimpunanSedang()) != 0 ){
-//                                double minFunction = Math.min(Double.parseDouble(fungsiImplikasiModelsUser.get(j).getHimpunanParah()),Double.parseDouble(fungsiImplikasiModelsPakar.get(j).getHimpunanSedang()));
-//                                CreateDataFI createDataFI = new CreateDataFI("R8",fungsiImplikasiModelsPakar.get(j).getHimpunanParah(),fungsiImplikasiModelsUser.get(j).getHimpunanSedang(),String.valueOf(minFunction),"0.8");
-//                                mDatabase.child("Fungsiimplikasi").child(fungsiImplikasiModelsPakar.get(j).getKey()).setValue(createDataFI);
-//                                Log.e("Implikasi If result R8",String.valueOf(minFunction));
-//                            }
-//                            if (Double.parseDouble(fungsiImplikasiModelsPakar.get(j).getHimpunanParah()) != 0 && Double.parseDouble(fungsiImplikasiModelsUser.get(j).getHimpunanParah()) != 0 ){
-//                                double minFunction = Math.min(Double.parseDouble(fungsiImplikasiModelsUser.get(j).getHimpunanParah()),Double.parseDouble(fungsiImplikasiModelsPakar.get(j).getHimpunanParah()));
-//                                CreateDataFI createDataFI = new CreateDataFI("R9",fungsiImplikasiModelsPakar.get(j).getHimpunanParah(),fungsiImplikasiModelsUser.get(j).getHimpunanParah(),String.valueOf(minFunction),"1");
-//                                mDatabase.child("Fungsiimplikasi").child(fungsiImplikasiModelsPakar.get(j).getKey()).setValue(createDataFI);
-//                                Log.e("Implikasi If result R9",String.valueOf(minFunction));
-//                            }
+                            //R4
+                            if (Double.parseDouble(fungsiImplikasiModelsPakar.get(j).getHimpunanSedang()) != 0 && Double.parseDouble(fungsiImplikasiModelsUser.get(j).getHimpunanRingan()) != 0 ){
+                                double minFunction = Math.min(Double.parseDouble(fungsiImplikasiModelsPakar.get(j).getHimpunanSedang()),Double.parseDouble(fungsiImplikasiModelsUser.get(j).getHimpunanRingan()));
+                                CreateDataFI createDataFI = new CreateDataFI(fungsiImplikasiModelsPakar.get(j).getKey(),"R4",fungsiImplikasiModelsPakar.get(j).getHimpunanSedang(),fungsiImplikasiModelsUser.get(j).getHimpunanRingan(),String.valueOf(minFunction),"0.4","RENDAH");
+                                mDatabase.child("Fungsiimplikasi")
+                                        .child(namaHama)
+                                        .child(fungsiImplikasiModelsPakar.get(j).getKey())
+                                        .child("R4").setValue(createDataFI);
+                                Log.e("Implikasi If result R4 ",String.valueOf(minFunction));
+                            }
+                            //R5
+                            if (Double.parseDouble(fungsiImplikasiModelsPakar.get(j).getHimpunanSedang()) != 0 && Double.parseDouble(fungsiImplikasiModelsUser.get(j).getHimpunanSedang()) != 0 ){
+                                double minFunction = Math.min(Double.parseDouble(fungsiImplikasiModelsUser.get(j).getHimpunanSedang()),Double.parseDouble(fungsiImplikasiModelsPakar.get(j).getHimpunanSedang()));
+                                CreateDataFI createDataFI = new CreateDataFI(fungsiImplikasiModelsPakar.get(j).getKey(),"R5",fungsiImplikasiModelsPakar.get(j).getHimpunanSedang(),fungsiImplikasiModelsUser.get(j).getHimpunanSedang(),String.valueOf(minFunction),"0.6","SEDANG");
+                                mDatabase.child("Fungsiimplikasi").child(namaHama).child(fungsiImplikasiModelsPakar.get(j).getKey()).child("R5").setValue(createDataFI);
+                                Log.e("Implikasi If result R5",String.valueOf(minFunction));
+                            }
+                            //R6
+                            if (Double.parseDouble(fungsiImplikasiModelsPakar.get(j).getHimpunanSedang()) != 0 && Double.parseDouble(fungsiImplikasiModelsUser.get(j).getHimpunanParah()) != 0 ){
+                                double minFunction = Math.min(Double.parseDouble(fungsiImplikasiModelsPakar.get(j).getHimpunanSedang()),Double.parseDouble(fungsiImplikasiModelsUser.get(j).getHimpunanParah()));
+                                CreateDataFI createDataFI = new CreateDataFI(fungsiImplikasiModelsPakar.get(j).getKey(),"R6",fungsiImplikasiModelsPakar.get(j).getHimpunanSedang(),fungsiImplikasiModelsUser.get(j).getHimpunanParah(),String.valueOf(minFunction),"0.8","TINGGI");
+                                mDatabase.child("Fungsiimplikasi").child(namaHama).child(fungsiImplikasiModelsPakar.get(j).getKey()).child("R6").setValue(createDataFI);
+                                Log.e("Implikasi If result R6",String.valueOf(minFunction));
+                            }
+                            //R7
+                            if (Double.parseDouble(fungsiImplikasiModelsPakar.get(j).getHimpunanParah()) != 0 && Double.parseDouble(fungsiImplikasiModelsUser.get(j).getHimpunanRingan()) != 0 ){
+                                double minFunction = Math.min(Double.parseDouble(fungsiImplikasiModelsPakar.get(j).getHimpunanParah()),Double.parseDouble(fungsiImplikasiModelsUser.get(j).getHimpunanRingan()));
+                                CreateDataFI createDataFI = new CreateDataFI(fungsiImplikasiModelsPakar.get(j).getKey(),"R7",fungsiImplikasiModelsPakar.get(j).getHimpunanParah(),fungsiImplikasiModelsUser.get(j).getHimpunanRingan(),String.valueOf(minFunction),"0.6","SEDANG");
+                                mDatabase.child("Fungsiimplikasi").child(namaHama).child(fungsiImplikasiModelsPakar.get(j).getKey()).child("R7").setValue(createDataFI);
+                                Log.e("Implikasi If result R7",String.valueOf(minFunction));
+                            }
+                            //R8
+                            if (Double.parseDouble(fungsiImplikasiModelsPakar.get(j).getHimpunanParah()) != 0 && Double.parseDouble(fungsiImplikasiModelsUser.get(j).getHimpunanSedang()) != 0 ){
+                                double minFunction = Math.min(Double.parseDouble(fungsiImplikasiModelsPakar.get(j).getHimpunanParah()),Double.parseDouble(fungsiImplikasiModelsUser.get(j).getHimpunanSedang()));
+                                CreateDataFI createDataFI = new CreateDataFI(fungsiImplikasiModelsPakar.get(j).getKey(),"R8",fungsiImplikasiModelsPakar.get(j).getHimpunanParah(),fungsiImplikasiModelsUser.get(j).getHimpunanSedang(),String.valueOf(minFunction),"0.8","TINGGI");
+                                mDatabase.child("Fungsiimplikasi").child(namaHama).child(fungsiImplikasiModelsPakar.get(j).getKey()).child("R8").setValue(createDataFI);
+                                Log.e("Implikasi If result R8",String.valueOf(minFunction));
+                            }
+                            //R9
+                            if (Double.parseDouble(fungsiImplikasiModelsPakar.get(j).getHimpunanParah()) != 0 && Double.parseDouble(fungsiImplikasiModelsUser.get(j).getHimpunanParah()) != 0 ){
+                                double minFunction = Math.min(Double.parseDouble(fungsiImplikasiModelsUser.get(j).getHimpunanParah()),Double.parseDouble(fungsiImplikasiModelsPakar.get(j).getHimpunanParah()));
+                                CreateDataFI createDataFI = new CreateDataFI(fungsiImplikasiModelsPakar.get(j).getKey(),"R9",fungsiImplikasiModelsPakar.get(j).getHimpunanParah(),fungsiImplikasiModelsUser.get(j).getHimpunanParah(),String.valueOf(minFunction),"1","TINGGI");
+                                mDatabase.child("Fungsiimplikasi").child(namaHama).child(fungsiImplikasiModelsPakar.get(j).getKey()).child("R9").setValue(createDataFI);
+                                Log.e("Implikasi If result R9",String.valueOf(minFunction));
+                            }
 
                         }
                     }

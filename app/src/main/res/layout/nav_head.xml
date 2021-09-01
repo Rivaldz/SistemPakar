@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="16dp"
-        android:text="Drawer Layout"
+        android:text="SiPadi"
         android:textSize="20sp" />
 
     <TextView
@@ -28,8 +28,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="16dp"
         android:autoLink="web"
-        android:text="https://wwww.gwnbs.com"
+        android:text="https://wwww.polinema.ac.id"
         android:textSize="17sp" />
-
 
 </LinearLayout>

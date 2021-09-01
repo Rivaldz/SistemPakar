@@ -30,13 +30,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Button"
-                android:onClick="buttonData"
-                />
+<!--            <Button-->
+<!--                android:id="@+id/button"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Button"-->
+<!--                android:onClick="buttonData"-->
+<!--                />-->
 
             <CheckBox
                 android:id="@+id/checkBox1"
@@ -49,6 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Masukan Nilai Kepercayaan?"
+                android:imeOptions="flagNoExtractUi"
                 />
 
             <CheckBox
@@ -62,6 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Masukan Nilai Kepercayaan?"
+                android:imeOptions="flagNoExtractUi"
                 />
 
             <CheckBox
@@ -76,6 +78,8 @@
                 android:layout_height="wrap_content"
                 android:hint="Masukan Nilai Kepercayaan?"
 
+                android:imeOptions="flagNoExtractUi"
+
                 />
 
             <CheckBox
@@ -88,6 +92,8 @@
                 android:id="@+id/autoCompleteTextView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
+                android:imeOptions="flagNoExtractUi"
 
                 android:hint="Masukan Nilai Kepercayaan?" />
 
@@ -102,6 +108,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
+                android:imeOptions="flagNoExtractUi"
                 android:hint="Masukan Nilai Kepercayaan?" />
 
             <CheckBox
@@ -115,6 +122,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
+                android:imeOptions="flagNoExtractUi"
                 android:hint="Masukan Nilai Kepercayaan?" />
 
             <CheckBox
@@ -127,6 +135,8 @@
                 android:id="@+id/autoCompleteTextView7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
+                android:imeOptions="flagNoExtractUi"
                 android:hint="Masukan Nilai Kepercayaan?" />
 
             <CheckBox
@@ -138,6 +148,8 @@
                 android:id="@+id/autoCompleteTextView8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
+                android:imeOptions="flagNoExtractUi"
                 android:hint="Masukan Nilai Kepercayaan?" />
 
             <CheckBox
@@ -149,6 +161,8 @@
                 android:id="@+id/autoCompleteTextView9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
+                android:imeOptions="flagNoExtractUi"
                 android:hint="Masukan Nilai Kepercayaan?" />
 
             <CheckBox
@@ -161,6 +175,8 @@
                 android:id="@+id/autoCompleteTextView10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
+                android:imeOptions="flagNoExtractUi"
                 android:hint="Masukan Nilai Kepercayaan?" />
 
             <CheckBox
@@ -173,6 +189,8 @@
                 android:id="@+id/autoCompleteTextView11"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
+                android:imeOptions="flagNoExtractUi"
                 android:hint="Masukan Nilai Kepercayaan?" />
 
             <CheckBox
@@ -185,6 +203,8 @@
                 android:id="@+id/autoCompleteTextView12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
+                android:imeOptions="flagNoExtractUi"
                 android:hint="Masukan Nilai Kepercayaan?" />
 
             <CheckBox
@@ -197,6 +217,8 @@
                 android:id="@+id/autoCompleteTextView13"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
+                android:imeOptions="flagNoExtractUi"
                 android:hint="Masukan Nilai Kepercayaan?" />
 
             <CheckBox
@@ -209,6 +231,8 @@
                 android:id="@+id/autoCompleteTextView14"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
+                android:imeOptions="flagNoExtractUi"
                 android:hint="Masukan Nilai Kepercayaan?" />
 
             <CheckBox
@@ -221,6 +245,8 @@
                 android:id="@+id/autoCompleteTextView15"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
+                android:imeOptions="flagNoExtractUi"
                 android:hint="Masukan Nilai Kepercayaan?" />
 
             <CheckBox
@@ -233,6 +259,8 @@
                 android:id="@+id/autoCompleteTextView16"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
+                android:imeOptions="flagNoExtractUi"
                 android:hint="Masukan Nilai Kepercayaan?" />
 
             <CheckBox
@@ -245,6 +273,8 @@
                 android:id="@+id/autoCompleteTextView17"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
+                android:imeOptions="flagNoExtractUi"
                 android:hint="Masukan Nilai Kepercayaan?" />
 
             <CheckBox
@@ -257,6 +287,8 @@
                 android:id="@+id/autoCompleteTextView18"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
+                android:imeOptions="flagNoExtractUi"
                 android:hint="Masukan Nilai Kepercayaan?" />
 
             <CheckBox
@@ -269,6 +301,8 @@
                 android:id="@+id/autoCompleteTextView19"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
+                android:imeOptions="flagNoExtractUi"
                 android:hint="Masukan Nilai Kepercayaan?" />
 
             <CheckBox
@@ -281,7 +315,456 @@
                 android:id="@+id/autoCompleteTextView20"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:imeOptions="flagNoExtractUi"
                 android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox21"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="21.Penurunan jumlah anakan?" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView21"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:imeOptions="flagNoExtractUi"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox22"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="22.Pertumbuhan tanaman terhambat dan memendek?" />
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView22"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:imeOptions="flagNoExtractUi"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox23"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="23.Terdapat tempat hisapan akan tumbuh cendawan jelaga?" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView23"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:imeOptions="flagNoExtractUi"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+
+            <CheckBox
+                android:id="@+id/checkBox24"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="24.Daun tanaman kering dan mati?" />
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView24"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:imeOptions="flagNoExtractUi"
+                android:hint="Masukan Nilai Kepercayaan?" />
+            <CheckBox
+                android:id="@+id/checkBox25"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="25.Pucuk daun berwarna kuning hingga kuning kecoklatan?" />
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView25"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="flagNoExtractUi"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox26"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="26.Malai yang dihasilkan sedikit?" />
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView26"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:imeOptions="flagNoExtractUi"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox27"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="27.Daun terpotong seperti gunting?" />
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView27"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:imeOptions="flagNoExtractUi"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox28"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="28.Daun berwarna putih kering dan pucuk daun bekas potongan?" />
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView28"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:imeOptions="flagNoExtractUi"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox29"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="29.Daun terpotong dilipat menyerupai tabung?" />
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView29"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:imeOptions="flagNoExtractUi"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox30"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="30.Gulungan padi berisi larva dan mengapung di atas air?" />
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView30"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:imeOptions="flagNoExtractUi"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox31"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="31.Daun bergulung berisi air?" />
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView31"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:imeOptions="flagNoExtractUi"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox32"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="32.Terdapat garis-garis putoh transparan?" />
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView32"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:imeOptions="flagNoExtractUi"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox33"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="33.Daun bendera(daun yg tegak diatas)ikut rusak?" />
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView33"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:imeOptions="flagNoExtractUi"
+                android:hint="Masukan Nilai Kepercayaan?" />
+            <CheckBox
+                android:id="@+id/checkBox34"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="34.Daun tanaman rusak?" />
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView34"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:imeOptions="flagNoExtractUi"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox35"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="35.Terdapat telur-telur ulat?" />
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView35"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:imeOptions="flagNoExtractUi"
+                android:hint="Masukan Nilai Kepercayaangj" />
+
+            <CheckBox
+                android:id="@+id/checkBox36"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="36.Daun berlubang dimakan ulat tinggal tulang daun saya?" />
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView36"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:imeOptions="flagNoExtractUi"
+                android:hint="Masukan Nilai Kepercayaan" />
+
+            <CheckBox
+                android:id="@+id/checkBox37"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="37.Bulir padi rusak?" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView37"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="flagNoExtractUi"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox38"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="38.Gabah kecil dan menciut?" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView38"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="flagNoExtractUi"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox39"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="39.Malai tegak?" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView39"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:imeOptions="flagNoExtractUi"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox40"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="40.Gabah cacat?" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView40"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="flagNoExtractUi"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox41"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="41.Bulir padi hampa dan berwarna hitam?" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView41"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="flagNoExtractUi"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox42"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="42.Buah padi berbintik-bintik hitam(Bercak coklat)?" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView42"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:imeOptions="flagNoExtractUi"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox43"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="43.Daun menggulung seperti daun bawang?" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView43"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:imeOptions="flagNoExtractUi"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox44"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="44.Gabah berserakan?" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView44"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:imeOptions="flagNoExtractUi"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox45"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="45.Pertumbahan padi jadi tidak normal?" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView45"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="flagNoExtractUi"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox46"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="46.Anakan tidak menghasilkan malai?" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView46"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:imeOptions="flagNoExtractUi"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox47"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="47.Daun berbentuk tidak beraturan?" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView47"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="flagNoExtractUi"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox48"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="48.Tanaman hanya tulang-tulang daun?" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView48"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="flagNoExtractUi"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox49"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="49.Adanya lubang-lubang pada daun?" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView49"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="flagNoExtractUi"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox50"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="50.Warna coklat disekitar pelepah dan batang?" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView50"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="flagNoExtractUi"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox51"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="51.Tanaman berwarna kuning,kering dan membusuk?" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView51"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="flagNoExtractUi"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox52"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="52.Daun kering dan menggulung secara membujur?" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView52"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="flagNoExtractUi"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
+            <CheckBox
+                android:id="@+id/checkBox53"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="53.Malai pendek?" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView53"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="flagNoExtractUi"
+                android:hint="Masukan Nilai Kepercayaan?" />
+
 
             <Button
                 android:id="@+id/buttonCalculate"
