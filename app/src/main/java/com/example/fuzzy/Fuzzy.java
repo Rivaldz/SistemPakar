@@ -9,10 +9,11 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class Fuzzy {
     private DatabaseReference mDatabase;
-    public String namaPenyakit;
+    public String namaPenyakit, userId;
 
-    public Fuzzy(String namaPenyakit) {
+    public Fuzzy(String namaPenyakit, String userId) {
         this.namaPenyakit = namaPenyakit;
+        this.userId = userId;
     }
     public void penyakitH001_User(double a, double b, double c, double d,double e, double f, double g){
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -238,7 +239,7 @@ public class Fuzzy {
 
             }
             ModelFuzzyDB modelFuzzyDB = new ModelFuzzyDB(String.valueOf(hasilRingan),String.valueOf(hasilSedang),String.valueOf(hasilParah));
-            mDatabase.child("Fuzzyfikasi").child(namaPenyakit).child("user").child(String.valueOf(j)).setValue(modelFuzzyDB);
+            mDatabase.child("Fuzzyfikasi").child(userId).child(namaPenyakit).child("user").child(String.valueOf(j)).setValue(modelFuzzyDB);
 
         }
     }
@@ -308,10 +309,9 @@ public class Fuzzy {
 
             }
             ModelFuzzyDB modelFuzzyDB = new ModelFuzzyDB(String.valueOf(hasilRingan),String.valueOf(hasilSedang),String.valueOf(hasilParah));
-            mDatabase.child("Fuzzyfikasi").child(namaPenyakit).child("pakar").child(String.valueOf(j)).setValue(modelFuzzyDB);
+            mDatabase.child("Fuzzyfikasi").child(userId).child(namaPenyakit).child("pakar").child(String.valueOf(j)).setValue(modelFuzzyDB);
 
         }
     }
-
 
 }

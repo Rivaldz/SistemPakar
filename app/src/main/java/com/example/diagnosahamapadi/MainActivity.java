@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -134,11 +135,18 @@ public class MainActivity extends AppCompatActivity {
     String[] trustedValueGej51 = {"","0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","1"};
     String[] trustedValueGej52 = {"","0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","1"};
     String[] trustedValueGej53 = {"","0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","1"};
+
+    SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        sharedPreferences = getSharedPreferences("user_details",MODE_PRIVATE);
+        String userId = sharedPreferences.getString("username",null);
+        Log.e("LIHAT USERNAME",userId);
+
 //        recyclerView = findViewById(R.id.recycler);
 
         //this drawable layout
@@ -1309,9 +1317,9 @@ public class MainActivity extends AppCompatActivity {
                             double combine_CFold_CF12 = combine_CFold_CF6 + resultCalculateGej12 * (1 - combine_CFold_CF6);
                             double combine_CFold_CF13 = combine_CFold_CF12 + resultCalculateGej13 * (1 - combine_CFold_CF12);
                             String endResult = String.valueOf((combine_CFold_CF13 * 100));
-                            createDataCF(endResult,"H001");
+                            createDataCF(endResult,"H001",userId);
 
-                            Fuzzy fuzzy = new Fuzzy("H001");
+                            Fuzzy fuzzy = new Fuzzy("H001",userId);
                             // counting fuzzyfikasi
                             fuzzy.penyakitH001_User(valueUserGejala1, valueUserGejala3, valueUserGejala4, valueUserGejala5, valueUserGejala6, valueUserGejala12,
                                     valueUserGejala13);
@@ -1323,7 +1331,7 @@ public class MainActivity extends AppCompatActivity {
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
-                            FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H001");
+                            FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H001",userId);
                             fungsiImplikasi.onPenyakit();
                             namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
 //                            Log.i("This value gejala",stringBobotPenyakit1.get(2));
@@ -1333,7 +1341,7 @@ public class MainActivity extends AppCompatActivity {
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
-                            Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H001");
+                            Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H001", userId);
                             defuzzyfikasi.defuzzyFikasi();
                             defuzzyfikasi.onAgregasi();
 //
@@ -1383,9 +1391,9 @@ public class MainActivity extends AppCompatActivity {
                             double combine_CFold_CF10 = combine_CFold_CF9 + resultCalculateGej10 * (1 - combine_CFold_CF9);
                             double combine_CFold_CF11 = combine_CFold_CF10 + resultCalculateGej11 * (1 - combine_CFold_CF10);
                             String endResult = String.valueOf((combine_CFold_CF11 * 100));
-                            createDataCF(endResult,"H002");
+                            createDataCF(endResult,"H002",userId);
 
-                            Fuzzy fuzzy = new Fuzzy("H002");
+                            Fuzzy fuzzy = new Fuzzy("H002",userId);
                             // counting fuzzyfikasi
                             fuzzy.penyakitH002_User(UserGejala7,UserGejala8,UserGejala9,UserGejala10,UserGejala11);
                             fuzzy.penyakitH002_Pakar(valueGejala7, valueGejala8, valueGejala9,valueGejala10,valueGejala11);
@@ -1396,7 +1404,7 @@ public class MainActivity extends AppCompatActivity {
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
-                            FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H002");
+                            FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H002",userId);
                             fungsiImplikasi.onPenyakit();
 //                            namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
 //                            Log.i("This value gejala",stringBobotPenyakit1.get(2));
@@ -1406,7 +1414,7 @@ public class MainActivity extends AppCompatActivity {
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
-                            Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H002");
+                            Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H002",userId);
                             defuzzyfikasi.defuzzyFikasi();
                             defuzzyfikasi.onAgregasi();
 //                           defuzzyfikasi.shortAgregations();
@@ -1457,9 +1465,9 @@ public class MainActivity extends AppCompatActivity {
                             double combine_CFold_CF17 = combine_CFold_CF16 + resultCalculateGej17 * (1 - combine_CFold_CF16);
                             double combine_CFold_CF18 = combine_CFold_CF17 + resultCalculateGej18 * (1 - combine_CFold_CF17);
                             String endResult = String.valueOf((combine_CFold_CF18 * 100));
-                            createDataCF(endResult,"H003");
+                            createDataCF(endResult,"H003",userId);
 
-                            Fuzzy fuzzy = new Fuzzy("H003");
+                            Fuzzy fuzzy = new Fuzzy("H003",userId);
                             // counting fuzzyfikasi
                             fuzzy.penyakitH003_User(valueUserGejala14,valueUserGejala15,valueUserGejala16,valueUserGejala17,valueGejala18);
                             fuzzy.penyakitH003_Pakar(valueGejala14,valueGejala15,valueGejala16,valueGejala17,valueGejala18);
@@ -1470,7 +1478,7 @@ public class MainActivity extends AppCompatActivity {
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
-                            FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H003");
+                            FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H003",userId);
                             fungsiImplikasi.onPenyakit();
                             namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
                             Log.i("This value gejala",listBobotH003.get(2));
@@ -1480,7 +1488,7 @@ public class MainActivity extends AppCompatActivity {
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
-                            Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H003");
+                            Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H003",userId);
                             defuzzyfikasi.defuzzyFikasi();
                             defuzzyfikasi.onAgregasi();
                         }
@@ -1529,9 +1537,9 @@ public class MainActivity extends AppCompatActivity {
                             double combine_CFold_CF22 = combine_CFold_CF21 + resultCalculateGej22 * (1 - combine_CFold_CF21);
                             double combine_CFold_CF23 = combine_CFold_CF22 + resultCalculateGej23 * (1 - combine_CFold_CF22);
                             String endResult = String.valueOf((combine_CFold_CF23 * 100));
-                            createDataCF(endResult,"H004");
+                            createDataCF(endResult,"H004",userId);
 
-                            Fuzzy fuzzy = new Fuzzy("H004");
+                            Fuzzy fuzzy = new Fuzzy("H004",userId);
                             // counting fuzzyfikasi
                             fuzzy.penyakitH004_User(valueUserGejala19,valueUserGejala20,valueUserGejala21,valueUserGejala22,valueGejala23);
                             fuzzy.penyakitH004_Pakar(valueGejala19,valueGejala20,valueGejala21,valueGejala22,valueGejala23);
@@ -1542,7 +1550,7 @@ public class MainActivity extends AppCompatActivity {
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
-                            FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H004");
+                            FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H004",userId);
                             fungsiImplikasi.onPenyakit();
                             namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
 
@@ -1553,7 +1561,7 @@ public class MainActivity extends AppCompatActivity {
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
-                            Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H004");
+                            Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H004",userId);
                             defuzzyfikasi.defuzzyFikasi();
                             defuzzyfikasi.onAgregasi();
                         }
@@ -1598,9 +1606,9 @@ public class MainActivity extends AppCompatActivity {
                             double combine_CFold_CF16 = combine_CF14_CF15 + resultCalculateGej16 * (1 - combine_CF14_CF15);
                             double combine_CFold_CF17 = combine_CFold_CF16 + resultCalculateGej17 * (1 - combine_CFold_CF16);
                             String endResult = String.valueOf((combine_CFold_CF17 * 100));
-                            createDataCF(endResult,"H005");
+                            createDataCF(endResult,"H005",userId);
 
-                            Fuzzy fuzzy = new Fuzzy("H005");
+                            Fuzzy fuzzy = new Fuzzy("H005",userId);
                             // counting fuzzyfikasi
                             fuzzy.penyakitH005_User(valueUserGejala14,valueUserGejala15,valueUserGejala16,valueUserGejala17);
                             fuzzy.penyakitH005_Pakar(valueGejala14,valueGejala15,valueGejala16,valueGejala17);
@@ -1611,7 +1619,7 @@ public class MainActivity extends AppCompatActivity {
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
-                            FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H005");
+                            FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H005",userId);
                             fungsiImplikasi.onPenyakit();
                             namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
                             Log.i("This value gejala",listBobotH005.get(2));
@@ -1621,7 +1629,7 @@ public class MainActivity extends AppCompatActivity {
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
-                            Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H005");
+                            Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H005",userId);
                             defuzzyfikasi.defuzzyFikasi();
                             defuzzyfikasi.onAgregasi();
 
@@ -1669,9 +1677,9 @@ public class MainActivity extends AppCompatActivity {
                            double combine_CFold_CF29 = combine_CFold_CF28 + resultCalculateGej29 * (1 - combine_CFold_CF28);
                            double combine_CFold_CF30 = combine_CFold_CF29 + resultCalculateGej30 * (1 - combine_CFold_CF29);
                            String endResult = String.valueOf((combine_CFold_CF30 * 100));
-                           createDataCF(endResult,"H006");
+                           createDataCF(endResult,"H006",userId);
 
-                           Fuzzy fuzzy = new Fuzzy("H006");
+                           Fuzzy fuzzy = new Fuzzy("H006",userId);
                            // counting fuzzyfikasi
                            fuzzy.penyakitH006_User(valueUserGejala2,valueUserGejala27,valueUserGejala28,valueUserGejala29,valueUserGejala30);
                            fuzzy.penyakitH006_Pakar(valueGejala2,valueGejala27,valueGejala28,valueGejala29,valueGejala30);
@@ -1682,7 +1690,7 @@ public class MainActivity extends AppCompatActivity {
                            } catch (InterruptedException e) {
                                e.printStackTrace();
                            }
-                           FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H006");
+                           FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H006",userId);
                            fungsiImplikasi.onPenyakit();
                            namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
 
@@ -1691,7 +1699,7 @@ public class MainActivity extends AppCompatActivity {
                            } catch (InterruptedException e) {
                                e.printStackTrace();
                            }
-                           Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H006");
+                           Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H006",userId);
                            defuzzyfikasi.defuzzyFikasi();
                            defuzzyfikasi.onAgregasi();
                        }
@@ -1731,9 +1739,9 @@ public class MainActivity extends AppCompatActivity {
                            double combine_CF34_CF35 = resultCalculateGej1 + resultCalculateGej2 * (1 - resultCalculateGej1);
                            double combine_CFold_CF36 = combine_CF34_CF35 + resultCalculateGej4 * (1 - combine_CF34_CF35);
                            String endResult = String.valueOf((combine_CFold_CF36 * 100));
-                           createDataCF(endResult,"H007");
+                           createDataCF(endResult,"H007",userId);
 
-                           Fuzzy fuzzy = new Fuzzy("H007");
+                           Fuzzy fuzzy = new Fuzzy("H007",userId);
                            // counting fuzzyfikasi
                            fuzzy.penyakitH007_User(valueUserGejala34, valueUserGejala35, valueUserGejala36);
                            fuzzy.penyakitH007_Pakar(valueGejala34, valueGejala35, valueGejala36);
@@ -1744,7 +1752,7 @@ public class MainActivity extends AppCompatActivity {
                            } catch (InterruptedException e) {
                                e.printStackTrace();
                            }
-                           FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H007");
+                           FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H007",userId);
                            fungsiImplikasi.onPenyakit();
                            namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
 //                           Log.i("This value gejala",stringBobotPenyakit1.get(2));
@@ -1754,7 +1762,7 @@ public class MainActivity extends AppCompatActivity {
                            } catch (InterruptedException e) {
                                e.printStackTrace();
                            }
-                           Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H007");
+                           Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H007",userId);
                            defuzzyfikasi.defuzzyFikasi();
                            defuzzyfikasi.onAgregasi();
 //                           defuzzyfikasi.shortAgregations();
@@ -1805,9 +1813,9 @@ public class MainActivity extends AppCompatActivity {
                            double combine_CFold_CF29 = combine_CFold_CF28 + resultCalculateGej29 * (1 - combine_CFold_CF28);
                            double combine_CFold_CF30 = combine_CFold_CF29 + resultCalculateGej30 * (1 - combine_CFold_CF29);
                            String endResult = String.valueOf((combine_CFold_CF30 * 100));
-                           createDataCF(endResult,"H008");
+                           createDataCF(endResult,"H008",userId);
 
-                           Fuzzy fuzzy = new Fuzzy("H008");
+                           Fuzzy fuzzy = new Fuzzy("H008",userId);
                            // counting fuzzyfikasi
                            fuzzy.penyakitH006_User(valueUserGejala2,valueUserGejala27,valueUserGejala28,valueUserGejala29,valueUserGejala30);
                            fuzzy.penyakitH006_Pakar(valueGejala2,valueGejala27,valueGejala28,valueGejala29,valueGejala30);
@@ -1818,7 +1826,7 @@ public class MainActivity extends AppCompatActivity {
                            } catch (InterruptedException e) {
                                e.printStackTrace();
                            }
-                           FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H008");
+                           FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H008",userId);
                            fungsiImplikasi.onPenyakit();
                            namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
 
@@ -1827,7 +1835,7 @@ public class MainActivity extends AppCompatActivity {
                            } catch (InterruptedException e) {
                                e.printStackTrace();
                            }
-                           Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H008");
+                           Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H008",userId);
                            defuzzyfikasi.defuzzyFikasi();
                            defuzzyfikasi.onAgregasi();
                        }
@@ -1869,9 +1877,9 @@ public class MainActivity extends AppCompatActivity {
                           double combine_CF34_CF35 = resultCalculateGej1 + resultCalculateGej2 * (1 - resultCalculateGej1);
                           double combine_CFold_CF36 = combine_CF34_CF35 + resultCalculateGej4 * (1 - combine_CF34_CF35);
                           String endResult = String.valueOf((combine_CFold_CF36 * 100));
-                          createDataCF(endResult,"H009");
+                          createDataCF(endResult,"H009",userId);
 
-                          Fuzzy fuzzy = new Fuzzy("H009");
+                          Fuzzy fuzzy = new Fuzzy("H009",userId);
                           // counting fuzzyfikasi
                           fuzzy.penyakitH007_User(valueUserGejala34, valueUserGejala35, valueUserGejala36);
                           fuzzy.penyakitH007_Pakar(valueGejala34, valueGejala35, valueGejala36);
@@ -1882,7 +1890,7 @@ public class MainActivity extends AppCompatActivity {
                           } catch (InterruptedException e) {
                               e.printStackTrace();
                           }
-                          FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H009");
+                          FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H009",userId);
                           fungsiImplikasi.onPenyakit();
                           namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
 //                           Log.i("This value gejala",stringBobotPenyakit1.get(2));
@@ -1892,7 +1900,7 @@ public class MainActivity extends AppCompatActivity {
                           } catch (InterruptedException e) {
                               e.printStackTrace();
                           }
-                          Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H009");
+                          Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H009",userId);
                           defuzzyfikasi.defuzzyFikasi();
                           defuzzyfikasi.onAgregasi();
 //                           defuzzyfikasi.shortAgregations();
@@ -1935,9 +1943,9 @@ public class MainActivity extends AppCompatActivity {
                            double combine_CF34_CF35 = resultCalculateGej1 + resultCalculateGej2 * (1 - resultCalculateGej1);
                            double combine_CFold_CF36 = combine_CF34_CF35 + resultCalculateGej4 * (1 - combine_CF34_CF35);
                            String endResult = String.valueOf((combine_CFold_CF36 * 100));
-                           createDataCF(endResult,"H010");
+                           createDataCF(endResult,"H010",userId);
 
-                           Fuzzy fuzzy = new Fuzzy("H010");
+                           Fuzzy fuzzy = new Fuzzy("H010",userId);
                            // counting fuzzyfikasi
                            fuzzy.penyakitH007_User(valueUserGejala34, valueUserGejala35, valueUserGejala36);
                            fuzzy.penyakitH007_Pakar(valueGejala34, valueGejala35, valueGejala36);
@@ -1948,7 +1956,7 @@ public class MainActivity extends AppCompatActivity {
                            } catch (InterruptedException e) {
                                e.printStackTrace();
                            }
-                           FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H010");
+                           FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H010",userId);
                            fungsiImplikasi.onPenyakit();
                            namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
 //                           Log.i("This value gejala",stringBobotPenyakit1.get(2));
@@ -1958,7 +1966,7 @@ public class MainActivity extends AppCompatActivity {
                            } catch (InterruptedException e) {
                                e.printStackTrace();
                            }
-                           Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H010");
+                           Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H010",userId);
                            defuzzyfikasi.defuzzyFikasi();
                            defuzzyfikasi.onAgregasi();
 //                           defuzzyfikasi.shortAgregations();
@@ -2009,9 +2017,9 @@ public class MainActivity extends AppCompatActivity {
                             double combine_CFold_CF29 = combine_CFold_CF28 + resultCalculateGej29 * (1 - combine_CFold_CF28);
                             double combine_CFold_CF30 = combine_CFold_CF29 + resultCalculateGej30 * (1 - combine_CFold_CF29);
                             String endResult = String.valueOf((combine_CFold_CF30 * 100));
-                            createDataCF(endResult,"H011");
+                            createDataCF(endResult,"H011",userId);
 
-                            Fuzzy fuzzy = new Fuzzy("H011");
+                            Fuzzy fuzzy = new Fuzzy("H011",userId);
                             // counting fuzzyfikasi
                             fuzzy.penyakitH006_User(valueUserGejala2,valueUserGejala27,valueUserGejala28,valueUserGejala29,valueUserGejala30);
                             fuzzy.penyakitH006_Pakar(valueGejala2,valueGejala27,valueGejala28,valueGejala29,valueGejala30);
@@ -2022,7 +2030,7 @@ public class MainActivity extends AppCompatActivity {
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
-                            FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H011");
+                            FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H011",userId);
                             fungsiImplikasi.onPenyakit();
                             namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
 
@@ -2031,7 +2039,7 @@ public class MainActivity extends AppCompatActivity {
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
-                            Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H011");
+                            Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H011",userId);
                             defuzzyfikasi.defuzzyFikasi();
                             defuzzyfikasi.onAgregasi();
                         }
@@ -2048,10 +2056,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void createDataCF(String result, String penyakit){
+    private void createDataCF(String result, String penyakit, String userId){
         databaseInserFM = FirebaseDatabase.getInstance().getReference();
         LastModel lastModel = new LastModel(penyakit,result);
-        databaseInserFM.child("LastResult").child("id_user").child("CF").setValue(lastModel);
+        databaseInserFM.child("LastResult").child(userId).child("CF").setValue(lastModel);
 
     }
 

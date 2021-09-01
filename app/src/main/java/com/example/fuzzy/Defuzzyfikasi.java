@@ -29,10 +29,11 @@ import java.util.Map;
 
 public class Defuzzyfikasi {
 
-    String namaPenyakit;
+    String namaPenyakit, userId;
 
-    public Defuzzyfikasi(String namaPenyakit) {
+    public Defuzzyfikasi(String namaPenyakit, String userId) {
         this.namaPenyakit = namaPenyakit;
+        this.userId = userId;
     }
 
     public String getNamaPenyakit() {
@@ -71,7 +72,7 @@ public class Defuzzyfikasi {
 
     public void defuzzyFikasi(){
 
-       mDatabase = FirebaseDatabase.getInstance().getReference().child("Fungsiimplikasi").child(namaPenyakit);
+       mDatabase = FirebaseDatabase.getInstance().getReference().child("Fungsiimplikasi").child(userId).child(namaPenyakit);
        mDatabase.addValueEventListener(new ValueEventListener() {
            @Override
            public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -94,7 +95,7 @@ public class Defuzzyfikasi {
     private void onQueriesDone(List<String>keyGejalaSt){
         for (int j = 0; j < keyGejalaSt.size(); j++) {
             Log.d("keyGejalaSt", keyGejalaSt.get(j));
-            mDatabaseMain = FirebaseDatabase.getInstance().getReference().child("Fungsiimplikasi").child(namaPenyakit).child(keyGejalaSt.get(j));
+            mDatabaseMain = FirebaseDatabase.getInstance().getReference().child("Fungsiimplikasi").child(userId).child(namaPenyakit).child(keyGejalaSt.get(j));
             int finalJ = j;
             mDatabaseMain.addValueEventListener(new ValueEventListener() {
                 @RequiresApi(api = Build.VERSION_CODES.N)
@@ -228,7 +229,7 @@ public class Defuzzyfikasi {
 
            }
            InputFuzzyDB inputFuzzyDB = new InputFuzzyDB("SEDANG",String.valueOf(max),String.valueOf(maxZi),key);
-           mDatabaseSedang.child("Defuzzyfikasi").child(namaPenyakit).child(String.valueOf(key)).child("SEDANG").setValue(inputFuzzyDB);
+           mDatabaseSedang.child("Defuzzyfikasi").child(userId).child(namaPenyakit).child(String.valueOf(key)).child("SEDANG").setValue(inputFuzzyDB);
            System.out.println("Nilai Max Sedang adalah " + max + "Nilai Zi " + maxZi + "Key " + key);
        }
 
@@ -256,7 +257,7 @@ public class Defuzzyfikasi {
 
            System.out.println("Nilai Max Rendah adalah " + max + "Nilai Zi " + maxZi + "key " + key);
            InputFuzzyDB inputFuzzyDB = new InputFuzzyDB("RENDAH",String.valueOf(max),String.valueOf(maxZi),key);
-           mDatabaseRendah.child("Defuzzyfikasi").child(namaPenyakit).child(String.valueOf(key)).child("RENDAH").setValue(inputFuzzyDB);
+           mDatabaseRendah.child("Defuzzyfikasi").child(userId).child(namaPenyakit).child(String.valueOf(key)).child("RENDAH").setValue(inputFuzzyDB);
            System.out.println("Nilai Max Sedang adalah " + max + "Nilai Zi " + maxZi);
        }
 
@@ -284,14 +285,14 @@ public class Defuzzyfikasi {
 
            System.out.println("Nilai Max Rendah adalah " + max + "Nilai Zi " + maxZi + "key " + key);
            InputFuzzyDB inputFuzzyDB = new InputFuzzyDB("TINGGI",String.valueOf(max),String.valueOf(maxZi),key);
-           mDatabaseTinggi.child("Defuzzyfikasi").child(namaPenyakit).child(String.valueOf(key)).child("TINGGI").setValue(inputFuzzyDB);
+           mDatabaseTinggi.child("Defuzzyfikasi").child(userId).child(namaPenyakit).child(String.valueOf(key)).child("TINGGI").setValue(inputFuzzyDB);
            System.out.println("Nilai Max Sedang adalah " + max + "Nilai Zi " + maxZi);
        }
 
    }
 
    public void onAgregasi(){
-       mDatabaseGetDefuzzy = FirebaseDatabase.getInstance().getReference().child("Defuzzyfikasi").child(namaPenyakit);
+       mDatabaseGetDefuzzy = FirebaseDatabase.getInstance().getReference().child("Defuzzyfikasi").child(userId).child(namaPenyakit);
        mDatabaseSedang = FirebaseDatabase.getInstance().getReference();
        mDatabaseTinggi = FirebaseDatabase.getInstance().getReference();
 
@@ -317,7 +318,7 @@ public class Defuzzyfikasi {
    private void saveListAgre(List<String>keyList){
 
        for (int j = 0; j < keyList.size(); j++) {
-           mDatabaseAgre = FirebaseDatabase.getInstance().getReference().child("Defuzzyfikasi").child(namaPenyakit).child(keyList.get(j));
+           mDatabaseAgre = FirebaseDatabase.getInstance().getReference().child("Defuzzyfikasi").child(userId).child(namaPenyakit).child(keyList.get(j));
            System.out.println("Ndeleng hasil keyne " + keyList.get(j));
            int finalJ = j;
            mDatabaseAgre.addValueEventListener(new ValueEventListener() {
@@ -420,7 +421,7 @@ public class Defuzzyfikasi {
        double result = hasilAkhir / sizeOuter;
        System.out.println("Ini adalah hasil akhir yang saya inginkan 000 " + result  + " hasil akhir " + hasilAkhir + " siw outer " + sizeOuter );
        LastModel lastModel = new LastModel(namaPenyakit,String.valueOf(result));
-       getmDatabaseLastValue.child("LastResult").child("id_user").child("FM").setValue(lastModel);
+       getmDatabaseLastValue.child("LastResult").child(userId).child(namaPenyakit).child("FM").setValue(lastModel);
 
    }
 }
