@@ -9,9 +9,29 @@
     tools:openDrawer="start">
 
     <include
+        android:id="@+id/layoutMain"
         layout="@layout/layout_main"
         android:layout_width="match_parent"
+        android:visibility="visible"
         android:layout_height="match_parent"/>
+
+    <include
+        android:id="@+id/layoutHistory"
+        layout="@layout/history_layout"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <include
+        android:id="@+id/layoutKnw"
+        layout="@layout/layout_know_base"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+<!--    <FrameLayout-->
+<!--        android:id="@+id/frameLayout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"/>-->
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"

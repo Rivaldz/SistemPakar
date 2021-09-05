@@ -15,6 +15,7 @@ import com.example.model.HashDataShort;
 import com.example.model.InputFuzzyDB;
 import com.example.model.KeyGetAgregation;
 import com.example.model.LastModel;
+import com.example.model.RandKey;
 import com.example.model.ShortDataModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,6 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -420,8 +422,9 @@ public class Defuzzyfikasi {
        }
        double result = hasilAkhir / sizeOuter;
        System.out.println("Ini adalah hasil akhir yang saya inginkan 000 " + result  + " hasil akhir " + hasilAkhir + " siw outer " + sizeOuter );
+       RandKey randKey = new RandKey();
        LastModel lastModel = new LastModel(namaPenyakit,String.valueOf(result));
-       getmDatabaseLastValue.child("LastResult").child(userId).child(namaPenyakit).child("FM").setValue(lastModel);
+       getmDatabaseLastValue.child("LastResult").child(userId).child(String.valueOf(randKey.getRandom())).child("CF").child("FM").setValue(lastModel);
 
    }
 }

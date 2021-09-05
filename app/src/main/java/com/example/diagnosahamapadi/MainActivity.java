@@ -7,9 +7,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,6 +19,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -27,22 +30,27 @@ import android.widget.Toast;
 
 import com.example.diagnosahamapadi.adapter.RecyclerViewAdapter;
 //import com.example.model.Fuzzy;
+import com.example.diagnosahamapadi.fragment.ResultFragment;
 import com.example.fuzzy.Defuzzyfikasi;
 import com.example.fuzzy.FungsiImplikasi;
 import com.example.fuzzy.Fuzzy;
 import com.example.model.DataClass;
 import com.example.model.Gejala;
 import com.example.model.LastModel;
+import com.example.model.RandKey;
+import com.example.model.ShowUser;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -137,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
     String[] trustedValueGej53 = {"","0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","1"};
 
     SharedPreferences sharedPreferences;
+    String userId = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,12 +153,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         sharedPreferences = getSharedPreferences("user_details",MODE_PRIVATE);
-        String userId = sharedPreferences.getString("username",null);
+        userId = sharedPreferences.getString("username",null);
         Log.e("LIHAT USERNAME",userId);
 
-//        recyclerView = findViewById(R.id.recycler);
-
-        //this drawable layout
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
@@ -172,31 +178,26 @@ public class MainActivity extends AppCompatActivity {
                 switch(id) {
                     case R.id.item1:
                         Toast.makeText(MainActivity.this,
-                                "Item1 di klik", Toast.LENGTH_SHORT).show();
-
+                                "Ini Home", Toast.LENGTH_SHORT).show();
+                        findViewById(R.id.layoutKnw).setVisibility(View.GONE);
+                        findViewById(R.id.layoutMain).setVisibility(View.VISIBLE);
+                        findViewById(R.id.layoutHistory).setVisibility(View.GONE);
                         break;
+
                     case R.id.item2:
                         Toast.makeText(MainActivity.this,
                                 "Item2 di klik", Toast.LENGTH_SHORT).show();
-
+                        findViewById(R.id.layoutKnw).setVisibility(View.VISIBLE);
+                        findViewById(R.id.layoutMain).setVisibility(View.GONE);
+                        findViewById(R.id.layoutHistory).setVisibility(View.GONE);
                         break;
                     case R.id.item3:
                         Toast.makeText(MainActivity.this,
                                 "Item3 di klik", Toast.LENGTH_SHORT).show();
-
+                        findViewById(R.id.layoutHistory).setVisibility(View.VISIBLE);
+                        findViewById(R.id.layoutMain).setVisibility(View.GONE);
+                        findViewById(R.id.layoutKnw).setVisibility(View.GONE);
                         break;
-//                    case R.id.item4:
-//                        Toast.makeText(MainActivity.this,
-//                                "Item4 di klik", Toast.LENGTH_SHORT).show();
-//                        break;
-//                    case R.id.manis1:
-//                        Toast.makeText(MainActivity.this,
-//                                "Manis1 di klik", Toast.LENGTH_SHORT).show();
-//                        break;
-//                    case R.id.manis2:
-//                        Toast.makeText(MainActivity.this,
-//                                "Manis2 di klik", Toast.LENGTH_SHORT).show();
-//                        break;
                 }
                 return true;
             }
@@ -2051,7 +2052,14 @@ public class MainActivity extends AppCompatActivity {
                     });
                }
 
+                //                else {
+//                    Toast.makeText(MainActivity.this, "Silahkan Pilih Gejala",Toast.LENGTH_LONG).show();
+//
+//                }
+                moveInten();
+
             }
+
         });
 
     }
@@ -2059,10 +2067,36 @@ public class MainActivity extends AppCompatActivity {
     private void createDataCF(String result, String penyakit, String userId){
         databaseInserFM = FirebaseDatabase.getInstance().getReference();
         LastModel lastModel = new LastModel(penyakit,result);
-        databaseInserFM.child("LastResult").child(userId).child("CF").setValue(lastModel);
+        databaseInserFM.child("LastResult").child(userId).child().child("CF").setValue(lastModel);
 
     }
+    private void moveInten(){
+        List<String> st = new ArrayList<>();
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("LastResult").child(userId);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    ShowUser showUser = dataSnapshot.getValue(ShowUser.class);
+                    showUser.setKeyMethod(dataSnapshot.getKey());
+                    st.add(showUser.keyMethod);
+                }
 
+                int size = st.size();
+
+                if (size > 1){
+                    Intent intent = new Intent(MainActivity.this, ResultActivity.class);
+                    startActivity(intent);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
