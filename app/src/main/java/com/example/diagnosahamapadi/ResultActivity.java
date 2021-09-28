@@ -27,9 +27,11 @@ public class ResultActivity extends AppCompatActivity {
     EditText namaPH, keparahan, kemungkinan;
     Button selsai;
 
-    SharedPreferences sharedPreferences;
+    SharedPreferences sharedPreferences, sharedPreferencesSession;
 
     List<ShowUser> listMethod = new ArrayList<>();
+
+    MainActivity mainActivity = new MainActivity();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +42,13 @@ public class ResultActivity extends AppCompatActivity {
         kemungkinan = findViewById(R.id.editTextKemungkinanPenyakit);
         selsai = findViewById(R.id.buttonSelesai);
 
+        String stringSession = mainActivity.sessionString;
+
         sharedPreferences = getSharedPreferences("user_details",MODE_PRIVATE);
         String userId = sharedPreferences.getString("username",null);
+
+        sharedPreferencesSession = getSharedPreferences("session",MODE_PRIVATE);
+        String idSession = sharedPreferencesSession.getString("varSession",null);
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("LastResult").child(userId);
         mDatabase.addValueEventListener(new ValueEventListener() {
@@ -51,7 +58,6 @@ public class ResultActivity extends AppCompatActivity {
                   ShowUser showUser = dataSnapshot.getValue(ShowUser.class);
                   showUser.setKeyMethod(dataSnapshot.getKey());
                   listMethod.add(showUser);
-
 
               }
                 Log.e("Lihat nama penyakit : ",listMethod.get(0).getNamaPenyakit());

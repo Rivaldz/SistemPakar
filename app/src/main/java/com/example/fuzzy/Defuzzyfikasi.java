@@ -1,11 +1,13 @@
 package com.example.fuzzy;
 
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
+import com.example.diagnosahamapadi.MainActivity;
 import com.example.model.AgreHashModel;
 import com.example.model.ArrayListModel;
 import com.example.model.DefuzzyfikasiModel;
@@ -15,7 +17,6 @@ import com.example.model.HashDataShort;
 import com.example.model.InputFuzzyDB;
 import com.example.model.KeyGetAgregation;
 import com.example.model.LastModel;
-import com.example.model.RandKey;
 import com.example.model.ShortDataModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,11 +32,19 @@ import java.util.Map;
 
 public class Defuzzyfikasi {
 
-    String namaPenyakit, userId;
+    String namaPenyakit, userId,idSession;
+
+    MainActivity mainActivity = new MainActivity();
+
+    SharedPreferences sharedPreferencesSession;
 
     public Defuzzyfikasi(String namaPenyakit, String userId) {
         this.namaPenyakit = namaPenyakit;
         this.userId = userId;
+    }
+
+    public Defuzzyfikasi(String idSess){
+        this.idSession = idSess;
     }
 
     public String getNamaPenyakit() {
@@ -386,6 +395,8 @@ public class Defuzzyfikasi {
    }
 
    public void shortAgregations(){
+//       sharedPreferencesSession = getSharedPreferences("session",MODE_PRIVATE);
+//       sharedPreferencesSession.contains("varSession");
         double hasilAkhir = 0;
         int sizeOuter = 0;
         double tempHasil = 0;
@@ -422,9 +433,9 @@ public class Defuzzyfikasi {
        }
        double result = hasilAkhir / sizeOuter;
        System.out.println("Ini adalah hasil akhir yang saya inginkan 000 " + result  + " hasil akhir " + hasilAkhir + " siw outer " + sizeOuter );
-       RandKey randKey = new RandKey();
+//       String sessionString = mainActivity.sessionString;
        LastModel lastModel = new LastModel(namaPenyakit,String.valueOf(result));
-       getmDatabaseLastValue.child("LastResult").child(userId).child(String.valueOf(randKey.getRandom())).child("CF").child("FM").setValue(lastModel);
+       getmDatabaseLastValue.child("LastResult").child(userId).child("FM").setValue(lastModel);
 
    }
 }

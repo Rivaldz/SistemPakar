@@ -37,7 +37,6 @@ import com.example.fuzzy.Fuzzy;
 import com.example.model.DataClass;
 import com.example.model.Gejala;
 import com.example.model.LastModel;
-import com.example.model.RandKey;
 import com.example.model.ShowUser;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.ChildEventListener;
@@ -144,8 +143,10 @@ public class MainActivity extends AppCompatActivity {
     String[] trustedValueGej52 = {"","0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","1"};
     String[] trustedValueGej53 = {"","0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","1"};
 
-    SharedPreferences sharedPreferences;
+    SharedPreferences sharedPreferences, sharedPreferencesSession;
     String userId = null;
+    int sessionId = 0;
+    public String sessionString = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,6 +155,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         sharedPreferences = getSharedPreferences("user_details",MODE_PRIVATE);
         userId = sharedPreferences.getString("username",null);
+
+        sharedPreferencesSession = getSharedPreferences("session",MODE_PRIVATE);
+        sharedPreferencesSession.contains("varSession");
+
         Log.e("LIHAT USERNAME",userId);
 
         if (getSupportActionBar() != null) {
@@ -178,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
                 switch(id) {
                     case R.id.item1:
                         Toast.makeText(MainActivity.this,
-                                "Ini Home", Toast.LENGTH_SHORT).show();
+                                "Halaman Home", Toast.LENGTH_SHORT).show();
                         findViewById(R.id.layoutKnw).setVisibility(View.GONE);
                         findViewById(R.id.layoutMain).setVisibility(View.VISIBLE);
                         findViewById(R.id.layoutHistory).setVisibility(View.GONE);
@@ -186,14 +191,14 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.item2:
                         Toast.makeText(MainActivity.this,
-                                "Item2 di klik", Toast.LENGTH_SHORT).show();
+                                "Halaman Budidaya", Toast.LENGTH_SHORT).show();
                         findViewById(R.id.layoutKnw).setVisibility(View.VISIBLE);
                         findViewById(R.id.layoutMain).setVisibility(View.GONE);
                         findViewById(R.id.layoutHistory).setVisibility(View.GONE);
                         break;
                     case R.id.item3:
                         Toast.makeText(MainActivity.this,
-                                "Item3 di klik", Toast.LENGTH_SHORT).show();
+                                "Tentang Aplikasi", Toast.LENGTH_SHORT).show();
                         findViewById(R.id.layoutHistory).setVisibility(View.VISIBLE);
                         findViewById(R.id.layoutMain).setVisibility(View.GONE);
                         findViewById(R.id.layoutKnw).setVisibility(View.GONE);
@@ -2057,7 +2062,13 @@ public class MainActivity extends AppCompatActivity {
 //
 //                }
                 moveInten();
-
+                // add sharedpreference
+                SharedPreferences.Editor editorSes = sharedPreferencesSession.edit();
+                editorSes.putString("varSession", String.valueOf(sessionId));
+                editorSes.apply();
+                sessionString = sharedPreferencesSession.getString("varSession",null);
+                new Defuzzyfikasi(sessionString);
+                sessionId++;
             }
 
         });
@@ -2067,7 +2078,7 @@ public class MainActivity extends AppCompatActivity {
     private void createDataCF(String result, String penyakit, String userId){
         databaseInserFM = FirebaseDatabase.getInstance().getReference();
         LastModel lastModel = new LastModel(penyakit,result);
-        databaseInserFM.child("LastResult").child(userId).child().child("CF").setValue(lastModel);
+        databaseInserFM.child("LastResult").child(userId).child("CF").setValue(lastModel);
 
     }
     private void moveInten(){
