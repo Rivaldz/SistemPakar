@@ -24,6 +24,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,7 +54,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener  {
 
     private static final String TAG = "MainActivity";
 
@@ -88,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
             ,txxtNilaiGejala37,txxtNilaiGejala38,txxtNilaiGejala39,txxtNilaiGejala40,txxtNilaiGejala41,txxtNilaiGejala42,txxtNilaiGejala43,txxtNilaiGejala44,txxtNilaiGejala45
             ,txxtNilaiGejala46,txxtNilaiGejala47,txxtNilaiGejala48,txxtNilaiGejala49,txxtNilaiGejala50,txxtNilaiGejala51,txxtNilaiGejala52,txxtNilaiGejala53;
 
+    private ImageView penyakitDanHama, tipsMenanam, pemasaran, jenisTanaman;
 
     String[] trustedValueGej1 = {"","0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","1"};
     String[] trustedValueGej2 = {"","0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","1"};
@@ -319,6 +321,16 @@ public class MainActivity extends AppCompatActivity {
         txxtNilaiGejala51 = findViewById(R.id.autoCompleteTextView51);
         txxtNilaiGejala52 = findViewById(R.id.autoCompleteTextView52);
         txxtNilaiGejala53 = findViewById(R.id.autoCompleteTextView53);
+
+        penyakitDanHama = findViewById(R.id.imageViewPenyakitHama);
+        tipsMenanam     = findViewById(R.id.imageViewTipsMenanam);
+        pemasaran       = findViewById(R.id.imageViewPemasaran);
+        jenisTanaman    = findViewById(R.id.imageViewJenisTanaman);
+
+        penyakitDanHama.setOnClickListener((View.OnClickListener) this);
+        tipsMenanam.setOnClickListener((View.OnClickListener) this);
+        pemasaran.setOnClickListener((View.OnClickListener) this);
+        jenisTanaman.setOnClickListener((View.OnClickListener) this);
 
         final ArrayAdapter<String> adapterGejala1 = new ArrayAdapter<String>
                 (this,android.R.layout.select_dialog_item, trustedValueGej1);
@@ -2133,5 +2145,25 @@ public class MainActivity extends AppCompatActivity {
 
     public void buttonData(View view) {
         startActivity(new Intent(MainActivity.this, MyListData.class));
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.imageViewPenyakitHama:
+                Toast.makeText(this, "Button Penaykit dan Hama clicked", Toast.LENGTH_SHORT).show();
+                //add mainactivity direct to web
+                break;
+            case R.id.imageViewTipsMenanam:
+                Toast.makeText(this, "Button Tips Menanam clicked", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.imageViewPemasaran:
+                Toast.makeText(this, "Button Pemasaran clicked", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.imageViewJenisTanaman:
+                Toast.makeText(this, "Button Jenis Tanaman clicked", Toast.LENGTH_SHORT).show();
+                break;
+
+        }
     }
 }
