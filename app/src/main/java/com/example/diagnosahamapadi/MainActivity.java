@@ -32,6 +32,10 @@ import android.widget.Toast;
 import com.example.diagnosahamapadi.adapter.RecyclerViewAdapter;
 //import com.example.model.Fuzzy;
 import com.example.diagnosahamapadi.fragment.ResultFragment;
+import com.example.diagnosahamapadi.webview.JenisPadi;
+import com.example.diagnosahamapadi.webview.Pemasaran;
+import com.example.diagnosahamapadi.webview.PenyakitHama;
+import com.example.diagnosahamapadi.webview.TipsMenanam;
 import com.example.fuzzy.Defuzzyfikasi;
 import com.example.fuzzy.FungsiImplikasi;
 import com.example.fuzzy.Fuzzy;
@@ -2152,16 +2156,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()) {
             case R.id.imageViewPenyakitHama:
                 Toast.makeText(this, "Button Penaykit dan Hama clicked", Toast.LENGTH_SHORT).show();
-                //add mainactivity direct to web
-                break;
+                startActivity(new Intent(MainActivity.this, PenyakitHama.class));
             case R.id.imageViewTipsMenanam:
                 Toast.makeText(this, "Button Tips Menanam clicked", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this, TipsMenanam.class));
                 break;
             case R.id.imageViewPemasaran:
                 Toast.makeText(this, "Button Pemasaran clicked", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this, Pemasaran.class));
                 break;
             case R.id.imageViewJenisTanaman:
                 Toast.makeText(this, "Button Jenis Tanaman clicked", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this, JenisPadi.class));
                 break;
 
         }
