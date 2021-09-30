@@ -1,7 +1,10 @@
 package com.example.diagnosahamapadi.webview;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
+
+import com.example.diagnosahamapadi.R;
 
 public class JenisPadi extends AppCompatActivity {
 
