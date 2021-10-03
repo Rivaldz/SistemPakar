@@ -14,7 +14,11 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".webview.JenisPadi"></activity>
-        <activity android:name=".webview.Pemasaran" />
+        <activity android:name=".webview.Pemasaran">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <activity android:name=".webview.TipsMenanam" />
         <activity android:name=".webview.PenyakitHama" />
         <activity android:name=".ResultActivity" />

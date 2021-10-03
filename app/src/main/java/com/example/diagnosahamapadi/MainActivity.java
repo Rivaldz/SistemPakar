@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ,txxtNilaiGejala37,txxtNilaiGejala38,txxtNilaiGejala39,txxtNilaiGejala40,txxtNilaiGejala41,txxtNilaiGejala42,txxtNilaiGejala43,txxtNilaiGejala44,txxtNilaiGejala45
             ,txxtNilaiGejala46,txxtNilaiGejala47,txxtNilaiGejala48,txxtNilaiGejala49,txxtNilaiGejala50,txxtNilaiGejala51,txxtNilaiGejala52,txxtNilaiGejala53;
 
-    private ImageView penyakitDanHama, tipsMenanam, pemasaran, jenisTanaman;
+    private Button penyakitDanHama, tipsMenanam, pemasaran, jenisTanaman;
 
     String[] trustedValueGej1 = {"","0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","1"};
     String[] trustedValueGej2 = {"","0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","1"};
