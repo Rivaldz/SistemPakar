@@ -25,22 +25,26 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Defuzzyfikasi {
 
-    String namaPenyakit, userId,idSession;
+    String namaPenyakit, userId,idSession,realNamaPenyakit;
 
     MainActivity mainActivity = new MainActivity();
 
     SharedPreferences sharedPreferencesSession;
 
-    public Defuzzyfikasi(String namaPenyakit, String userId) {
+    public Defuzzyfikasi() {
+    }
+
+    public Defuzzyfikasi(String namaPenyakit, String userId, String realNamaPenyakit) {
         this.namaPenyakit = namaPenyakit;
         this.userId = userId;
+        this.realNamaPenyakit = realNamaPenyakit;
+
     }
 
     public Defuzzyfikasi(String idSess){
@@ -74,9 +78,9 @@ public class Defuzzyfikasi {
 
     ArrayListModel arrayListModel = new ArrayListModel();
 
-    Map<String, ArrayList<HashDataShort>> multiMapRendah = new HashMap<String, ArrayList<HashDataShort>>();
-    Map<String, ArrayList<HashDataShort>> multiMapSedang = new HashMap<String, ArrayList<HashDataShort>>();
-    Map<String, ArrayList<HashDataShort>> multiMapTinggi = new HashMap<String, ArrayList<HashDataShort>>();
+    public Map<String, ArrayList<HashDataShort>> multiMapRendah = new HashMap<String, ArrayList<HashDataShort>>();
+    public Map<String, ArrayList<HashDataShort>> multiMapSedang = new HashMap<String, ArrayList<HashDataShort>>();
+    public Map<String, ArrayList<HashDataShort>> multiMapTinggi = new HashMap<String, ArrayList<HashDataShort>>();
     Map<String, List<String>> objekMap = new HashMap<>();
     Map<String, ArrayList<AgreHashModel>> lastStep = new HashMap<String, ArrayList<AgreHashModel>>();
 
@@ -220,85 +224,91 @@ public class Defuzzyfikasi {
         mDatabaseSedang = FirebaseDatabase.getInstance().getReference();
         mDatabaseTinggi = FirebaseDatabase.getInstance().getReference();
 
-       for (Map.Entry<String, ArrayList<HashDataShort>> entry : multiMapSedang.entrySet()) {
+//        if (databaseChecker()){
+//            DatabaseReference deleteDb = FirebaseDatabase.getInstance().getReference().child("Defuzzyfikasi").child(userId);
+//            deleteDb.removeValue();
+//        }else {
+            for (Map.Entry<String, ArrayList<HashDataShort>> entry : multiMapSedang.entrySet()) {
 
-           List<HashDataShort> values = entry.getValue();
+                List<HashDataShort> values = entry.getValue();
 
-           String key = entry.getKey();
+                String key = entry.getKey();
 
-           double max = values.get(0).getMinFunction();
-           double maxZi = values.get(0).getZiValue();
+                double max = values.get(0).getMinFunction();
+                double maxZi = values.get(0).getZiValue();
 
-           int siz = values.size();
+                int siz = values.size();
 
-           for (int i = 0; i < siz; i++) {
-               if (max < values.get(i).getMinFunction()){
-                   max = values.get(i).getMinFunction();
-                   maxZi = values.get(i).getZiValue();
+                for (int i = 0; i < siz; i++) {
+                    if (max < values.get(i).getMinFunction()) {
+                        max = values.get(i).getMinFunction();
+                        maxZi = values.get(i).getZiValue();
 
-               }
+                    }
 
-           }
-           InputFuzzyDB inputFuzzyDB = new InputFuzzyDB("SEDANG",String.valueOf(max),String.valueOf(maxZi),key);
-           mDatabaseSedang.child("Defuzzyfikasi").child(userId).child(namaPenyakit).child(String.valueOf(key)).child("SEDANG").setValue(inputFuzzyDB);
-           System.out.println("Nilai Max Sedang adalah " + max + "Nilai Zi " + maxZi + "Key " + key);
-       }
+                }
+                InputFuzzyDB inputFuzzyDB = new InputFuzzyDB("SEDANG", String.valueOf(max), String.valueOf(maxZi), key);
+                mDatabaseSedang.child("Defuzzyfikasi").child(userId).child(namaPenyakit).child(String.valueOf(key)).child("SEDANG").setValue(inputFuzzyDB);
+                System.out.println("Nilai Max Sedang adalah " + max + "Nilai Zi " + maxZi + "Key " + key);
+            }
 
-       for (Map.Entry<String, ArrayList<HashDataShort>> entry : multiMapRendah.entrySet()) {
-           List<HashDataShort> values = entry.getValue();
-
-//           System.out.println("ini size " + values.size());
-
-           double min = values.get(0).getMinFunction();
-           double max = values.get(0).getMinFunction();
-           double maxZi = values.get(0).getZiValue();
-
-           int siz = values.size();
-
-           String  key = entry.getKey();
-
-           for (int i = 0; i < siz; i++) {
-               if (max < values.get(i).getMinFunction()){
-                    max = values.get(i).getMinFunction();
-                    maxZi = values.get(i).getZiValue();
-
-               }
-
-           }
-
-           System.out.println("Nilai Max Rendah adalah " + max + "Nilai Zi " + maxZi + "key " + key);
-           InputFuzzyDB inputFuzzyDB = new InputFuzzyDB("RENDAH",String.valueOf(max),String.valueOf(maxZi),key);
-           mDatabaseRendah.child("Defuzzyfikasi").child(userId).child(namaPenyakit).child(String.valueOf(key)).child("RENDAH").setValue(inputFuzzyDB);
-           System.out.println("Nilai Max Sedang adalah " + max + "Nilai Zi " + maxZi);
-       }
-
-       for (Map.Entry<String, ArrayList<HashDataShort>> entry : multiMapTinggi.entrySet()) {
-           List<HashDataShort> values = entry.getValue();
+            for (Map.Entry<String, ArrayList<HashDataShort>> entry : multiMapRendah.entrySet()) {
+                List<HashDataShort> values = entry.getValue();
 
 //           System.out.println("ini size " + values.size());
 
-           double min = values.get(0).getMinFunction();
-           double max = values.get(0).getMinFunction();
-           double maxZi = values.get(0).getZiValue();
+                double min = values.get(0).getMinFunction();
+                double max = values.get(0).getMinFunction();
+                double maxZi = values.get(0).getZiValue();
 
-           int siz = values.size();
+                int siz = values.size();
 
-           String  key = entry.getKey();
+                String key = entry.getKey();
 
-           for (int i = 0; i < siz; i++) {
-               if (max < values.get(i).getMinFunction()){
-                   max = values.get(i).getMinFunction();
-                   maxZi = values.get(i).getZiValue();
+                for (int i = 0; i < siz; i++) {
+                    if (max < values.get(i).getMinFunction()) {
+                        max = values.get(i).getMinFunction();
+                        maxZi = values.get(i).getZiValue();
 
-               }
+                    }
 
-           }
+                }
 
-           System.out.println("Nilai Max Rendah adalah " + max + "Nilai Zi " + maxZi + "key " + key);
-           InputFuzzyDB inputFuzzyDB = new InputFuzzyDB("TINGGI",String.valueOf(max),String.valueOf(maxZi),key);
-           mDatabaseTinggi.child("Defuzzyfikasi").child(userId).child(namaPenyakit).child(String.valueOf(key)).child("TINGGI").setValue(inputFuzzyDB);
-           System.out.println("Nilai Max Sedang adalah " + max + "Nilai Zi " + maxZi);
-       }
+                System.out.println("Nilai Max Rendah adalah " + max + "Nilai Zi " + maxZi + "key " + key);
+                InputFuzzyDB inputFuzzyDB = new InputFuzzyDB("RENDAH", String.valueOf(max), String.valueOf(maxZi), key);
+                mDatabaseRendah.child("Defuzzyfikasi").child(userId).child(namaPenyakit).child(String.valueOf(key)).child("RENDAH").setValue(inputFuzzyDB);
+                System.out.println("Nilai Max Sedang adalah " + max + "Nilai Zi " + maxZi);
+            }
+
+            for (Map.Entry<String, ArrayList<HashDataShort>> entry : multiMapTinggi.entrySet()) {
+                List<HashDataShort> values = entry.getValue();
+
+//           System.out.println("ini size " + values.size());
+
+                double min = values.get(0).getMinFunction();
+                double max = values.get(0).getMinFunction();
+                double maxZi = values.get(0).getZiValue();
+
+                int siz = values.size();
+
+                String key = entry.getKey();
+
+                for (int i = 0; i < siz; i++) {
+                    if (max < values.get(i).getMinFunction()) {
+                        max = values.get(i).getMinFunction();
+                        maxZi = values.get(i).getZiValue();
+
+                    }
+
+                }
+
+                System.out.println("Nilai Max Rendah adalah " + max + "Nilai Zi " + maxZi + "key " + key);
+                InputFuzzyDB inputFuzzyDB = new InputFuzzyDB("TINGGI", String.valueOf(max), String.valueOf(maxZi), key);
+                mDatabaseTinggi.child("Defuzzyfikasi").child(userId).child(namaPenyakit).child(String.valueOf(key)).child("TINGGI").setValue(inputFuzzyDB);
+                System.out.println("Nilai Max Sedang adalah " + max + "Nilai Zi " + maxZi);
+            }
+//        }
+       deleteHash();
 
    }
 
@@ -434,8 +444,33 @@ public class Defuzzyfikasi {
        double result = hasilAkhir / sizeOuter;
        System.out.println("Ini adalah hasil akhir yang saya inginkan 000 " + result  + " hasil akhir " + hasilAkhir + " siw outer " + sizeOuter );
 //       String sessionString = mainActivity.sessionString;
-       LastModel lastModel = new LastModel(namaPenyakit,String.valueOf(result));
+       LastModel lastModel = new LastModel(realNamaPenyakit,String.valueOf(result));
        getmDatabaseLastValue.child("LastResult").child(userId).child("FM").setValue(lastModel);
+       lastStep.clear();
 
    }
+
+    private void deleteHash(){
+        multiMapRendah.clear();
+        multiMapSedang.clear();
+        multiMapTinggi.clear();
+    }
+
+//   public boolean databaseChecker(){
+//       final boolean[] valueData = {false};
+//        DatabaseReference dbChecker = FirebaseDatabase.getInstance().getReference().child("Defuzzyfikasi").child(userId);
+//        dbChecker.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                if (snapshot.exists());
+//                    valueData[0] = true;
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//       return valueData[0];
+//   }
 }

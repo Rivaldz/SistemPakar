@@ -1363,7 +1363,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
-                            Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H001", userId);
+                            Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H001", userId,"Hama pengerek batang padi kuning");
                             defuzzyfikasi.defuzzyFikasi();
                             defuzzyfikasi.onAgregasi();
 //
@@ -1436,7 +1436,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
-                            Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H002",userId);
+                            Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H002",userId,"Hama putih palsu atau pelipat daun");
                             defuzzyfikasi.defuzzyFikasi();
                             defuzzyfikasi.onAgregasi();
 //                           defuzzyfikasi.shortAgregations();
@@ -1510,7 +1510,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
-                            Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H003",userId);
+                            Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H003",userId,"hama wereng batang coklat");
                             defuzzyfikasi.defuzzyFikasi();
                             defuzzyfikasi.onAgregasi();
                         }
@@ -1583,7 +1583,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
-                            Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H004",userId);
+                            Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H004",userId,"on progress");
                             defuzzyfikasi.defuzzyFikasi();
                             defuzzyfikasi.onAgregasi();
                         }
@@ -1651,7 +1651,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
-                            Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H005",userId);
+                            Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H005",userId,"on progress");
                             defuzzyfikasi.defuzzyFikasi();
                             defuzzyfikasi.onAgregasi();
 
@@ -1721,7 +1721,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                            } catch (InterruptedException e) {
                                e.printStackTrace();
                            }
-                           Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H006",userId);
+                           Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H006",userId,"on progress");
                            defuzzyfikasi.defuzzyFikasi();
                            defuzzyfikasi.onAgregasi();
                        }
@@ -1784,7 +1784,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                            } catch (InterruptedException e) {
                                e.printStackTrace();
                            }
-                           Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H007",userId);
+                           Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H007",userId,"Hama ulat grayak");
                            defuzzyfikasi.defuzzyFikasi();
                            defuzzyfikasi.onAgregasi();
 //                           defuzzyfikasi.shortAgregations();
@@ -1857,7 +1857,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                            } catch (InterruptedException e) {
                                e.printStackTrace();
                            }
-                           Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H008",userId);
+                           Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H008",userId,"Hama Ganjur");
                            defuzzyfikasi.defuzzyFikasi();
                            defuzzyfikasi.onAgregasi();
                        }
@@ -1922,7 +1922,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                           } catch (InterruptedException e) {
                               e.printStackTrace();
                           }
-                          Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H009",userId);
+                          Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H009",userId,"Hama ganjur");
                           defuzzyfikasi.defuzzyFikasi();
                           defuzzyfikasi.onAgregasi();
 //                           defuzzyfikasi.shortAgregations();
@@ -1988,7 +1988,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                            } catch (InterruptedException e) {
                                e.printStackTrace();
                            }
-                           Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H010",userId);
+                           Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H010",userId,"hama belalang kembara");
                            defuzzyfikasi.defuzzyFikasi();
                            defuzzyfikasi.onAgregasi();
 //                           defuzzyfikasi.shortAgregations();
@@ -2061,7 +2061,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
-                            Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H011",userId);
+                            Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H011",userId,"hama kepinding tanah");
                             defuzzyfikasi.defuzzyFikasi();
                             defuzzyfikasi.onAgregasi();
                         }
@@ -2073,10 +2073,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     });
                }
 
-                //                else {
-//                    Toast.makeText(MainActivity.this, "Silahkan Pilih Gejala",Toast.LENGTH_LONG).show();
-//
-//                }
+                else {
+                    Toast.makeText(MainActivity.this, "Silahkan Pilih Gejala",Toast.LENGTH_LONG).show();
+                }
                 moveInten();
                 // add sharedpreference
                 SharedPreferences.Editor editorSes = sharedPreferencesSession.edit();
@@ -2093,28 +2092,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void createDataCF(String result, String penyakit, String userId){
         databaseInserFM = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference databaseInserSession = FirebaseDatabase.getInstance().getReference();
         LastModel lastModel = new LastModel(penyakit,result);
         databaseInserFM.child("LastResult").child(userId).child("CF").setValue(lastModel);
 
+        LastModel lastModelSes = new LastModel(penyakit,"1");
+        databaseInserSession.child("LastResult").child(userId).child("SES").child("keyy").setValue(lastModelSes);
     }
     private void moveInten(){
         List<String> st = new ArrayList<>();
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("LastResult").child(userId);
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("LastResult").child(userId).child("SES");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     ShowUser showUser = dataSnapshot.getValue(ShowUser.class);
                     showUser.setKeyMethod(dataSnapshot.getKey());
-                    st.add(showUser.keyMethod);
+                    st.add(showUser.nilaiAkhir);
+
+                    if (showUser.nilaiAkhir.equalsIgnoreCase("1")){
+                        Intent intent = new Intent(MainActivity.this, ResultActivity.class);
+                        startActivity(intent);
+                    }
                 }
 
-                int size = st.size();
-
-                if (size > 1){
-                    Intent intent = new Intent(MainActivity.this, ResultActivity.class);
-                    startActivity(intent);
-                }
+//                int size = st.size();
+//
+//                if (st.get(0). > 1){
+//                    Intent intent = new Intent(MainActivity.this, ResultActivity.class);
+//                    startActivity(intent);
+//                }
 
             }
 
@@ -2157,6 +2164,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.imageViewPenyakitHama:
                 Toast.makeText(this, "Button Penaykit dan Hama clicked", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(MainActivity.this, PenyakitHama.class));
+                break;
             case R.id.imageViewTipsMenanam:
                 Toast.makeText(this, "Button Tips Menanam clicked", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(MainActivity.this, TipsMenanam.class));

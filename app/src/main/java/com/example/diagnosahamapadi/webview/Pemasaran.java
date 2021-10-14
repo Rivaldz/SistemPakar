@@ -23,6 +23,10 @@ public class Pemasaran extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pemasaran);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+
 //        actionBar = getSupportActionBar();
 //        getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 //
@@ -59,10 +63,9 @@ public class Pemasaran extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
+                this.finish();
                 return true;
-            default:
-                return super.onOptionsItemSelected(item);
         }
+        return super.onOptionsItemSelected(item);
     }
 }
