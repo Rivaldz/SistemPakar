@@ -18,6 +18,7 @@ public class JenisPadi extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jenis_padi);
+        setTitle("Jenis Padi");
 
 
         ActionBar actionBar = getSupportActionBar();

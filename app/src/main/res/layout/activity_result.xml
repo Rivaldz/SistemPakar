@@ -20,40 +20,43 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <TextView
         android:id="@+id/editTextNamaPenyakit"
-        android:layout_width="253dp"
-        android:layout_height="43dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:editable="false"
-        android:ems="10"
-        android:inputType="textPersonName"
+        android:text="Hasil Tidak Diketahui"
+        android:textStyle="italic"
+        android:textSize="17dp"
+        android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
-    <EditText
+    <TextView
         android:id="@+id/editTextKemungkinanPenyakit"
-        android:layout_width="263dp"
-        android:layout_height="44dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:editable="false"
-        android:ems="10"
-        android:inputType="textPersonName"
+        android:text="Hasil Tidak Diketahui"
+        android:textColor="#000000"
+        android:textStyle="italic"
+        android:textSize="17dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.402"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
-    <EditText
+    <TextView
         android:id="@+id/editTextKeparahan"
-        android:layout_width="256dp"
-        android:layout_height="48dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:editable="false"
-        android:ems="10"
-        android:inputType="textPersonName"
+        android:textSize="17dp"
+        android:textStyle="italic"
+        android:textColor="#000000"
+        android:text="Hasil Tidak Diketahui"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.402"
         app:layout_constraintStart_toStartOf="parent"

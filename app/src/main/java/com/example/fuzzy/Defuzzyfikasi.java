@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class Defuzzyfikasi {
 
@@ -349,7 +350,6 @@ public class Defuzzyfikasi {
                     GetAgregation getAgregation = dataSnapshot.getValue(GetAgregation.class);
 
 
-
                     System.out.println("--- Index " + keyList.get(finalJ) + "Keanggotaan " + getAgregation.getKeanggotaan()
                     + " Max Value " + getAgregation.maxValue + "key data " + getAgregation.getKey__());
 
@@ -446,6 +446,16 @@ public class Defuzzyfikasi {
 //       String sessionString = mainActivity.sessionString;
        LastModel lastModel = new LastModel(realNamaPenyakit,String.valueOf(result));
        getmDatabaseLastValue.child("LastResult").child(userId).child("FM").setValue(lastModel);
+
+//                try {
+//                    TimeUnit.SECONDS.sleep(2);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+
+       LastModel lastModelSes = new LastModel(realNamaPenyakit,"1");
+        getmDatabaseLastValue.child("LastResult").child(userId).child("SES").child("keyy").setValue(lastModelSes);
+
        lastStep.clear();
 
    }

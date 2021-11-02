@@ -770,7 +770,7 @@
                 android:id="@+id/buttonCalculate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Detksi Penyakit" />
+                android:text="Deteksi Penyakit dan hama" />
 
             <TextView
                 android:id="@+id/textViewResult"

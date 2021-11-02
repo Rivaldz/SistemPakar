@@ -24,11 +24,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class ResultActivity extends AppCompatActivity {
     DatabaseReference mDatabase;
 
-    EditText namaPH, keparahan, kemungkinan;
+    TextView namaPH, keparahan, kemungkinan;
     Button selsai;
     TextView solusi;
 
@@ -38,7 +39,7 @@ public class ResultActivity extends AppCompatActivity {
 
     MainActivity mainActivity = new MainActivity();
 
-    String userIdPub,hama;
+    String userIdPub,hama, namaHama, resiko, kemungkinanHama;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +60,7 @@ public class ResultActivity extends AppCompatActivity {
         sharedPreferencesSession = getSharedPreferences("session",MODE_PRIVATE);
         String idSession = sharedPreferencesSession.getString("varSession",null);
 
-        deleteHash();
+//        deleteHash();
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("LastResult").child(userId);
         mDatabase.addValueEventListener(new ValueEventListener() {
@@ -85,6 +86,9 @@ public class ResultActivity extends AppCompatActivity {
                 String nilaiKahirCFSt = listMethod.get(0).getNilaiAkhir();
                 String nilaiKahirFMSt = listMethod.get(1).getNilaiAkhir();
                 String hasilBobot = null;
+
+
+
                 if (Double.parseDouble(nilaiKahirFMSt) <= 0.4){
                    hasilBobot = "RINGAN" ;
                 }else if (Double.parseDouble(nilaiKahirFMSt) > 0.4 && Double.parseDouble(nilaiKahirFMSt) < 0.8){
@@ -93,11 +97,15 @@ public class ResultActivity extends AppCompatActivity {
                     hasilBobot = "PARAH" ;
                 }
 
+//
                 namaPH.setText(namaPHST);
                 kemungkinan.setText(nilaiKahirCFSt);
                 keparahan.setText(hasilBobot);
 
-                hama = namaPHST;
+//                namaHama = namaPHST;
+//                resiko = hasilBobot;
+//                kemungkinanHama = nilaiKahirCFSt;
+
             }
 
             @Override
@@ -105,6 +113,16 @@ public class ResultActivity extends AppCompatActivity {
 
             }
         });
+
+//        if (!namaHama.equalsIgnoreCase("") && !namaHama.equalsIgnoreCase("") && !namaHama.equalsIgnoreCase("")){
+//                namaPH.setText(namaHama);
+//                kemungkinan.setText(resiko);
+//                keparahan.setText(kemungkinanHama);
+//        }else {
+//            Log.e("Data ","Tidak DI temukan");
+//        }
+
+
 
         selsai.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,11 +133,11 @@ public class ResultActivity extends AppCompatActivity {
                 mDatabaseFunsiImp.removeValue();
 //                mDatabaseResult.removeValue();
                 mDatabaseDefuzzy.removeValue();
-                LastModel lastModelSes = new LastModel("Penyakit","0");
-                mDatabaseResult.child("LastResult").child(userId).child("SES").child("keyy").setValue(lastModelSes);
                 Intent intent = new Intent(ResultActivity.this, MainActivity.class);
                 startActivity(intent);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                LastModel lastModelSes = new LastModel("Penyakit","0");
+                mDatabaseResult.child("LastResult").child(userId).child("SES").child("keyy").setValue(lastModelSes);
+                onDestroy();
             }
         });
 

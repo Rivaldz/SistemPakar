@@ -1294,796 +1294,819 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnProsess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                IsNullErrorHandling errorHandMain = new IsNullErrorHandling();
+//                errorHandMain.checkInputUser();
+                if (userHandling() == true) {
 
-                //Hama H001
-                if (chkGejala1.isChecked() && chkGejala3.isChecked() && chkGejala4.isChecked() && chkGejala5.isChecked() && chkGejala6.isChecked() && chkGejala12.isChecked() && chkGejala13.isChecked()){
-                    List<String>listH001 = new ArrayList<>();
-                    databaseReferenceH001 = FirebaseDatabase.getInstance().getReference().child("Database").child("H001");
-                    databaseReferenceH001.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                                DataClass gejala = dataSnapshot.getValue(DataClass.class);
-                                listH001.add(gejala.getBobotGejala());
+                    //Hama H001
+                    if (chkGejala1.isChecked() && chkGejala3.isChecked() && chkGejala4.isChecked() && chkGejala5.isChecked() && chkGejala6.isChecked() && chkGejala12.isChecked() && chkGejala13.isChecked()) {
+                        List<String> listH001 = new ArrayList<>();
+                        databaseReferenceH001 = FirebaseDatabase.getInstance().getReference().child("Database").child("H001");
+                        databaseReferenceH001.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                    DataClass gejala = dataSnapshot.getValue(DataClass.class);
+                                    listH001.add(gejala.getBobotGejala());
 
-                            }
-                            String namaPentakit = "penyakit";
-                            double valueUserGejala1 = Double.parseDouble(txxtNilaiGejala1.getText().toString());
-                            double valueUserGejala3 = Double.parseDouble(txxtNilaiGejala3.getText().toString());
-                            double valueUserGejala4 = Double.parseDouble(txxtNilaiGejala4.getText().toString());
-                            double valueUserGejala5 = Double.parseDouble(txxtNilaiGejala5.getText().toString());
-                            double valueUserGejala6 = Double.parseDouble(txxtNilaiGejala6.getText().toString());
-                            double valueUserGejala12 = Double.parseDouble(txxtNilaiGejala12.getText().toString());
-                            double valueUserGejala13 = Double.parseDouble(txxtNilaiGejala13.getText().toString());
+                                }
+                                String namaPentakit = "penyakit";
+                                double valueUserGejala1 = Double.parseDouble(txxtNilaiGejala1.getText().toString());
+                                double valueUserGejala3 = Double.parseDouble(txxtNilaiGejala3.getText().toString());
+                                double valueUserGejala4 = Double.parseDouble(txxtNilaiGejala4.getText().toString());
+                                double valueUserGejala5 = Double.parseDouble(txxtNilaiGejala5.getText().toString());
+                                double valueUserGejala6 = Double.parseDouble(txxtNilaiGejala6.getText().toString());
+                                double valueUserGejala12 = Double.parseDouble(txxtNilaiGejala12.getText().toString());
+                                double valueUserGejala13 = Double.parseDouble(txxtNilaiGejala13.getText().toString());
 
-                            double valueGejala1 = Double.parseDouble(listH001.get(0));
-                            double valueGejala3 = Double.parseDouble(listH001.get(1));
-                            double valueGejala4 = Double.parseDouble(listH001.get(2));
-                            double valueGejala5 = Double.parseDouble(listH001.get(3));
-                            double valueGejala6 = Double.parseDouble(listH001.get(4));
-                            double valueGejala12 = Double.parseDouble(listH001.get(5));
-                            double valueGejala13 = Double.parseDouble(listH001.get(6));
+                                double valueGejala1 = Double.parseDouble(listH001.get(0));
+                                double valueGejala3 = Double.parseDouble(listH001.get(1));
+                                double valueGejala4 = Double.parseDouble(listH001.get(2));
+                                double valueGejala5 = Double.parseDouble(listH001.get(3));
+                                double valueGejala6 = Double.parseDouble(listH001.get(4));
+                                double valueGejala12 = Double.parseDouble(listH001.get(5));
+                                double valueGejala13 = Double.parseDouble(listH001.get(6));
 
-                            double resultCalculateGej1 = valueGejala1 * valueUserGejala1;
-                            double resultCalculateGej3 = valueGejala3 * valueUserGejala3;
-                            double resultCalculateGej4 = valueGejala4 * valueUserGejala4;
-                            double resultCalculateGej5 = valueGejala5 * valueUserGejala5;
-                            double resultCalculateGej6 = valueGejala6 * valueUserGejala6;
-                            double resultCalculateGej12 = valueGejala12 * valueUserGejala12;
-                            double resultCalculateGej13 = valueGejala13 * valueUserGejala13;
+                                double resultCalculateGej1 = valueGejala1 * valueUserGejala1;
+                                double resultCalculateGej3 = valueGejala3 * valueUserGejala3;
+                                double resultCalculateGej4 = valueGejala4 * valueUserGejala4;
+                                double resultCalculateGej5 = valueGejala5 * valueUserGejala5;
+                                double resultCalculateGej6 = valueGejala6 * valueUserGejala6;
+                                double resultCalculateGej12 = valueGejala12 * valueUserGejala12;
+                                double resultCalculateGej13 = valueGejala13 * valueUserGejala13;
 
-                            double combine_CF1_CF2 = resultCalculateGej1 + resultCalculateGej3 * (1 - resultCalculateGej1);
-                            double combine_CFold_CF4 = combine_CF1_CF2 + resultCalculateGej4 * (1 - combine_CF1_CF2);
-                            double combine_CFold_CF5 = combine_CFold_CF4 + resultCalculateGej5 * (1 - combine_CFold_CF4);
-                            double combine_CFold_CF6 = combine_CFold_CF5 + resultCalculateGej6 * (1 - combine_CFold_CF5);
-                            double combine_CFold_CF12 = combine_CFold_CF6 + resultCalculateGej12 * (1 - combine_CFold_CF6);
-                            double combine_CFold_CF13 = combine_CFold_CF12 + resultCalculateGej13 * (1 - combine_CFold_CF12);
-                            String endResult = String.valueOf((combine_CFold_CF13 * 100));
-                            createDataCF(endResult,"H001",userId);
+                                double combine_CF1_CF2 = resultCalculateGej1 + resultCalculateGej3 * (1 - resultCalculateGej1);
+                                double combine_CFold_CF4 = combine_CF1_CF2 + resultCalculateGej4 * (1 - combine_CF1_CF2);
+                                double combine_CFold_CF5 = combine_CFold_CF4 + resultCalculateGej5 * (1 - combine_CFold_CF4);
+                                double combine_CFold_CF6 = combine_CFold_CF5 + resultCalculateGej6 * (1 - combine_CFold_CF5);
+                                double combine_CFold_CF12 = combine_CFold_CF6 + resultCalculateGej12 * (1 - combine_CFold_CF6);
+                                double combine_CFold_CF13 = combine_CFold_CF12 + resultCalculateGej13 * (1 - combine_CFold_CF12);
+                                String endResult = String.valueOf((combine_CFold_CF13 * 100));
+                                createDataCF(endResult, "H001", userId);
 
-                            Fuzzy fuzzy = new Fuzzy("H001",userId);
-                            // counting fuzzyfikasi
-                            fuzzy.penyakitH001_User(valueUserGejala1, valueUserGejala3, valueUserGejala4, valueUserGejala5, valueUserGejala6, valueUserGejala12,
-                                    valueUserGejala13);
-                            fuzzy.penyakitH001_Pakar(valueGejala1, valueGejala3, valueGejala4, valueGejala5,valueGejala6,valueGejala12,valueGejala13);
+                                Fuzzy fuzzy = new Fuzzy("H001", userId);
+                                // counting fuzzyfikasi
+                                fuzzy.penyakitH001_User(valueUserGejala1, valueUserGejala3, valueUserGejala4, valueUserGejala5, valueUserGejala6, valueUserGejala12,
+                                        valueUserGejala13);
+                                fuzzy.penyakitH001_Pakar(valueGejala1, valueGejala3, valueGejala4, valueGejala5, valueGejala6, valueGejala12, valueGejala13);
 
-                            // fungsi implikasi
-                            try {
-                                TimeUnit.SECONDS.sleep(2);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H001",userId);
-                            fungsiImplikasi.onPenyakit();
-                            namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
+                                // fungsi implikasi
+                                try {
+                                    TimeUnit.SECONDS.sleep(2);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H001", userId);
+                                fungsiImplikasi.onPenyakit();
+                                namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
 //                            Log.i("This value gejala",stringBobotPenyakit1.get(2));
 
-                            try {
-                                TimeUnit.SECONDS.sleep(2);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H001", userId,"Hama pengerek batang padi kuning");
-                            defuzzyfikasi.defuzzyFikasi();
-                            defuzzyfikasi.onAgregasi();
+                                try {
+                                    TimeUnit.SECONDS.sleep(2);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H001", userId, "Hama pengerek batang padi kuning");
+                                defuzzyfikasi.defuzzyFikasi();
+                                defuzzyfikasi.onAgregasi();
 //
-                        }
+                            }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-
-                }
-                //Hama H002
-                if (chkGejala7.isChecked() && chkGejala8.isChecked() && chkGejala9.isChecked() && chkGejala10.isChecked() && chkGejala11.isChecked()){
-                    List<String> listH002 = new ArrayList<>();
-                    databaseReferenceH002 = FirebaseDatabase.getInstance().getReference().child("Database").child("H002");
-                    databaseReferenceH002.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                                DataClass gejala = dataSnapshot.getValue(DataClass.class);
-                                listH002.add(gejala.getBobotGejala());
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
 
                             }
+                        });
+
+                    }
+                    //Hama H002
+                    if (chkGejala7.isChecked() && chkGejala8.isChecked() && chkGejala9.isChecked() && chkGejala10.isChecked() && chkGejala11.isChecked()) {
+                        List<String> listH002 = new ArrayList<>();
+                        databaseReferenceH002 = FirebaseDatabase.getInstance().getReference().child("Database").child("H002");
+                        databaseReferenceH002.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                    DataClass gejala = dataSnapshot.getValue(DataClass.class);
+                                    listH002.add(gejala.getBobotGejala());
+
+                                }
 //                            String namaPentakit = "penyakit";
-                            double UserGejala7 = Double.parseDouble(txxtNilaiGejala7.getText().toString());
-                            double UserGejala8 = Double.parseDouble(txxtNilaiGejala8.getText().toString());
-                            double UserGejala9 = Double.parseDouble(txxtNilaiGejala9.getText().toString());
-                            double UserGejala10 = Double.parseDouble(txxtNilaiGejala10.getText().toString());
-                            double UserGejala11 = Double.parseDouble(txxtNilaiGejala11.getText().toString());
+                                double UserGejala7 = Double.parseDouble(txxtNilaiGejala7.getText().toString());
+                                double UserGejala8 = Double.parseDouble(txxtNilaiGejala8.getText().toString());
+                                double UserGejala9 = Double.parseDouble(txxtNilaiGejala9.getText().toString());
+                                double UserGejala10 = Double.parseDouble(txxtNilaiGejala10.getText().toString());
+                                double UserGejala11 = Double.parseDouble(txxtNilaiGejala11.getText().toString());
 
-                            double valueGejala7 = Double.parseDouble(listH002.get(0));
-                            double valueGejala8 = Double.parseDouble(listH002.get(1));
-                            double valueGejala9 = Double.parseDouble(listH002.get(2));
-                            double valueGejala10 = Double.parseDouble(listH002.get(3));
-                            double valueGejala11 = Double.parseDouble(listH002.get(4));
+                                double valueGejala7 = Double.parseDouble(listH002.get(0));
+                                double valueGejala8 = Double.parseDouble(listH002.get(1));
+                                double valueGejala9 = Double.parseDouble(listH002.get(2));
+                                double valueGejala10 = Double.parseDouble(listH002.get(3));
+                                double valueGejala11 = Double.parseDouble(listH002.get(4));
 
 
-                            double resultCalculateGej7 = valueGejala7 * UserGejala7;
-                            double resultCalculateGej8 = valueGejala8 * UserGejala8;
-                            double resultCalculateGej9 = valueGejala9 * UserGejala9;
-                            double resultCalculateGej10 = valueGejala10 * UserGejala10;
-                            double resultCalculateGej11 = valueGejala11 * UserGejala11;
+                                double resultCalculateGej7 = valueGejala7 * UserGejala7;
+                                double resultCalculateGej8 = valueGejala8 * UserGejala8;
+                                double resultCalculateGej9 = valueGejala9 * UserGejala9;
+                                double resultCalculateGej10 = valueGejala10 * UserGejala10;
+                                double resultCalculateGej11 = valueGejala11 * UserGejala11;
 
-                            double combine_CF7_CF8 = resultCalculateGej7 + resultCalculateGej8 * (1 - resultCalculateGej7);
-                            double combine_CFold_CF9 = combine_CF7_CF8 + resultCalculateGej9 * (1 - combine_CF7_CF8);
-                            double combine_CFold_CF10 = combine_CFold_CF9 + resultCalculateGej10 * (1 - combine_CFold_CF9);
-                            double combine_CFold_CF11 = combine_CFold_CF10 + resultCalculateGej11 * (1 - combine_CFold_CF10);
-                            String endResult = String.valueOf((combine_CFold_CF11 * 100));
-                            createDataCF(endResult,"H002",userId);
+                                double combine_CF7_CF8 = resultCalculateGej7 + resultCalculateGej8 * (1 - resultCalculateGej7);
+                                double combine_CFold_CF9 = combine_CF7_CF8 + resultCalculateGej9 * (1 - combine_CF7_CF8);
+                                double combine_CFold_CF10 = combine_CFold_CF9 + resultCalculateGej10 * (1 - combine_CFold_CF9);
+                                double combine_CFold_CF11 = combine_CFold_CF10 + resultCalculateGej11 * (1 - combine_CFold_CF10);
+                                String endResult = String.valueOf((combine_CFold_CF11 * 100));
+                                createDataCF(endResult, "H002", userId);
 
-                            Fuzzy fuzzy = new Fuzzy("H002",userId);
-                            // counting fuzzyfikasi
-                            fuzzy.penyakitH002_User(UserGejala7,UserGejala8,UserGejala9,UserGejala10,UserGejala11);
-                            fuzzy.penyakitH002_Pakar(valueGejala7, valueGejala8, valueGejala9,valueGejala10,valueGejala11);
+                                Fuzzy fuzzy = new Fuzzy("H002", userId);
+                                // counting fuzzyfikasi
+                                fuzzy.penyakitH002_User(UserGejala7, UserGejala8, UserGejala9, UserGejala10, UserGejala11);
+                                fuzzy.penyakitH002_Pakar(valueGejala7, valueGejala8, valueGejala9, valueGejala10, valueGejala11);
 
-                            // fungsi implikasi
-                            try {
-                                TimeUnit.SECONDS.sleep(2);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H002",userId);
-                            fungsiImplikasi.onPenyakit();
+                                // fungsi implikasi
+                                try {
+                                    TimeUnit.SECONDS.sleep(2);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H002", userId);
+                                fungsiImplikasi.onPenyakit();
 //                            namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
 //                            Log.i("This value gejala",stringBobotPenyakit1.get(2));
 
-                            try {
-                                TimeUnit.SECONDS.sleep(2);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H002",userId,"Hama putih palsu atau pelipat daun");
-                            defuzzyfikasi.defuzzyFikasi();
-                            defuzzyfikasi.onAgregasi();
+                                try {
+                                    TimeUnit.SECONDS.sleep(2);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H002", userId, "Hama putih palsu atau pelipat daun");
+                                defuzzyfikasi.defuzzyFikasi();
+                                defuzzyfikasi.onAgregasi();
 //                           defuzzyfikasi.shortAgregations();
 
-                        }
+                            }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-
-                }
-                //Hama H003
-                if (chkGejala14.isChecked() && chkGejala15.isChecked() && chkGejala16.isChecked() && chkGejala17.isChecked() & chkGejala18.isChecked()){
-                    List<String>listBobotH003 = new ArrayList<>();
-                    databaseReferenceH003 = FirebaseDatabase.getInstance().getReference().child("Database").child("H003");
-                    databaseReferenceH003.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                                DataClass gejala = dataSnapshot.getValue(DataClass.class);
-                                listBobotH003.add(gejala.getBobotGejala());
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
 
                             }
-                            String namaPentakit = "penyakit";
-                            double valueUserGejala14 = Double.parseDouble(txxtNilaiGejala14.getText().toString());
-                            double valueUserGejala15 = Double.parseDouble(txxtNilaiGejala15.getText().toString());
-                            double valueUserGejala16 = Double.parseDouble(txxtNilaiGejala16.getText().toString());
-                            double valueUserGejala17 = Double.parseDouble(txxtNilaiGejala17.getText().toString());
-                            double valueUserGejala18 = Double.parseDouble(txxtNilaiGejala18.getText().toString());
+                        });
+
+                    }
+                    //Hama H003
+                    if (chkGejala14.isChecked() && chkGejala15.isChecked() && chkGejala16.isChecked() && chkGejala17.isChecked() & chkGejala18.isChecked()) {
+                        List<String> listBobotH003 = new ArrayList<>();
+                        databaseReferenceH003 = FirebaseDatabase.getInstance().getReference().child("Database").child("H003");
+                        databaseReferenceH003.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                    DataClass gejala = dataSnapshot.getValue(DataClass.class);
+                                    listBobotH003.add(gejala.getBobotGejala());
+
+                                }
+                                String namaPentakit = "penyakit";
+                                double valueUserGejala14 = Double.parseDouble(txxtNilaiGejala14.getText().toString());
+                                double valueUserGejala15 = Double.parseDouble(txxtNilaiGejala15.getText().toString());
+                                double valueUserGejala16 = Double.parseDouble(txxtNilaiGejala16.getText().toString());
+                                double valueUserGejala17 = Double.parseDouble(txxtNilaiGejala17.getText().toString());
+                                double valueUserGejala18 = Double.parseDouble(txxtNilaiGejala18.getText().toString());
 
 
-                            double valueGejala14 = Double.parseDouble(listBobotH003.get(0));
-                            double valueGejala15 = Double.parseDouble(listBobotH003.get(1));
-                            double valueGejala16 = Double.parseDouble(listBobotH003.get(2));
-                            double valueGejala17 = Double.parseDouble(listBobotH003.get(3));
-                            double valueGejala18 = Double.parseDouble(listBobotH003.get(4));
+                                double valueGejala14 = Double.parseDouble(listBobotH003.get(0));
+                                double valueGejala15 = Double.parseDouble(listBobotH003.get(1));
+                                double valueGejala16 = Double.parseDouble(listBobotH003.get(2));
+                                double valueGejala17 = Double.parseDouble(listBobotH003.get(3));
+                                double valueGejala18 = Double.parseDouble(listBobotH003.get(4));
 
-                            double resultCalculateGej14 = valueGejala14 * valueUserGejala14;
-                            double resultCalculateGej15 = valueGejala15 * valueUserGejala15;
-                            double resultCalculateGej16 = valueGejala16 * valueUserGejala16;
-                            double resultCalculateGej17 = valueGejala17 * valueUserGejala17;
-                            double resultCalculateGej18 = valueGejala18 * valueUserGejala18;
+                                double resultCalculateGej14 = valueGejala14 * valueUserGejala14;
+                                double resultCalculateGej15 = valueGejala15 * valueUserGejala15;
+                                double resultCalculateGej16 = valueGejala16 * valueUserGejala16;
+                                double resultCalculateGej17 = valueGejala17 * valueUserGejala17;
+                                double resultCalculateGej18 = valueGejala18 * valueUserGejala18;
 
-                            double combine_CF14_CF15 = resultCalculateGej14 + resultCalculateGej15 * (1 - resultCalculateGej14);
-                            double combine_CFold_CF16 = combine_CF14_CF15 + resultCalculateGej16 * (1 - combine_CF14_CF15);
-                            double combine_CFold_CF17 = combine_CFold_CF16 + resultCalculateGej17 * (1 - combine_CFold_CF16);
-                            double combine_CFold_CF18 = combine_CFold_CF17 + resultCalculateGej18 * (1 - combine_CFold_CF17);
-                            String endResult = String.valueOf((combine_CFold_CF18 * 100));
-                            createDataCF(endResult,"H003",userId);
+                                double combine_CF14_CF15 = resultCalculateGej14 + resultCalculateGej15 * (1 - resultCalculateGej14);
+                                double combine_CFold_CF16 = combine_CF14_CF15 + resultCalculateGej16 * (1 - combine_CF14_CF15);
+                                double combine_CFold_CF17 = combine_CFold_CF16 + resultCalculateGej17 * (1 - combine_CFold_CF16);
+                                double combine_CFold_CF18 = combine_CFold_CF17 + resultCalculateGej18 * (1 - combine_CFold_CF17);
+                                String endResult = String.valueOf((combine_CFold_CF18 * 100));
+                                createDataCF(endResult, "H003", userId);
 
-                            Fuzzy fuzzy = new Fuzzy("H003",userId);
-                            // counting fuzzyfikasi
-                            fuzzy.penyakitH003_User(valueUserGejala14,valueUserGejala15,valueUserGejala16,valueUserGejala17,valueGejala18);
-                            fuzzy.penyakitH003_Pakar(valueGejala14,valueGejala15,valueGejala16,valueGejala17,valueGejala18);
+                                Fuzzy fuzzy = new Fuzzy("H003", userId);
+                                // counting fuzzyfikasi
+                                fuzzy.penyakitH003_User(valueUserGejala14, valueUserGejala15, valueUserGejala16, valueUserGejala17, valueGejala18);
+                                fuzzy.penyakitH003_Pakar(valueGejala14, valueGejala15, valueGejala16, valueGejala17, valueGejala18);
 
-                            // fungsi implikasi
-                            try {
-                                TimeUnit.SECONDS.sleep(2);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
+                                // fungsi implikasi
+                                try {
+                                    TimeUnit.SECONDS.sleep(2);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H003", userId);
+                                fungsiImplikasi.onPenyakit();
+                                namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
+                                Log.i("This value gejala", listBobotH003.get(2));
+
+                                try {
+                                    TimeUnit.SECONDS.sleep(2);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H003", userId, "hama wereng batang coklat");
+                                defuzzyfikasi.defuzzyFikasi();
+                                defuzzyfikasi.onAgregasi();
                             }
-                            FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H003",userId);
-                            fungsiImplikasi.onPenyakit();
-                            namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
-                            Log.i("This value gejala",listBobotH003.get(2));
 
-                            try {
-                                TimeUnit.SECONDS.sleep(2);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H003",userId,"hama wereng batang coklat");
-                            defuzzyfikasi.defuzzyFikasi();
-                            defuzzyfikasi.onAgregasi();
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-
-                }
-                //Hama H004
-                if (chkGejala19.isChecked() && chkGejala20.isChecked() && chkGejala21.isChecked() && chkGejala22.isChecked() && chkGejala23.isChecked() ){
-                    List<String> listBobotH004 = new ArrayList<>();
-                    databaseReferenceH004 = FirebaseDatabase.getInstance().getReference().child("Database").child("H004");
-                    databaseReferenceH004.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                                DataClass gejala = dataSnapshot.getValue(DataClass.class);
-                                listBobotH004.add(gejala.getBobotGejala());
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
 
                             }
-                            String namaPentakit = "penyakit";
-                            double valueUserGejala19 = Double.parseDouble(txxtNilaiGejala14.getText().toString());
-                            double valueUserGejala20 = Double.parseDouble(txxtNilaiGejala15.getText().toString());
-                            double valueUserGejala21 = Double.parseDouble(txxtNilaiGejala16.getText().toString());
-                            double valueUserGejala22 = Double.parseDouble(txxtNilaiGejala17.getText().toString());
-                            double valueUserGejala23 = Double.parseDouble(txxtNilaiGejala18.getText().toString());
+                        });
+
+                    }
+                    //Hama H004
+                    if (chkGejala19.isChecked() && chkGejala20.isChecked() && chkGejala21.isChecked() && chkGejala22.isChecked() && chkGejala23.isChecked()) {
+                        List<String> listBobotH004 = new ArrayList<>();
+                        databaseReferenceH004 = FirebaseDatabase.getInstance().getReference().child("Database").child("H004");
+                        databaseReferenceH004.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                    DataClass gejala = dataSnapshot.getValue(DataClass.class);
+                                    listBobotH004.add(gejala.getBobotGejala());
+
+                                }
+                                String namaPentakit = "penyakit";
+                                double valueUserGejala19 = Double.parseDouble(txxtNilaiGejala14.getText().toString());
+                                double valueUserGejala20 = Double.parseDouble(txxtNilaiGejala15.getText().toString());
+                                double valueUserGejala21 = Double.parseDouble(txxtNilaiGejala16.getText().toString());
+                                double valueUserGejala22 = Double.parseDouble(txxtNilaiGejala17.getText().toString());
+                                double valueUserGejala23 = Double.parseDouble(txxtNilaiGejala18.getText().toString());
 
 
-                            double valueGejala19 = Double.parseDouble(listBobotH004.get(0));
-                            double valueGejala20 = Double.parseDouble(listBobotH004.get(1));
-                            double valueGejala21 = Double.parseDouble(listBobotH004.get(2));
-                            double valueGejala22 = Double.parseDouble(listBobotH004.get(3));
-                            double valueGejala23 = Double.parseDouble(listBobotH004.get(4));
+                                double valueGejala19 = Double.parseDouble(listBobotH004.get(0));
+                                double valueGejala20 = Double.parseDouble(listBobotH004.get(1));
+                                double valueGejala21 = Double.parseDouble(listBobotH004.get(2));
+                                double valueGejala22 = Double.parseDouble(listBobotH004.get(3));
+                                double valueGejala23 = Double.parseDouble(listBobotH004.get(4));
 
-                            double resultCalculateGej19 = valueGejala19 * valueUserGejala19;
-                            double resultCalculateGej20 = valueGejala20 * valueUserGejala20;
-                            double resultCalculateGej21 = valueGejala21 * valueUserGejala21;
-                            double resultCalculateGej22 = valueGejala22 * valueUserGejala22;
-                            double resultCalculateGej23 = valueGejala23 * valueUserGejala23;
+                                double resultCalculateGej19 = valueGejala19 * valueUserGejala19;
+                                double resultCalculateGej20 = valueGejala20 * valueUserGejala20;
+                                double resultCalculateGej21 = valueGejala21 * valueUserGejala21;
+                                double resultCalculateGej22 = valueGejala22 * valueUserGejala22;
+                                double resultCalculateGej23 = valueGejala23 * valueUserGejala23;
 
-                            double combine_CF19_CF20 = resultCalculateGej19 + resultCalculateGej20 * (1 - resultCalculateGej20);
-                            double combine_CFold_CF21 = combine_CF19_CF20 + resultCalculateGej21 * (1 - combine_CF19_CF20);
-                            double combine_CFold_CF22 = combine_CFold_CF21 + resultCalculateGej22 * (1 - combine_CFold_CF21);
-                            double combine_CFold_CF23 = combine_CFold_CF22 + resultCalculateGej23 * (1 - combine_CFold_CF22);
-                            String endResult = String.valueOf((combine_CFold_CF23 * 100));
-                            createDataCF(endResult,"H004",userId);
+                                double combine_CF19_CF20 = resultCalculateGej19 + resultCalculateGej20 * (1 - resultCalculateGej20);
+                                double combine_CFold_CF21 = combine_CF19_CF20 + resultCalculateGej21 * (1 - combine_CF19_CF20);
+                                double combine_CFold_CF22 = combine_CFold_CF21 + resultCalculateGej22 * (1 - combine_CFold_CF21);
+                                double combine_CFold_CF23 = combine_CFold_CF22 + resultCalculateGej23 * (1 - combine_CFold_CF22);
+                                String endResult = String.valueOf((combine_CFold_CF23 * 100));
+                                createDataCF(endResult, "H004", userId);
 
-                            Fuzzy fuzzy = new Fuzzy("H004",userId);
-                            // counting fuzzyfikasi
-                            fuzzy.penyakitH004_User(valueUserGejala19,valueUserGejala20,valueUserGejala21,valueUserGejala22,valueGejala23);
-                            fuzzy.penyakitH004_Pakar(valueGejala19,valueGejala20,valueGejala21,valueGejala22,valueGejala23);
+                                Fuzzy fuzzy = new Fuzzy("H004", userId);
+                                // counting fuzzyfikasi
+                                fuzzy.penyakitH004_User(valueUserGejala19, valueUserGejala20, valueUserGejala21, valueUserGejala22, valueGejala23);
+                                fuzzy.penyakitH004_Pakar(valueGejala19, valueGejala20, valueGejala21, valueGejala22, valueGejala23);
 
-                            // fungsi implikasi
-                            try {
-                                TimeUnit.SECONDS.sleep(2);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H004",userId);
-                            fungsiImplikasi.onPenyakit();
-                            namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
+                                // fungsi implikasi
+                                try {
+                                    TimeUnit.SECONDS.sleep(2);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H004", userId);
+                                fungsiImplikasi.onPenyakit();
+                                namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
 
 //                            Log.i("This value gejala",listBobotH004.get(2));
 
-                            try {
-                                TimeUnit.SECONDS.sleep(2);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
+                                try {
+                                    TimeUnit.SECONDS.sleep(2);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H004", userId, "on progress");
+                                defuzzyfikasi.defuzzyFikasi();
+                                defuzzyfikasi.onAgregasi();
                             }
-                            Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H004",userId,"on progress");
-                            defuzzyfikasi.defuzzyFikasi();
-                            defuzzyfikasi.onAgregasi();
-                        }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-
-                }
-                //Hama H005
-                if (chkGejala14.isChecked() && chkGejala15.isChecked() && chkGejala16.isChecked() && chkGejala17.isChecked()){
-                    List<String>listBobotH005 = new ArrayList<>();
-                    databaseReferenceH005 = FirebaseDatabase.getInstance().getReference().child("Databaase").child("H005");
-                    databaseReferenceH005.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                                DataClass gejala = dataSnapshot.getValue(DataClass.class);
-                                listBobotH005.add(gejala.getBobotGejala());
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
 
                             }
-                            String namaPentakit = "penyakit";
-                            double valueUserGejala14 = Double.parseDouble(txxtNilaiGejala14.getText().toString());
-                            double valueUserGejala15 = Double.parseDouble(txxtNilaiGejala15.getText().toString());
-                            double valueUserGejala16 = Double.parseDouble(txxtNilaiGejala16.getText().toString());
-                            double valueUserGejala17 = Double.parseDouble(txxtNilaiGejala17.getText().toString());
+                        });
+
+                    }
+                    //Hama H005
+                    if (chkGejala14.isChecked() && chkGejala15.isChecked() && chkGejala16.isChecked() && chkGejala17.isChecked()) {
+                        List<String> listBobotH005 = new ArrayList<>();
+                        databaseReferenceH005 = FirebaseDatabase.getInstance().getReference().child("Databaase").child("H005");
+                        databaseReferenceH005.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                    DataClass gejala = dataSnapshot.getValue(DataClass.class);
+                                    listBobotH005.add(gejala.getBobotGejala());
+
+                                }
+                                String namaPentakit = "penyakit";
+                                double valueUserGejala14 = Double.parseDouble(txxtNilaiGejala14.getText().toString());
+                                double valueUserGejala15 = Double.parseDouble(txxtNilaiGejala15.getText().toString());
+                                double valueUserGejala16 = Double.parseDouble(txxtNilaiGejala16.getText().toString());
+                                double valueUserGejala17 = Double.parseDouble(txxtNilaiGejala17.getText().toString());
 
 
-                            double valueGejala14 = Double.parseDouble(listBobotH005.get(0));
-                            double valueGejala15 = Double.parseDouble(listBobotH005.get(1));
-                            double valueGejala16 = Double.parseDouble(listBobotH005.get(2));
-                            double valueGejala17 = Double.parseDouble(listBobotH005.get(3));
+                                double valueGejala14 = Double.parseDouble(listBobotH005.get(0));
+                                double valueGejala15 = Double.parseDouble(listBobotH005.get(1));
+                                double valueGejala16 = Double.parseDouble(listBobotH005.get(2));
+                                double valueGejala17 = Double.parseDouble(listBobotH005.get(3));
 
-                            double resultCalculateGej14 = valueGejala14 * valueUserGejala14;
-                            double resultCalculateGej15 = valueGejala15 * valueUserGejala15;
-                            double resultCalculateGej16 = valueGejala16 * valueUserGejala16;
-                            double resultCalculateGej17 = valueGejala17 * valueUserGejala17;
+                                double resultCalculateGej14 = valueGejala14 * valueUserGejala14;
+                                double resultCalculateGej15 = valueGejala15 * valueUserGejala15;
+                                double resultCalculateGej16 = valueGejala16 * valueUserGejala16;
+                                double resultCalculateGej17 = valueGejala17 * valueUserGejala17;
 
-                            double combine_CF14_CF15 = resultCalculateGej14 + resultCalculateGej15 * (1 - resultCalculateGej14);
-                            double combine_CFold_CF16 = combine_CF14_CF15 + resultCalculateGej16 * (1 - combine_CF14_CF15);
-                            double combine_CFold_CF17 = combine_CFold_CF16 + resultCalculateGej17 * (1 - combine_CFold_CF16);
-                            String endResult = String.valueOf((combine_CFold_CF17 * 100));
-                            createDataCF(endResult,"H005",userId);
+                                double combine_CF14_CF15 = resultCalculateGej14 + resultCalculateGej15 * (1 - resultCalculateGej14);
+                                double combine_CFold_CF16 = combine_CF14_CF15 + resultCalculateGej16 * (1 - combine_CF14_CF15);
+                                double combine_CFold_CF17 = combine_CFold_CF16 + resultCalculateGej17 * (1 - combine_CFold_CF16);
+                                String endResult = String.valueOf((combine_CFold_CF17 * 100));
+                                createDataCF(endResult, "H005", userId);
 
-                            Fuzzy fuzzy = new Fuzzy("H005",userId);
-                            // counting fuzzyfikasi
-                            fuzzy.penyakitH005_User(valueUserGejala14,valueUserGejala15,valueUserGejala16,valueUserGejala17);
-                            fuzzy.penyakitH005_Pakar(valueGejala14,valueGejala15,valueGejala16,valueGejala17);
+                                Fuzzy fuzzy = new Fuzzy("H005", userId);
+                                // counting fuzzyfikasi
+                                fuzzy.penyakitH005_User(valueUserGejala14, valueUserGejala15, valueUserGejala16, valueUserGejala17);
+                                fuzzy.penyakitH005_Pakar(valueGejala14, valueGejala15, valueGejala16, valueGejala17);
 
-                            // fungsi implikasi
-                            try {
-                                TimeUnit.SECONDS.sleep(2);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
+                                // fungsi implikasi
+                                try {
+                                    TimeUnit.SECONDS.sleep(2);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H005", userId);
+                                fungsiImplikasi.onPenyakit();
+                                namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
+                                Log.i("This value gejala", listBobotH005.get(2));
+
+                                try {
+                                    TimeUnit.SECONDS.sleep(2);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H005", userId, "on progress");
+                                defuzzyfikasi.defuzzyFikasi();
+                                defuzzyfikasi.onAgregasi();
+
                             }
-                            FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H005",userId);
-                            fungsiImplikasi.onPenyakit();
-                            namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
-                            Log.i("This value gejala",listBobotH005.get(2));
 
-                            try {
-                                TimeUnit.SECONDS.sleep(2);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
                             }
-                            Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H005",userId,"on progress");
-                            defuzzyfikasi.defuzzyFikasi();
-                            defuzzyfikasi.onAgregasi();
+                        });
+                    }
+                    //Hama H006
+                    if (chkGejala2.isChecked() && chkGejala27.isChecked() && chkGejala28.isChecked() && chkGejala29.isChecked() && chkGejala30.isChecked()) {
+                        List<String> listBobotH006 = new ArrayList<>();
+                        databaseReferenceH006 = FirebaseDatabase.getInstance().getReference().child("Database").child("H006");
+                        databaseReferenceH006.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                    DataClass gejala = dataSnapshot.getValue(DataClass.class);
+                                    listBobotH006.add(gejala.getBobotGejala());
 
-                        }
+                                }
+                                String namaPentakit = "penyakit";
+                                double valueUserGejala2 = Double.parseDouble(txxtNilaiGejala2.getText().toString());
+                                double valueUserGejala27 = Double.parseDouble(txxtNilaiGejala27.getText().toString());
+                                double valueUserGejala28 = Double.parseDouble(txxtNilaiGejala28.getText().toString());
+                                double valueUserGejala29 = Double.parseDouble(txxtNilaiGejala29.getText().toString());
+                                double valueUserGejala30 = Double.parseDouble(txxtNilaiGejala30.getText().toString());
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
+                                double valueGejala2 = Double.parseDouble(listBobotH006.get(0));
+                                double valueGejala27 = Double.parseDouble(listBobotH006.get(1));
+                                double valueGejala28 = Double.parseDouble(listBobotH006.get(2));
+                                double valueGejala29 = Double.parseDouble(listBobotH006.get(3));
+                                double valueGejala30 = Double.parseDouble(listBobotH006.get(4));
 
-                        }
-                    });
-                }
-                //Hama H006
-                if (chkGejala2.isChecked() && chkGejala27.isChecked() && chkGejala28.isChecked() && chkGejala29.isChecked() && chkGejala30.isChecked()){
-                   List<String> listBobotH006 = new ArrayList<>();
-                   databaseReferenceH006 = FirebaseDatabase.getInstance().getReference().child("Database").child("H006");
-                   databaseReferenceH006.addValueEventListener(new ValueEventListener() {
-                       @Override
-                       public void onDataChange(@NonNull DataSnapshot snapshot) {
-                           for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                               DataClass gejala = dataSnapshot.getValue(DataClass.class);
-                               listBobotH006.add(gejala.getBobotGejala());
+                                double resultCalculateGej2 = valueGejala2 * valueUserGejala2;
+                                double resultCalculateGej27 = valueGejala27 * valueUserGejala27;
+                                double resultCalculateGej28 = valueGejala28 * valueUserGejala28;
+                                double resultCalculateGej29 = valueGejala29 * valueUserGejala29;
+                                double resultCalculateGej30 = valueGejala30 * valueUserGejala30;
 
-                           }
-                           String namaPentakit = "penyakit";
-                           double valueUserGejala2 = Double.parseDouble(txxtNilaiGejala2.getText().toString());
-                           double valueUserGejala27 = Double.parseDouble(txxtNilaiGejala27.getText().toString());
-                           double valueUserGejala28 = Double.parseDouble(txxtNilaiGejala28.getText().toString());
-                           double valueUserGejala29 = Double.parseDouble(txxtNilaiGejala29.getText().toString());
-                           double valueUserGejala30 = Double.parseDouble(txxtNilaiGejala30.getText().toString());
+                                double combine_CF2_CF27 = resultCalculateGej2 + resultCalculateGej27 * (1 - resultCalculateGej2);
+                                double combine_CFold_CF28 = combine_CF2_CF27 + resultCalculateGej28 * (1 - combine_CF2_CF27);
+                                double combine_CFold_CF29 = combine_CFold_CF28 + resultCalculateGej29 * (1 - combine_CFold_CF28);
+                                double combine_CFold_CF30 = combine_CFold_CF29 + resultCalculateGej30 * (1 - combine_CFold_CF29);
+                                String endResult = String.valueOf((combine_CFold_CF30 * 100));
+                                createDataCF(endResult, "H006", userId);
 
-                           double valueGejala2 = Double.parseDouble(listBobotH006.get(0));
-                           double valueGejala27 = Double.parseDouble(listBobotH006.get(1));
-                           double valueGejala28 = Double.parseDouble(listBobotH006.get(2));
-                           double valueGejala29 = Double.parseDouble(listBobotH006.get(3));
-                           double valueGejala30 = Double.parseDouble(listBobotH006.get(4));
+                                Fuzzy fuzzy = new Fuzzy("H006", userId);
+                                // counting fuzzyfikasi
+                                fuzzy.penyakitH006_User(valueUserGejala2, valueUserGejala27, valueUserGejala28, valueUserGejala29, valueUserGejala30);
+                                fuzzy.penyakitH006_Pakar(valueGejala2, valueGejala27, valueGejala28, valueGejala29, valueGejala30);
 
-                           double resultCalculateGej2 = valueGejala2 * valueUserGejala2;
-                           double resultCalculateGej27 = valueGejala27 * valueUserGejala27;
-                           double resultCalculateGej28 = valueGejala28 * valueUserGejala28;
-                           double resultCalculateGej29 = valueGejala29 * valueUserGejala29;
-                           double resultCalculateGej30 = valueGejala30 * valueUserGejala30;
+                                // fungsi implikasi
+                                try {
+                                    TimeUnit.SECONDS.sleep(2);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H006", userId);
+                                fungsiImplikasi.onPenyakit();
+                                namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
 
-                           double combine_CF2_CF27 = resultCalculateGej2 + resultCalculateGej27 * (1 - resultCalculateGej2);
-                           double combine_CFold_CF28 = combine_CF2_CF27 + resultCalculateGej28 * (1 - combine_CF2_CF27);
-                           double combine_CFold_CF29 = combine_CFold_CF28 + resultCalculateGej29 * (1 - combine_CFold_CF28);
-                           double combine_CFold_CF30 = combine_CFold_CF29 + resultCalculateGej30 * (1 - combine_CFold_CF29);
-                           String endResult = String.valueOf((combine_CFold_CF30 * 100));
-                           createDataCF(endResult,"H006",userId);
+                                try {
+                                    TimeUnit.SECONDS.sleep(2);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H006", userId, "on progress");
+                                defuzzyfikasi.defuzzyFikasi();
+                                defuzzyfikasi.onAgregasi();
+                            }
 
-                           Fuzzy fuzzy = new Fuzzy("H006",userId);
-                           // counting fuzzyfikasi
-                           fuzzy.penyakitH006_User(valueUserGejala2,valueUserGejala27,valueUserGejala28,valueUserGejala29,valueUserGejala30);
-                           fuzzy.penyakitH006_Pakar(valueGejala2,valueGejala27,valueGejala28,valueGejala29,valueGejala30);
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
 
-                           // fungsi implikasi
-                           try {
-                               TimeUnit.SECONDS.sleep(2);
-                           } catch (InterruptedException e) {
-                               e.printStackTrace();
-                           }
-                           FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H006",userId);
-                           fungsiImplikasi.onPenyakit();
-                           namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
+                            }
+                        });
+                    }
+                    //Hama H007
+                    if (chkGejala34.isChecked() && chkGejala35.isChecked() && chkGejala36.isChecked()) {
+                            List<String> listGejalaH007 = new ArrayList<>();
 
-                           try {
-                               TimeUnit.SECONDS.sleep(2);
-                           } catch (InterruptedException e) {
-                               e.printStackTrace();
-                           }
-                           Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H006",userId,"on progress");
-                           defuzzyfikasi.defuzzyFikasi();
-                           defuzzyfikasi.onAgregasi();
-                       }
+                            databaseReferenceH007 = FirebaseDatabase.getInstance().getReference().child("Database").child("H007");
+                            databaseReferenceH007.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                        DataClass gejala = dataSnapshot.getValue(DataClass.class);
+                                        listGejalaH007.add(gejala.getBobotGejala());
 
-                       @Override
-                       public void onCancelled(@NonNull DatabaseError error) {
+                                    }
+                                    String namaPentakit = "penyakit";
 
-                       }
-                   });
-                }
-                //Hama H007
-                if (chkGejala34.isChecked() && chkGejala35.isChecked() && chkGejala36.isChecked()){
-                    List<String> listGejalaH007 = new ArrayList<>();
+                                    double valueUserGejala34 = Double.parseDouble(txxtNilaiGejala34.getText().toString());
+                                    double valueUserGejala35 = Double.parseDouble(txxtNilaiGejala35.getText().toString());
+                                    double valueUserGejala36 = Double.parseDouble(txxtNilaiGejala36.getText().toString());
 
-                   databaseReferenceH007 = FirebaseDatabase.getInstance().getReference().child("Database").child("H007");
-                   databaseReferenceH007.addValueEventListener(new ValueEventListener() {
-                       @Override
-                       public void onDataChange(@NonNull DataSnapshot snapshot) {
-                           for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                               DataClass gejala = dataSnapshot.getValue(DataClass.class);
-                               listGejalaH007.add(gejala.getBobotGejala());
+                                    double valueGejala34 = Double.parseDouble(listGejalaH007.get(0));
+                                    double valueGejala35 = Double.parseDouble(listGejalaH007.get(1));
+                                    double valueGejala36 = Double.parseDouble(listGejalaH007.get(2));
 
-                           }
-                           String namaPentakit = "penyakit";
-                           double valueUserGejala34 = Double.parseDouble(txxtNilaiGejala34.getText().toString());
-                           double valueUserGejala35 = Double.parseDouble(txxtNilaiGejala35.getText().toString());
-                           double valueUserGejala36 = Double.parseDouble(txxtNilaiGejala36.getText().toString());
+                                    double resultCalculateGej1 = valueGejala34 * valueUserGejala34;
+                                    double resultCalculateGej2 = valueGejala35 * valueUserGejala35;
+                                    double resultCalculateGej4 = valueGejala36 * valueUserGejala36;
 
-                           double valueGejala34 = Double.parseDouble(listGejalaH007.get(0));
-                           double valueGejala35 = Double.parseDouble(listGejalaH007.get(1));
-                           double valueGejala36 = Double.parseDouble(listGejalaH007.get(2));
+                                    double combine_CF34_CF35 = resultCalculateGej1 + resultCalculateGej2 * (1 - resultCalculateGej1);
+                                    double combine_CFold_CF36 = combine_CF34_CF35 + resultCalculateGej4 * (1 - combine_CF34_CF35);
+                                    String endResult = String.valueOf((combine_CFold_CF36 * 100));
+                                    createDataCF(endResult, "H007", userId);
 
-                           double resultCalculateGej1 = valueGejala34 * valueUserGejala34;
-                           double resultCalculateGej2 = valueGejala35 * valueUserGejala35;
-                           double resultCalculateGej4 = valueGejala36 * valueUserGejala36;
+                                    Fuzzy fuzzy = new Fuzzy("H007", userId);
+                                    // counting fuzzyfikasi
+                                    fuzzy.penyakitH007_User(valueUserGejala34, valueUserGejala35, valueUserGejala36);
+                                    fuzzy.penyakitH007_Pakar(valueGejala34, valueGejala35, valueGejala36);
 
-                           double combine_CF34_CF35 = resultCalculateGej1 + resultCalculateGej2 * (1 - resultCalculateGej1);
-                           double combine_CFold_CF36 = combine_CF34_CF35 + resultCalculateGej4 * (1 - combine_CF34_CF35);
-                           String endResult = String.valueOf((combine_CFold_CF36 * 100));
-                           createDataCF(endResult,"H007",userId);
-
-                           Fuzzy fuzzy = new Fuzzy("H007",userId);
-                           // counting fuzzyfikasi
-                           fuzzy.penyakitH007_User(valueUserGejala34, valueUserGejala35, valueUserGejala36);
-                           fuzzy.penyakitH007_Pakar(valueGejala34, valueGejala35, valueGejala36);
-
-                           // fungsi implikasi
-                           try {
-                               TimeUnit.SECONDS.sleep(2);
-                           } catch (InterruptedException e) {
-                               e.printStackTrace();
-                           }
-                           FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H007",userId);
-                           fungsiImplikasi.onPenyakit();
-                           namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
+                                    // fungsi implikasi
+                                    try {
+                                        TimeUnit.SECONDS.sleep(2);
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
+                                    FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H007", userId);
+                                    fungsiImplikasi.onPenyakit();
+                                    namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
 //                           Log.i("This value gejala",stringBobotPenyakit1.get(2));
 
-                           try {
-                               TimeUnit.SECONDS.sleep(2);
-                           } catch (InterruptedException e) {
-                               e.printStackTrace();
-                           }
-                           Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H007",userId,"Hama ulat grayak");
-                           defuzzyfikasi.defuzzyFikasi();
-                           defuzzyfikasi.onAgregasi();
+                                    try {
+                                        TimeUnit.SECONDS.sleep(2);
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
+                                    Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H007", userId, "Hama ulat grayak");
+                                    defuzzyfikasi.defuzzyFikasi();
+                                    defuzzyfikasi.onAgregasi();
 //                           defuzzyfikasi.shortAgregations();
 
 //                           tcOutput.setText(""+namaPentakit);
-                       }
 
-                       @Override
-                       public void onCancelled(@NonNull DatabaseError error) {
+                                }
 
-                       }
-                   });
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
 
-               }
-                //Hama H008
-                if (chkGejala37.isChecked() && chkGejala38.isChecked() && chkGejala39.isChecked() && chkGejala40.isChecked() && chkGejala41.isChecked()){
-                   List<String> listGejalaH008 = new ArrayList<>();
-                   databaseReferenceH008 = FirebaseDatabase.getInstance().getReference().child("Database").child("H009");
-                   databaseReferenceH008.addValueEventListener(new ValueEventListener() {
-                       @Override
-                       public void onDataChange(@NonNull DataSnapshot snapshot) {
-                           for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                               DataClass gejala = dataSnapshot.getValue(DataClass.class);
-                               listGejalaH008.add(gejala.getBobotGejala());
+                                }
+                            });
 
-                           }
-                           String namaPentakit = "penyakit";
-                           double valueUserGejala2 = Double.parseDouble(txxtNilaiGejala37.getText().toString());
-                           double valueUserGejala27 = Double.parseDouble(txxtNilaiGejala38.getText().toString());
-                           double valueUserGejala28 = Double.parseDouble(txxtNilaiGejala39.getText().toString());
-                           double valueUserGejala29 = Double.parseDouble(txxtNilaiGejala40.getText().toString());
-                           double valueUserGejala30 = Double.parseDouble(txxtNilaiGejala41.getText().toString());
+                    }
+                    //Hama H008
+                    if (chkGejala37.isChecked() && chkGejala38.isChecked() && chkGejala39.isChecked() && chkGejala40.isChecked() && chkGejala41.isChecked()) {
+                        List<String> listGejalaH008 = new ArrayList<>();
+                        databaseReferenceH008 = FirebaseDatabase.getInstance().getReference().child("Database").child("H009");
+                        databaseReferenceH008.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                    DataClass gejala = dataSnapshot.getValue(DataClass.class);
+                                    listGejalaH008.add(gejala.getBobotGejala());
 
-                           double valueGejala2 = Double.parseDouble(listGejalaH008.get(0));
-                           double valueGejala27 = Double.parseDouble(listGejalaH008.get(1));
-                           double valueGejala28 = Double.parseDouble(listGejalaH008.get(2));
-                           double valueGejala29 = Double.parseDouble(listGejalaH008.get(3));
-                           double valueGejala30 = Double.parseDouble(listGejalaH008.get(4));
+                                }
+                                String namaPentakit = "penyakit";
+                                double valueUserGejala2 = Double.parseDouble(txxtNilaiGejala37.getText().toString());
+                                double valueUserGejala27 = Double.parseDouble(txxtNilaiGejala38.getText().toString());
+                                double valueUserGejala28 = Double.parseDouble(txxtNilaiGejala39.getText().toString());
+                                double valueUserGejala29 = Double.parseDouble(txxtNilaiGejala40.getText().toString());
+                                double valueUserGejala30 = Double.parseDouble(txxtNilaiGejala41.getText().toString());
 
-                           double resultCalculateGej2 = valueGejala2 * valueUserGejala2;
-                           double resultCalculateGej27 = valueGejala27 * valueUserGejala27;
-                           double resultCalculateGej28 = valueGejala28 * valueUserGejala28;
-                           double resultCalculateGej29 = valueGejala29 * valueUserGejala29;
-                           double resultCalculateGej30 = valueGejala30 * valueUserGejala30;
+                                double valueGejala2 = Double.parseDouble(listGejalaH008.get(0));
+                                double valueGejala27 = Double.parseDouble(listGejalaH008.get(1));
+                                double valueGejala28 = Double.parseDouble(listGejalaH008.get(2));
+                                double valueGejala29 = Double.parseDouble(listGejalaH008.get(3));
+                                double valueGejala30 = Double.parseDouble(listGejalaH008.get(4));
 
-                           double combine_CF2_CF27 = resultCalculateGej2 + resultCalculateGej27 * (1 - resultCalculateGej2);
-                           double combine_CFold_CF28 = combine_CF2_CF27 + resultCalculateGej28 * (1 - combine_CF2_CF27);
-                           double combine_CFold_CF29 = combine_CFold_CF28 + resultCalculateGej29 * (1 - combine_CFold_CF28);
-                           double combine_CFold_CF30 = combine_CFold_CF29 + resultCalculateGej30 * (1 - combine_CFold_CF29);
-                           String endResult = String.valueOf((combine_CFold_CF30 * 100));
-                           createDataCF(endResult,"H008",userId);
+                                double resultCalculateGej2 = valueGejala2 * valueUserGejala2;
+                                double resultCalculateGej27 = valueGejala27 * valueUserGejala27;
+                                double resultCalculateGej28 = valueGejala28 * valueUserGejala28;
+                                double resultCalculateGej29 = valueGejala29 * valueUserGejala29;
+                                double resultCalculateGej30 = valueGejala30 * valueUserGejala30;
 
-                           Fuzzy fuzzy = new Fuzzy("H008",userId);
-                           // counting fuzzyfikasi
-                           fuzzy.penyakitH006_User(valueUserGejala2,valueUserGejala27,valueUserGejala28,valueUserGejala29,valueUserGejala30);
-                           fuzzy.penyakitH006_Pakar(valueGejala2,valueGejala27,valueGejala28,valueGejala29,valueGejala30);
+                                double combine_CF2_CF27 = resultCalculateGej2 + resultCalculateGej27 * (1 - resultCalculateGej2);
+                                double combine_CFold_CF28 = combine_CF2_CF27 + resultCalculateGej28 * (1 - combine_CF2_CF27);
+                                double combine_CFold_CF29 = combine_CFold_CF28 + resultCalculateGej29 * (1 - combine_CFold_CF28);
+                                double combine_CFold_CF30 = combine_CFold_CF29 + resultCalculateGej30 * (1 - combine_CFold_CF29);
+                                String endResult = String.valueOf((combine_CFold_CF30 * 100));
+                                createDataCF(endResult, "H008", userId);
 
-                           // fungsi implikasi
-                           try {
-                               TimeUnit.SECONDS.sleep(2);
-                           } catch (InterruptedException e) {
-                               e.printStackTrace();
-                           }
-                           FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H008",userId);
-                           fungsiImplikasi.onPenyakit();
-                           namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
+                                Fuzzy fuzzy = new Fuzzy("H008", userId);
+                                // counting fuzzyfikasi
+                                fuzzy.penyakitH006_User(valueUserGejala2, valueUserGejala27, valueUserGejala28, valueUserGejala29, valueUserGejala30);
+                                fuzzy.penyakitH006_Pakar(valueGejala2, valueGejala27, valueGejala28, valueGejala29, valueGejala30);
 
-                           try {
-                               TimeUnit.SECONDS.sleep(2);
-                           } catch (InterruptedException e) {
-                               e.printStackTrace();
-                           }
-                           Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H008",userId,"Hama Ganjur");
-                           defuzzyfikasi.defuzzyFikasi();
-                           defuzzyfikasi.onAgregasi();
-                       }
+                                // fungsi implikasi
+                                try {
+                                    TimeUnit.SECONDS.sleep(2);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H008", userId);
+                                fungsiImplikasi.onPenyakit();
+                                namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
 
-                       @Override
-                       public void onCancelled(@NonNull DatabaseError error) {
+                                try {
+                                    TimeUnit.SECONDS.sleep(2);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H008", userId, "Hama Ganjur");
+                                defuzzyfikasi.defuzzyFikasi();
+                                defuzzyfikasi.onAgregasi();
+                            }
 
-                       }
-                   });
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
 
 
-               }
-                //Hama H009
-                if (chkGejala43.isChecked() && chkGejala45.isChecked() && chkGejala46.isChecked()){
-                  List<String> listHamaH009 = new ArrayList<>();
-                  databaseReferenceH009 = FirebaseDatabase.getInstance().getReference().child("Database").child("H009");
-                  databaseReferenceH009.addValueEventListener(new ValueEventListener() {
-                      List<String> listGejalaH009 = new ArrayList<>();
-                      @Override
-                      public void onDataChange(@NonNull DataSnapshot snapshot) {
-                          for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                              DataClass gejala = dataSnapshot.getValue(DataClass.class);
-                              listGejalaH009.add(gejala.getBobotGejala());
+                    }
+                    //Hama H009
+                    if (chkGejala43.isChecked() && chkGejala45.isChecked() && chkGejala46.isChecked()) {
+                        List<String> listHamaH009 = new ArrayList<>();
+                        databaseReferenceH009 = FirebaseDatabase.getInstance().getReference().child("Database").child("H009");
+                        databaseReferenceH009.addValueEventListener(new ValueEventListener() {
+                            List<String> listGejalaH009 = new ArrayList<>();
 
-                          }
-                          String namaPentakit = "penyakit";
-                          double valueUserGejala34 = Double.parseDouble(txxtNilaiGejala43.getText().toString());
-                          double valueUserGejala35 = Double.parseDouble(txxtNilaiGejala45.getText().toString());
-                          double valueUserGejala36 = Double.parseDouble(txxtNilaiGejala46.getText().toString());
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                    DataClass gejala = dataSnapshot.getValue(DataClass.class);
+                                    listGejalaH009.add(gejala.getBobotGejala());
 
-                          double valueGejala34 = Double.parseDouble(listGejalaH009.get(0));
-                          double valueGejala35 = Double.parseDouble(listGejalaH009.get(1));
-                          double valueGejala36 = Double.parseDouble(listGejalaH009.get(2));
+                                }
+                                String namaPentakit = "penyakit";
+                                double valueUserGejala34 = Double.parseDouble(txxtNilaiGejala43.getText().toString());
+                                double valueUserGejala35 = Double.parseDouble(txxtNilaiGejala45.getText().toString());
+                                double valueUserGejala36 = Double.parseDouble(txxtNilaiGejala46.getText().toString());
 
-                          double resultCalculateGej1 = valueGejala34 * valueUserGejala34;
-                          double resultCalculateGej2 = valueGejala35 * valueUserGejala35;
-                          double resultCalculateGej4 = valueGejala36 * valueUserGejala36;
+                                double valueGejala34 = Double.parseDouble(listGejalaH009.get(0));
+                                double valueGejala35 = Double.parseDouble(listGejalaH009.get(1));
+                                double valueGejala36 = Double.parseDouble(listGejalaH009.get(2));
 
-                          double combine_CF34_CF35 = resultCalculateGej1 + resultCalculateGej2 * (1 - resultCalculateGej1);
-                          double combine_CFold_CF36 = combine_CF34_CF35 + resultCalculateGej4 * (1 - combine_CF34_CF35);
-                          String endResult = String.valueOf((combine_CFold_CF36 * 100));
-                          createDataCF(endResult,"H009",userId);
+                                double resultCalculateGej1 = valueGejala34 * valueUserGejala34;
+                                double resultCalculateGej2 = valueGejala35 * valueUserGejala35;
+                                double resultCalculateGej4 = valueGejala36 * valueUserGejala36;
 
-                          Fuzzy fuzzy = new Fuzzy("H009",userId);
-                          // counting fuzzyfikasi
-                          fuzzy.penyakitH007_User(valueUserGejala34, valueUserGejala35, valueUserGejala36);
-                          fuzzy.penyakitH007_Pakar(valueGejala34, valueGejala35, valueGejala36);
+                                double combine_CF34_CF35 = resultCalculateGej1 + resultCalculateGej2 * (1 - resultCalculateGej1);
+                                double combine_CFold_CF36 = combine_CF34_CF35 + resultCalculateGej4 * (1 - combine_CF34_CF35);
+                                String endResult = String.valueOf((combine_CFold_CF36 * 100));
+                                createDataCF(endResult, "H009", userId);
 
-                          // fungsi implikasi
-                          try {
-                              TimeUnit.SECONDS.sleep(2);
-                          } catch (InterruptedException e) {
-                              e.printStackTrace();
-                          }
-                          FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H009",userId);
-                          fungsiImplikasi.onPenyakit();
-                          namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
+                                Fuzzy fuzzy = new Fuzzy("H009", userId);
+                                // counting fuzzyfikasi
+                                fuzzy.penyakitH007_User(valueUserGejala34, valueUserGejala35, valueUserGejala36);
+                                fuzzy.penyakitH007_Pakar(valueGejala34, valueGejala35, valueGejala36);
+
+                                // fungsi implikasi
+                                try {
+                                    TimeUnit.SECONDS.sleep(2);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H009", userId);
+                                fungsiImplikasi.onPenyakit();
+                                namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
 //                           Log.i("This value gejala",stringBobotPenyakit1.get(2));
 
-                          try {
-                              TimeUnit.SECONDS.sleep(2);
-                          } catch (InterruptedException e) {
-                              e.printStackTrace();
-                          }
-                          Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H009",userId,"Hama ganjur");
-                          defuzzyfikasi.defuzzyFikasi();
-                          defuzzyfikasi.onAgregasi();
+                                try {
+                                    TimeUnit.SECONDS.sleep(2);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H009", userId, "Hama ganjur");
+                                defuzzyfikasi.defuzzyFikasi();
+                                defuzzyfikasi.onAgregasi();
 //                           defuzzyfikasi.shortAgregations();
 
 //                           tcOutput.setText(""+namaPentakit);
-                      }
+                            }
 
-                      @Override
-                      public void onCancelled(@NonNull DatabaseError error) {
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
 
-                      }
-                  });
+                            }
+                        });
 
-               }
-                //Hama H010
-                if (chkGejala47.isChecked() && chkGejala48.isChecked() && chkGejala49.isChecked()){
-                   List<String>listGejalaH010 = new ArrayList<>();
-                   databaseReferenceH0010 = FirebaseDatabase.getInstance().getReference().child("Database").child("H010");
-                   databaseReferenceH0010.addValueEventListener(new ValueEventListener() {
-                       @Override
-                       public void onDataChange(@NonNull DataSnapshot snapshot) {
-                           for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                               DataClass gejala = dataSnapshot.getValue(DataClass.class);
-                               listGejalaH010.add(gejala.getBobotGejala());
+                    }
+                    //Hama H010
+                    if (chkGejala47.isChecked() && chkGejala48.isChecked() && chkGejala49.isChecked()) {
+                        List<String> listGejalaH010 = new ArrayList<>();
+                        databaseReferenceH0010 = FirebaseDatabase.getInstance().getReference().child("Database").child("H010");
+                        databaseReferenceH0010.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                    DataClass gejala = dataSnapshot.getValue(DataClass.class);
+                                    listGejalaH010.add(gejala.getBobotGejala());
 
-                           }
-                           String namaPentakit = "penyakit";
-                           double valueUserGejala34 = Double.parseDouble(txxtNilaiGejala47.getText().toString());
-                           double valueUserGejala35 = Double.parseDouble(txxtNilaiGejala48.getText().toString());
-                           double valueUserGejala36 = Double.parseDouble(txxtNilaiGejala49.getText().toString());
+                                }
+                                String namaPentakit = "penyakit";
+                                double valueUserGejala34 = Double.parseDouble(txxtNilaiGejala47.getText().toString());
+                                double valueUserGejala35 = Double.parseDouble(txxtNilaiGejala48.getText().toString());
+                                double valueUserGejala36 = Double.parseDouble(txxtNilaiGejala49.getText().toString());
 
-                           double valueGejala34 = Double.parseDouble(listGejalaH010.get(0));
-                           double valueGejala35 = Double.parseDouble(listGejalaH010.get(1));
-                           double valueGejala36 = Double.parseDouble(listGejalaH010.get(2));
+                                double valueGejala34 = Double.parseDouble(listGejalaH010.get(0));
+                                double valueGejala35 = Double.parseDouble(listGejalaH010.get(1));
+                                double valueGejala36 = Double.parseDouble(listGejalaH010.get(2));
 
-                           double resultCalculateGej1 = valueGejala34 * valueUserGejala34;
-                           double resultCalculateGej2 = valueGejala35 * valueUserGejala35;
-                           double resultCalculateGej4 = valueGejala36 * valueUserGejala36;
+                                double resultCalculateGej1 = valueGejala34 * valueUserGejala34;
+                                double resultCalculateGej2 = valueGejala35 * valueUserGejala35;
+                                double resultCalculateGej4 = valueGejala36 * valueUserGejala36;
 
-                           double combine_CF34_CF35 = resultCalculateGej1 + resultCalculateGej2 * (1 - resultCalculateGej1);
-                           double combine_CFold_CF36 = combine_CF34_CF35 + resultCalculateGej4 * (1 - combine_CF34_CF35);
-                           String endResult = String.valueOf((combine_CFold_CF36 * 100));
-                           createDataCF(endResult,"H010",userId);
+                                double combine_CF34_CF35 = resultCalculateGej1 + resultCalculateGej2 * (1 - resultCalculateGej1);
+                                double combine_CFold_CF36 = combine_CF34_CF35 + resultCalculateGej4 * (1 - combine_CF34_CF35);
+                                String endResult = String.valueOf((combine_CFold_CF36 * 100));
+                                createDataCF(endResult, "H010", userId);
 
-                           Fuzzy fuzzy = new Fuzzy("H010",userId);
-                           // counting fuzzyfikasi
-                           fuzzy.penyakitH007_User(valueUserGejala34, valueUserGejala35, valueUserGejala36);
-                           fuzzy.penyakitH007_Pakar(valueGejala34, valueGejala35, valueGejala36);
+                                Fuzzy fuzzy = new Fuzzy("H010", userId);
+                                // counting fuzzyfikasi
+                                fuzzy.penyakitH007_User(valueUserGejala34, valueUserGejala35, valueUserGejala36);
+                                fuzzy.penyakitH007_Pakar(valueGejala34, valueGejala35, valueGejala36);
 
-                           // fungsi implikasi
-                           try {
-                               TimeUnit.SECONDS.sleep(2);
-                           } catch (InterruptedException e) {
-                               e.printStackTrace();
-                           }
-                           FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H010",userId);
-                           fungsiImplikasi.onPenyakit();
-                           namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
+                                // fungsi implikasi
+                                try {
+                                    TimeUnit.SECONDS.sleep(2);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H010", userId);
+                                fungsiImplikasi.onPenyakit();
+                                namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
 //                           Log.i("This value gejala",stringBobotPenyakit1.get(2));
 
-                           try {
-                               TimeUnit.SECONDS.sleep(2);
-                           } catch (InterruptedException e) {
-                               e.printStackTrace();
-                           }
-                           Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H010",userId,"hama belalang kembara");
-                           defuzzyfikasi.defuzzyFikasi();
-                           defuzzyfikasi.onAgregasi();
+                                try {
+                                    TimeUnit.SECONDS.sleep(2);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H010", userId, "hama belalang kembara");
+                                defuzzyfikasi.defuzzyFikasi();
+                                defuzzyfikasi.onAgregasi();
 //                           defuzzyfikasi.shortAgregations();
 
 //                           tcOutput.setText(""+namaPentakit);
-                       }
+                            }
 
-                       @Override
-                       public void onCancelled(@NonNull DatabaseError error) {
-
-                       }
-                   });
-
-               }
-                //Hama H011
-                if (chkGejala22.isChecked() && chkGejala50.isChecked() && chkGejala51.isChecked() && chkGejala52.isChecked() && chkGejala53.isChecked()){
-                    List<String> listGejalaH011 = new ArrayList<>();
-                    databaseReferenceH0011 = FirebaseDatabase.getInstance().getReference().child("Database").child("H011");
-                    databaseReferenceH0011.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                                DataClass gejala = dataSnapshot.getValue(DataClass.class);
-                                listGejalaH011.add(gejala.getBobotGejala());
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
 
                             }
-                            String namaPentakit = "penyakit";
-                            double valueUserGejala2 = Double.parseDouble(txxtNilaiGejala22.getText().toString());
-                            double valueUserGejala27 = Double.parseDouble(txxtNilaiGejala50.getText().toString());
-                            double valueUserGejala28 = Double.parseDouble(txxtNilaiGejala51.getText().toString());
-                            double valueUserGejala29 = Double.parseDouble(txxtNilaiGejala52.getText().toString());
-                            double valueUserGejala30 = Double.parseDouble(txxtNilaiGejala53.getText().toString());
+                        });
 
-                            double valueGejala2 = Double.parseDouble(listGejalaH011.get(0));
-                            double valueGejala27 = Double.parseDouble(listGejalaH011.get(1));
-                            double valueGejala28 = Double.parseDouble(listGejalaH011.get(2));
-                            double valueGejala29 = Double.parseDouble(listGejalaH011.get(3));
-                            double valueGejala30 = Double.parseDouble(listGejalaH011.get(4));
+                    }
+                    //Hama H011
+                    if (chkGejala22.isChecked() && chkGejala50.isChecked() && chkGejala51.isChecked() && chkGejala52.isChecked() && chkGejala53.isChecked()) {
+                        List<String> listGejalaH011 = new ArrayList<>();
+                        databaseReferenceH0011 = FirebaseDatabase.getInstance().getReference().child("Database").child("H011");
+                        databaseReferenceH0011.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                    DataClass gejala = dataSnapshot.getValue(DataClass.class);
+                                    listGejalaH011.add(gejala.getBobotGejala());
 
-                            double resultCalculateGej2 = valueGejala2 * valueUserGejala2;
-                            double resultCalculateGej27 = valueGejala27 * valueUserGejala27;
-                            double resultCalculateGej28 = valueGejala28 * valueUserGejala28;
-                            double resultCalculateGej29 = valueGejala29 * valueUserGejala29;
-                            double resultCalculateGej30 = valueGejala30 * valueUserGejala30;
+                                }
+                                String namaPentakit = "penyakit";
+                                double valueUserGejala2 = Double.parseDouble(txxtNilaiGejala22.getText().toString());
+                                double valueUserGejala27 = Double.parseDouble(txxtNilaiGejala50.getText().toString());
+                                double valueUserGejala28 = Double.parseDouble(txxtNilaiGejala51.getText().toString());
+                                double valueUserGejala29 = Double.parseDouble(txxtNilaiGejala52.getText().toString());
+                                double valueUserGejala30 = Double.parseDouble(txxtNilaiGejala53.getText().toString());
 
-                            double combine_CF2_CF27 = resultCalculateGej2 + resultCalculateGej27 * (1 - resultCalculateGej2);
-                            double combine_CFold_CF28 = combine_CF2_CF27 + resultCalculateGej28 * (1 - combine_CF2_CF27);
-                            double combine_CFold_CF29 = combine_CFold_CF28 + resultCalculateGej29 * (1 - combine_CFold_CF28);
-                            double combine_CFold_CF30 = combine_CFold_CF29 + resultCalculateGej30 * (1 - combine_CFold_CF29);
-                            String endResult = String.valueOf((combine_CFold_CF30 * 100));
-                            createDataCF(endResult,"H011",userId);
+                                double valueGejala2 = Double.parseDouble(listGejalaH011.get(0));
+                                double valueGejala27 = Double.parseDouble(listGejalaH011.get(1));
+                                double valueGejala28 = Double.parseDouble(listGejalaH011.get(2));
+                                double valueGejala29 = Double.parseDouble(listGejalaH011.get(3));
+                                double valueGejala30 = Double.parseDouble(listGejalaH011.get(4));
 
-                            Fuzzy fuzzy = new Fuzzy("H011",userId);
-                            // counting fuzzyfikasi
-                            fuzzy.penyakitH006_User(valueUserGejala2,valueUserGejala27,valueUserGejala28,valueUserGejala29,valueUserGejala30);
-                            fuzzy.penyakitH006_Pakar(valueGejala2,valueGejala27,valueGejala28,valueGejala29,valueGejala30);
+                                double resultCalculateGej2 = valueGejala2 * valueUserGejala2;
+                                double resultCalculateGej27 = valueGejala27 * valueUserGejala27;
+                                double resultCalculateGej28 = valueGejala28 * valueUserGejala28;
+                                double resultCalculateGej29 = valueGejala29 * valueUserGejala29;
+                                double resultCalculateGej30 = valueGejala30 * valueUserGejala30;
 
-                            // fungsi implikasi
-                            try {
-                                TimeUnit.SECONDS.sleep(2);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
+                                double combine_CF2_CF27 = resultCalculateGej2 + resultCalculateGej27 * (1 - resultCalculateGej2);
+                                double combine_CFold_CF28 = combine_CF2_CF27 + resultCalculateGej28 * (1 - combine_CF2_CF27);
+                                double combine_CFold_CF29 = combine_CFold_CF28 + resultCalculateGej29 * (1 - combine_CFold_CF28);
+                                double combine_CFold_CF30 = combine_CFold_CF29 + resultCalculateGej30 * (1 - combine_CFold_CF29);
+                                String endResult = String.valueOf((combine_CFold_CF30 * 100));
+                                createDataCF(endResult, "H011", userId);
+
+                                Fuzzy fuzzy = new Fuzzy("H011", userId);
+                                // counting fuzzyfikasi
+                                fuzzy.penyakitH006_User(valueUserGejala2, valueUserGejala27, valueUserGejala28, valueUserGejala29, valueUserGejala30);
+                                fuzzy.penyakitH006_Pakar(valueGejala2, valueGejala27, valueGejala28, valueGejala29, valueGejala30);
+
+                                // fungsi implikasi
+                                try {
+                                    TimeUnit.SECONDS.sleep(2);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H011", userId);
+                                fungsiImplikasi.onPenyakit();
+                                namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
+
+                                try {
+                                    TimeUnit.SECONDS.sleep(2);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H011", userId, "hama kepinding tanah");
+                                defuzzyfikasi.defuzzyFikasi();
+                                defuzzyfikasi.onAgregasi();
                             }
-                            FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H011",userId);
-                            fungsiImplikasi.onPenyakit();
-                            namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
 
-                            try {
-                                TimeUnit.SECONDS.sleep(2);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
                             }
-                            Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H011",userId,"hama kepinding tanah");
-                            defuzzyfikasi.defuzzyFikasi();
-                            defuzzyfikasi.onAgregasi();
-                        }
+                        });
+                    }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
+                    if (!chkGejala1.isChecked() && !chkGejala2.isChecked() && !chkGejala3.isChecked() && !chkGejala4.isChecked() && !chkGejala5.isChecked() && !chkGejala6.isChecked()
+                            && !chkGejala7.isChecked() && !chkGejala8.isChecked() && !chkGejala9.isChecked() && !chkGejala10.isChecked() && !chkGejala11.isChecked() && !chkGejala12.isChecked()
+                            && !chkGejala13.isChecked() && !chkGejala14.isChecked() && !chkGejala15.isChecked() && !chkGejala16.isChecked() && !chkGejala17.isChecked() && !chkGejala18.isChecked()
+                            && !chkGejala19.isChecked() && !chkGejala20.isChecked() && !chkGejala21.isChecked() && !chkGejala22.isChecked() && !chkGejala23.isChecked() && !chkGejala24.isChecked()
+                            && !chkGejala25.isChecked() && !chkGejala26.isChecked() && !chkGejala27.isChecked() && !chkGejala28.isChecked() && !chkGejala29.isChecked() && !chkGejala30.isChecked()
+                            && !chkGejala31.isChecked() && !chkGejala32.isChecked() && !chkGejala33.isChecked() && !chkGejala34.isChecked() && !chkGejala35.isChecked() && !chkGejala36.isChecked()
+                            && !chkGejala37.isChecked() && !chkGejala38.isChecked() && !chkGejala39.isChecked() && !chkGejala40.isChecked() && !chkGejala41.isChecked() && !chkGejala42.isChecked()
+                            && !chkGejala43.isChecked() && !chkGejala44.isChecked() && !chkGejala45.isChecked() && !chkGejala46.isChecked() && !chkGejala47.isChecked() && !chkGejala48.isChecked()
+                            && !chkGejala49.isChecked() && !chkGejala50.isChecked() && !chkGejala51.isChecked() && !chkGejala52.isChecked() && !chkGejala53.isChecked()) {
 
-                        }
-                    });
-               }
+                        Toast.makeText(MainActivity.this, "Silahkan Pilih Gejala", Toast.LENGTH_LONG).show();
+                    }
 
-                else {
-                    Toast.makeText(MainActivity.this, "Silahkan Pilih Gejala",Toast.LENGTH_LONG).show();
+//                try {
+//                    TimeUnit.SECONDS.sleep(2);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+
+                    moveInten();
+                    // add sharedpreference
+                    SharedPreferences.Editor editorSes = sharedPreferencesSession.edit();
+                    editorSes.putString("varSession", String.valueOf(sessionId));
+                    editorSes.apply();
+                    sessionString = sharedPreferencesSession.getString("varSession", null);
+                    new Defuzzyfikasi(sessionString);
+                    sessionId++;
                 }
-                moveInten();
-                // add sharedpreference
-                SharedPreferences.Editor editorSes = sharedPreferencesSession.edit();
-                editorSes.putString("varSession", String.valueOf(sessionId));
-                editorSes.apply();
-                sessionString = sharedPreferencesSession.getString("varSession",null);
-                new Defuzzyfikasi(sessionString);
-                sessionId++;
             }
 
         });
@@ -2096,8 +2119,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         LastModel lastModel = new LastModel(penyakit,result);
         databaseInserFM.child("LastResult").child(userId).child("CF").setValue(lastModel);
 
-        LastModel lastModelSes = new LastModel(penyakit,"1");
-        databaseInserSession.child("LastResult").child(userId).child("SES").child("keyy").setValue(lastModelSes);
+//        LastModel lastModelSes = new LastModel(penyakit,"1");
+//        databaseInserSession.child("LastResult").child(userId).child("SES").child("keyy").setValue(lastModelSes);
     }
     private void moveInten(){
         List<String> st = new ArrayList<>();
@@ -2111,8 +2134,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     st.add(showUser.nilaiAkhir);
 
                     if (showUser.nilaiAkhir.equalsIgnoreCase("1")){
+                        try {
+                            TimeUnit.SECONDS.sleep(2);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+//                        onDestroy();
                         Intent intent = new Intent(MainActivity.this, ResultActivity.class);
                         startActivity(intent);
+                        finish();
                     }
                 }
 
@@ -2131,6 +2161,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
+
 
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -2154,10 +2185,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         draw.openDrawer(GravityCompat.START);
     }
 
-    public void buttonData(View view) {
-        startActivity(new Intent(MainActivity.this, MyListData.class));
-    }
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -2179,5 +2206,172 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
         }
+    }
+
+    private boolean userHandling(){
+        boolean hasil = true;
+        if (chkGejala1.isChecked() && txxtNilaiGejala1.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        }
+//        else if (chkGejala2.isChecked() && txxtNilaiGejala2.getText().toString().matches("")){
+//            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+//            hasil = false;
+//        }
+        else if (chkGejala2.isChecked() && txxtNilaiGejala2.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala3.isChecked() && txxtNilaiGejala3.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala4.isChecked() && txxtNilaiGejala4.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala6.isChecked() && txxtNilaiGejala6.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala7.isChecked() && txxtNilaiGejala7.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala8.isChecked() && txxtNilaiGejala8.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala9.isChecked() && txxtNilaiGejala9.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala10.isChecked() && txxtNilaiGejala10.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala11.isChecked() && txxtNilaiGejala11.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala12.isChecked() && txxtNilaiGejala12.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala13.isChecked() && txxtNilaiGejala13.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala14.isChecked() && txxtNilaiGejala14.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala15.isChecked() && txxtNilaiGejala15.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala16.isChecked() && txxtNilaiGejala16.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala17.isChecked() && txxtNilaiGejala17.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala18.isChecked() && txxtNilaiGejala18.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala19.isChecked() && txxtNilaiGejala19.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala20.isChecked() && txxtNilaiGejala20.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala21.isChecked() && txxtNilaiGejala21.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala22.isChecked() && txxtNilaiGejala22.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala23.isChecked() && txxtNilaiGejala23.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala24.isChecked() && txxtNilaiGejala24.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala25.isChecked() && txxtNilaiGejala25.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala26.isChecked() && txxtNilaiGejala26.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala27.isChecked() && txxtNilaiGejala27.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala28.isChecked() && txxtNilaiGejala28.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala29.isChecked() && txxtNilaiGejala29.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala30.isChecked() && txxtNilaiGejala30.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala31.isChecked() && txxtNilaiGejala31.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala32.isChecked() && txxtNilaiGejala32.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala33.isChecked() && txxtNilaiGejala33.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala34.isChecked() && txxtNilaiGejala34.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala35.isChecked() && txxtNilaiGejala35.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala36.isChecked() && txxtNilaiGejala36.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala37.isChecked() && txxtNilaiGejala37.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala38.isChecked() && txxtNilaiGejala38.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala39.isChecked() && txxtNilaiGejala39.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala40.isChecked() && txxtNilaiGejala40.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala41.isChecked() && txxtNilaiGejala41.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala42.isChecked() && txxtNilaiGejala42.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala43.isChecked() && txxtNilaiGejala43.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala44.isChecked() && txxtNilaiGejala44.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala45.isChecked() && txxtNilaiGejala45.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala46.isChecked() && txxtNilaiGejala46.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala47.isChecked() && txxtNilaiGejala47.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala48.isChecked() && txxtNilaiGejala48.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala49.isChecked() && txxtNilaiGejala49.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala50.isChecked() && txxtNilaiGejala50.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala51.isChecked() && txxtNilaiGejala51.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala52.isChecked() && txxtNilaiGejala52.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        } else if (chkGejala53.isChecked() && txxtNilaiGejala53.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
+            hasil = false;
+        }
+        return hasil;
     }
 }

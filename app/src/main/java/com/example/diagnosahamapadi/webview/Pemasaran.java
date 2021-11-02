@@ -25,6 +25,7 @@ public class Pemasaran extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+        setTitle("Tips Pemasaran");
 
 
 //        actionBar = getSupportActionBar();
