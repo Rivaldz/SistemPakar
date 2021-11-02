@@ -76,9 +76,6 @@ public class ResultActivity extends AppCompatActivity {
 //                Log.e("Lihat Key method : ", listMethod.get(0).getKeyMethod());
 //                Log.e("Lihat hasil method : ", listMethod.get(0).getNilaiAkhir());
 //
-//                Log.e("Lihat nama penyakit : ",listMethod.get(1).getNamaPenyakit());
-//                Log.e("Lihat Key method : ", listMethod.get(1).getKeyMethod());
-//                Log.e("Lihat hasil method : ", listMethod.get(1).getNilaiAkhir());
 
                 String namaPHST = listMethod.get(1).getNamaPenyakit();
                 String namaMethodeCFSt = listMethod.get(0).getKeyMethod();
