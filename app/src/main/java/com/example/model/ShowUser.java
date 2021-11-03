@@ -1,15 +1,24 @@
 package com.example.model;
 
 public class ShowUser {
-    public String namaPenyakit, nilaiAkhir, countStatus;
 
-    public ShowUser(String namaPenyakit, String nilaiAkhir, String keyMethod) {
+    public String countStatus, namaPenyakit, nilaiAkhir;
+
+    public ShowUser(String countStatus, String namaPenyakit, String nilaiAkhir) {
+        this.countStatus = countStatus;
         this.namaPenyakit = namaPenyakit;
         this.nilaiAkhir = nilaiAkhir;
-        this.countStatus = keyMethod;
     }
 
     public ShowUser() {
+    }
+
+    public String getCountStatus() {
+        return countStatus;
+    }
+
+    public void setCountStatus(String countStatus) {
+        this.countStatus = countStatus;
     }
 
     public String getNamaPenyakit() {
@@ -26,13 +35,5 @@ public class ShowUser {
 
     public void setNilaiAkhir(String nilaiAkhir) {
         this.nilaiAkhir = nilaiAkhir;
-    }
-
-    public String getKeyMethod() {
-        return countStatus;
-    }
-
-    public void setKeyMethod(String keyMethod) {
-        this.countStatus = keyMethod;
     }
 }

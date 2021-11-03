@@ -68,7 +68,7 @@ public class ResultActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
               for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                   ShowUser showUser = dataSnapshot.getValue(ShowUser.class);
-                  showUser.setKeyMethod(dataSnapshot.getKey());
+//                  showUser.setKeyMethod(dataSnapshot.getKey());
                   listMethod.add(showUser);
 
               }
@@ -78,8 +78,8 @@ public class ResultActivity extends AppCompatActivity {
 //
 
                 String namaPHST = listMethod.get(1).getNamaPenyakit();
-                String namaMethodeCFSt = listMethod.get(0).getKeyMethod();
-                String namaMethodeFMSt = listMethod.get(1).getKeyMethod();
+//                String namaMethodeCFSt = listMethod.get(0).getKeyMethod();
+//                String namaMethodeFMSt = listMethod.get(1).getKeyMethod();
                 String nilaiKahirCFSt = listMethod.get(0).getNilaiAkhir();
                 String nilaiKahirFMSt = listMethod.get(1).getNilaiAkhir();
                 String hasilBobot = null;
@@ -134,8 +134,8 @@ public class ResultActivity extends AppCompatActivity {
                 startActivity(intent);
                 LastModel lastModelSes = new LastModel("Penyakit","null","0");
                 mDatabaseResult.child("LastResult").child(userId).child("FM").setValue(lastModelSes);
-                finish();
-//                onDestroy();
+//                finish();
+                onDestroy();
             }
         });
 

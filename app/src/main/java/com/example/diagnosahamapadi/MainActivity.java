@@ -2121,7 +2121,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     ShowUser showUser = dataSnapshot.getValue(ShowUser.class);
-                    showUser.setKeyMethod(dataSnapshot.getKey());
+//                    showUser.setKeyMethod(dataSnapshot.getKey());
                     st.add(showUser.nilaiAkhir);
 
                     if (showUser.nilaiAkhir.equalsIgnoreCase("1")){

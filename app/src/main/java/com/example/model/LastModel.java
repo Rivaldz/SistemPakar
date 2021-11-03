@@ -16,4 +16,29 @@ public class LastModel {
 
     public LastModel() {
     }
+
+
+    public String getNamaPenyakit() {
+        return namaPenyakit;
+    }
+
+    public void setNamaPenyakit(String namaPenyakit) {
+        this.namaPenyakit = namaPenyakit;
+    }
+
+    public String getNilaiAkhir() {
+        return nilaiAkhir;
+    }
+
+    public void setNilaiAkhir(String nilaiAkhir) {
+        this.nilaiAkhir = nilaiAkhir;
+    }
+
+    public String getCountStatus() {
+        return countStatus;
+    }
+
+    public void setCountStatus(String countStatus) {
+        this.countStatus = countStatus;
+    }
 }
