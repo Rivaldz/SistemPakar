@@ -444,7 +444,7 @@ public class Defuzzyfikasi {
        double result = hasilAkhir / sizeOuter;
        System.out.println("Ini adalah hasil akhir yang saya inginkan 000 " + result  + " hasil akhir " + hasilAkhir + " siw outer " + sizeOuter );
 //       String sessionString = mainActivity.sessionString;
-       LastModel lastModel = new LastModel(realNamaPenyakit,String.valueOf(result));
+       LastModel lastModel = new LastModel(realNamaPenyakit,String.valueOf(result),"1");
        getmDatabaseLastValue.child("LastResult").child(userId).child("FM").setValue(lastModel);
 
 //                try {
@@ -453,8 +453,8 @@ public class Defuzzyfikasi {
 //                    e.printStackTrace();
 //                }
 
-       LastModel lastModelSes = new LastModel(realNamaPenyakit,"1");
-        getmDatabaseLastValue.child("LastResult").child(userId).child("SES").child("keyy").setValue(lastModelSes);
+//       LastModel lastModelSes = new LastModel(realNamaPenyakit,"1");
+//        getmDatabaseLastValue.child("LastResult").child(userId).child("SES").child("keyy").setValue(lastModelSes);
 
        lastStep.clear();
 

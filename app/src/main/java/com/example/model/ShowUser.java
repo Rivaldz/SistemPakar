@@ -1,12 +1,12 @@
 package com.example.model;
 
 public class ShowUser {
-    public String namaPenyakit, nilaiAkhir, keyMethod;
+    public String namaPenyakit, nilaiAkhir, countStatus;
 
     public ShowUser(String namaPenyakit, String nilaiAkhir, String keyMethod) {
         this.namaPenyakit = namaPenyakit;
         this.nilaiAkhir = nilaiAkhir;
-        this.keyMethod = keyMethod;
+        this.countStatus = keyMethod;
     }
 
     public ShowUser() {
@@ -29,10 +29,10 @@ public class ShowUser {
     }
 
     public String getKeyMethod() {
-        return keyMethod;
+        return countStatus;
     }
 
     public void setKeyMethod(String keyMethod) {
-        this.keyMethod = keyMethod;
+        this.countStatus = keyMethod;
     }
 }

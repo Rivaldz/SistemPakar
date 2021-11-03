@@ -1296,7 +1296,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onClick(View view) {
 //                IsNullErrorHandling errorHandMain = new IsNullErrorHandling();
 //                errorHandMain.checkInputUser();
-                if (userHandling() == true) {
+                if (userHandling() == true && emptySelect() == true) {
 
                     //Hama H001
                     if (chkGejala1.isChecked() && chkGejala3.isChecked() && chkGejala4.isChecked() && chkGejala5.isChecked() && chkGejala6.isChecked() && chkGejala12.isChecked() && chkGejala13.isChecked()) {
@@ -2079,18 +2079,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         });
                     }
 
-                    if (!chkGejala1.isChecked() && !chkGejala2.isChecked() && !chkGejala3.isChecked() && !chkGejala4.isChecked() && !chkGejala5.isChecked() && !chkGejala6.isChecked()
-                            && !chkGejala7.isChecked() && !chkGejala8.isChecked() && !chkGejala9.isChecked() && !chkGejala10.isChecked() && !chkGejala11.isChecked() && !chkGejala12.isChecked()
-                            && !chkGejala13.isChecked() && !chkGejala14.isChecked() && !chkGejala15.isChecked() && !chkGejala16.isChecked() && !chkGejala17.isChecked() && !chkGejala18.isChecked()
-                            && !chkGejala19.isChecked() && !chkGejala20.isChecked() && !chkGejala21.isChecked() && !chkGejala22.isChecked() && !chkGejala23.isChecked() && !chkGejala24.isChecked()
-                            && !chkGejala25.isChecked() && !chkGejala26.isChecked() && !chkGejala27.isChecked() && !chkGejala28.isChecked() && !chkGejala29.isChecked() && !chkGejala30.isChecked()
-                            && !chkGejala31.isChecked() && !chkGejala32.isChecked() && !chkGejala33.isChecked() && !chkGejala34.isChecked() && !chkGejala35.isChecked() && !chkGejala36.isChecked()
-                            && !chkGejala37.isChecked() && !chkGejala38.isChecked() && !chkGejala39.isChecked() && !chkGejala40.isChecked() && !chkGejala41.isChecked() && !chkGejala42.isChecked()
-                            && !chkGejala43.isChecked() && !chkGejala44.isChecked() && !chkGejala45.isChecked() && !chkGejala46.isChecked() && !chkGejala47.isChecked() && !chkGejala48.isChecked()
-                            && !chkGejala49.isChecked() && !chkGejala50.isChecked() && !chkGejala51.isChecked() && !chkGejala52.isChecked() && !chkGejala53.isChecked()) {
-
-                        Toast.makeText(MainActivity.this, "Silahkan Pilih Gejala", Toast.LENGTH_LONG).show();
-                    }
 
 //                try {
 //                    TimeUnit.SECONDS.sleep(2);
@@ -2098,14 +2086,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                    e.printStackTrace();
 //                }
 
-                    moveInten();
+//                    moveInten();
                     // add sharedpreference
-                    SharedPreferences.Editor editorSes = sharedPreferencesSession.edit();
-                    editorSes.putString("varSession", String.valueOf(sessionId));
-                    editorSes.apply();
-                    sessionString = sharedPreferencesSession.getString("varSession", null);
-                    new Defuzzyfikasi(sessionString);
-                    sessionId++;
+
+//                    SharedPreferences.Editor editorSes = sharedPreferencesSession.edit();
+//                    editorSes.putString("varSession", String.valueOf(sessionId));
+//                    editorSes.apply();
+//                    sessionString = sharedPreferencesSession.getString("varSession", null);
+//                    new Defuzzyfikasi(sessionString);
+//                    sessionId++;
+                      startActivity(new Intent(MainActivity.this, LoadingActivity.class));
+
                 }
             }
 
@@ -2141,6 +2132,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
 //                        onDestroy();
                         Intent intent = new Intent(MainActivity.this, ResultActivity.class);
+
+//                        Intent intent = new Intent(MainActivity.this, LoadingActivity.class);
                         startActivity(intent);
                         finish();
                     }
@@ -2373,5 +2366,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             hasil = false;
         }
         return hasil;
+    }
+
+    private boolean emptySelect(){
+        boolean selectVar = true;
+
+        if (!chkGejala1.isChecked() && !chkGejala2.isChecked() && !chkGejala3.isChecked() && !chkGejala4.isChecked() && !chkGejala5.isChecked() && !chkGejala6.isChecked()
+                && !chkGejala7.isChecked() && !chkGejala8.isChecked() && !chkGejala9.isChecked() && !chkGejala10.isChecked() && !chkGejala11.isChecked() && !chkGejala12.isChecked()
+                && !chkGejala13.isChecked() && !chkGejala14.isChecked() && !chkGejala15.isChecked() && !chkGejala16.isChecked() && !chkGejala17.isChecked() && !chkGejala18.isChecked()
+                && !chkGejala19.isChecked() && !chkGejala20.isChecked() && !chkGejala21.isChecked() && !chkGejala22.isChecked() && !chkGejala23.isChecked() && !chkGejala24.isChecked()
+                && !chkGejala25.isChecked() && !chkGejala26.isChecked() && !chkGejala27.isChecked() && !chkGejala28.isChecked() && !chkGejala29.isChecked() && !chkGejala30.isChecked()
+                && !chkGejala31.isChecked() && !chkGejala32.isChecked() && !chkGejala33.isChecked() && !chkGejala34.isChecked() && !chkGejala35.isChecked() && !chkGejala36.isChecked()
+                && !chkGejala37.isChecked() && !chkGejala38.isChecked() && !chkGejala39.isChecked() && !chkGejala40.isChecked() && !chkGejala41.isChecked() && !chkGejala42.isChecked()
+                && !chkGejala43.isChecked() && !chkGejala44.isChecked() && !chkGejala45.isChecked() && !chkGejala46.isChecked() && !chkGejala47.isChecked() && !chkGejala48.isChecked()
+                && !chkGejala49.isChecked() && !chkGejala50.isChecked() && !chkGejala51.isChecked() && !chkGejala52.isChecked() && !chkGejala53.isChecked()) {
+
+            Toast.makeText(MainActivity.this, "Silahkan Pilih Gejala", Toast.LENGTH_LONG).show();
+            selectVar = false;
+        }
+        return selectVar;
     }
 }

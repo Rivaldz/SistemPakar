@@ -132,9 +132,10 @@ public class ResultActivity extends AppCompatActivity {
                 mDatabaseDefuzzy.removeValue();
                 Intent intent = new Intent(ResultActivity.this, MainActivity.class);
                 startActivity(intent);
-                LastModel lastModelSes = new LastModel("Penyakit","0");
-                mDatabaseResult.child("LastResult").child(userId).child("SES").child("keyy").setValue(lastModelSes);
-                onDestroy();
+                LastModel lastModelSes = new LastModel("Penyakit","null","0");
+                mDatabaseResult.child("LastResult").child(userId).child("FM").setValue(lastModelSes);
+                finish();
+//                onDestroy();
             }
         });
 
