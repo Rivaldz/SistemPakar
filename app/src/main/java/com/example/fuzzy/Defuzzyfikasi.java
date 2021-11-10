@@ -395,7 +395,6 @@ public class Defuzzyfikasi {
                 }
 //                   System.out.println("Lihat hasil nilai dari agregasi " + getAgregations.get(0).getMaxValue() + "lihat key hasil agre " + keyList.get(finalJ) );
 //                shortAgregations(getAgregations);
-                   shortAgregations();
                }
 
                @Override
@@ -404,9 +403,11 @@ public class Defuzzyfikasi {
                }
            });
        }
+
+       shortAgregations();
    }
 
-   public void shortAgregations(){
+    public void shortAgregations(){
 //       sharedPreferencesSession = getSharedPreferences("session",MODE_PRIVATE);
 //       sharedPreferencesSession.contains("varSession");
         double hasilAkhir = 0;
@@ -454,13 +455,48 @@ public class Defuzzyfikasi {
 
 
        getLOMFuzzy();
-       lastStep.clear();
+       deleteHash();
+       sumKeanggotaan();
 
    }
 
-   public void getLOMFuzzy(){
-        getLomDB = FirebaseDatabase.getInstance().getReference().child("DefuzzyLOM").child(userId).child(namaPenyakit);
-        Query getLomQuery = getLomDB.orderByChild("keanggotaan").equalTo("RENDAH");
+   public String getLOMFuzzy(){
+//       System.out.println("Ini user ID" + username);
+//       System.out.println("Penyakit" + kodePenykit);
+       final String[] lihatHasil = new String[1];
+       getLomDB = FirebaseDatabase.getInstance().getReference().child("DefuzzyLOM").child(userId).child(namaPenyakit);
+        getLomDB.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    String anggota = dataSnapshot.child("keanggotaan").getValue().toString();
+                    String key = dataSnapshot.child("key__").getValue().toString();
+                    if (anggota.equalsIgnoreCase("RENDAH")){
+                        Log.e("Hasil RENDAH", anggota);
+                        Log.e("Hasil key", key);
+                        getKeyKeanggotaanRendah.add(anggota);
+                    }else if(anggota.equalsIgnoreCase("SEDANG")){
+                        Log.e("Hasil SEDANG", anggota);
+                        Log.e("Hasil key", key);
+                        getKeyKeanggotaanSedang.add(anggota);
+                    }else {
+                        Log.e("Hasil TINGGI", anggota);
+                        Log.e("Hasil key", key);
+                        getKeyKeanggotaanTinggi.add(anggota);
+                    }
+//                    Log.e("Hasil anggota", anggota);
+//                    Log.e("Hasil key", key);
+//                    lihatHasil[0] = snapshot.getKey();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    /*    Query getLomQuery = getLomDB.orderByChild("keanggotaan").equalTo("RENDAH");
         getLomQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -476,9 +512,32 @@ public class Defuzzyfikasi {
             }
         });
 
+     */
+
 
 //       LastModel lastModelSes = new LastModel(realNamaPenyakit,"1");
 //        getmDatabaseLastValue.child("LastResult").child(userId).child("SES").child("keyy").setValue(lastModelSes);
+       return String.valueOf(lihatHasil);
+
+   }
+
+   private void sumKeanggotaan(){
+        int sizeRendah = getKeyKeanggotaanRendah.size();
+        int sizeSedang = getKeyKeanggotaanSedang.size();
+        int sizeTinggi = getKeyKeanggotaanTinggi.size();
+
+        if (sizeRendah > sizeSedang){
+            if (sizeRendah > sizeTinggi){
+                Log.e("Hasil tertinggi Rendah", String.valueOf(sizeRendah));
+            }
+        }else if(sizeSedang > sizeTinggi){
+            Log.e("Hasil tertinggi Sedang", String.valueOf(sizeSedang));
+        }else if(sizeTinggi > sizeRendah){
+            if (sizeRendah > sizeSedang){
+                Log.e("Hasil tertinggi Tinggi", String.valueOf(sizeTinggi));
+            }
+
+        }
 
    }
 

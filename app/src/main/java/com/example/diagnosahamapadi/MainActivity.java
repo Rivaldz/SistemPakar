@@ -1294,6 +1294,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnProsess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                DatabaseReference mDatabaseFunsiImp = FirebaseDatabase.getInstance().getReference().child("Fungsiimplikasi").child(userIdPub);
+                DatabaseReference mDatabaseDefuzzy = FirebaseDatabase.getInstance().getReference().child("Defuzzyfikasi").child(userIdPub);
+                mDatabaseFunsiImp.removeValue();
+                mDatabaseDefuzzy.removeValue();
+
 //                IsNullErrorHandling errorHandMain = new IsNullErrorHandling();
 //                errorHandMain.checkInputUser();
                 if (userHandling() == true && emptySelect() == true) {
@@ -1366,10 +1371,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }
+
                                 Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H001", userId, "Hama pengerek batang padi kuning");
                                 defuzzyfikasi.defuzzyFikasi();
                                 defuzzyfikasi.onAgregasi();
-//
                             }
 
                             @Override
