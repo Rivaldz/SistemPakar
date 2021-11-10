@@ -2,6 +2,7 @@ package com.example.fuzzy;
 
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.provider.ContactsContract;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -439,7 +440,7 @@ public class Defuzzyfikasi {
 
            System.out.println("gejala == " + key + "Dengan hasil " + maxZi + " Nilai keanggotaan " + keanggotaan + " Nilai max " + max);
            GetAgregation getAgregationLom = new GetAgregation(keanggotaan,String.valueOf(max),String.valueOf(maxZi),String.valueOf(key));
-           getmDatabaseLastValue.child("DefuzzyLOM").child(userId).child(namaPenyakit).setValue(getAgregationLom);
+           getmDatabaseLastValue.child("DefuzzyLOM").child(userId).child(namaPenyakit).child(key).setValue(getAgregationLom);
 
            hasilAkhir = tempHasil + max ;
            tempHasil = hasilAkhir;
@@ -459,6 +460,21 @@ public class Defuzzyfikasi {
 
    public void getLOMFuzzy(){
         getLomDB = FirebaseDatabase.getInstance().getReference().child("DefuzzyLOM").child(userId).child(namaPenyakit);
+        Query getLomQuery = getLomDB.orderByChild("keanggotaan").equalTo("RENDAH");
+        getLomQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    String keyTest = dataSnapshot.getKey();
+                    Log.e("Key Test ", keyTest);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
 
 //       LastModel lastModelSes = new LastModel(realNamaPenyakit,"1");

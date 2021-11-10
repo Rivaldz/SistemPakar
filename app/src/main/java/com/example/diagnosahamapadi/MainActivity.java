@@ -1299,7 +1299,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (userHandling() == true && emptySelect() == true) {
 
                     //Hama H001
-                    if (chkGejala1.isChecked() && chkGejala3.isChecked() && chkGejala4.isChecked() && chkGejala5.isChecked() && chkGejala6.isChecked() && chkGejala12.isChecked() && chkGejala13.isChecked()) {
+                    if (chkGejala1.isChecked() || chkGejala3.isChecked() || chkGejala4.isChecked() || chkGejala5.isChecked() || chkGejala6.isChecked() || chkGejala12.isChecked() || chkGejala13.isChecked()) {
                         List<String> listH001 = new ArrayList<>();
                         databaseReferenceH001 = FirebaseDatabase.getInstance().getReference().child("Database").child("H001");
                         databaseReferenceH001.addValueEventListener(new ValueEventListener() {
@@ -1311,13 +1311,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                                 }
                                 String namaPentakit = "penyakit";
-                                double valueUserGejala1 = Double.parseDouble(txxtNilaiGejala1.getText().toString());
-                                double valueUserGejala3 = Double.parseDouble(txxtNilaiGejala3.getText().toString());
-                                double valueUserGejala4 = Double.parseDouble(txxtNilaiGejala4.getText().toString());
-                                double valueUserGejala5 = Double.parseDouble(txxtNilaiGejala5.getText().toString());
-                                double valueUserGejala6 = Double.parseDouble(txxtNilaiGejala6.getText().toString());
-                                double valueUserGejala12 = Double.parseDouble(txxtNilaiGejala12.getText().toString());
-                                double valueUserGejala13 = Double.parseDouble(txxtNilaiGejala13.getText().toString());
+                                double valueUserGejala1 = txxtNilaiGejala1.getText().toString().matches("") ? 0 : Double.parseDouble(txxtNilaiGejala1.getText().toString());
+                                double valueUserGejala3 = txxtNilaiGejala3.getText().toString().matches("") ? 0 : Double.parseDouble(txxtNilaiGejala3.getText().toString());
+                                double valueUserGejala4 = txxtNilaiGejala4.getText().toString().matches("") ? 0 : Double.parseDouble(txxtNilaiGejala4.getText().toString());
+                                double valueUserGejala5 = txxtNilaiGejala5.getText().toString().matches("") ? 0 : Double.parseDouble(txxtNilaiGejala5.getText().toString());
+                                double valueUserGejala6 = txxtNilaiGejala6.getText().toString().matches("") ? 0 : Double.parseDouble(txxtNilaiGejala6.getText().toString());
+                                double valueUserGejala12 = txxtNilaiGejala12.getText().toString().matches("") ? 0 : Double.parseDouble(txxtNilaiGejala12.getText().toString());
+                                double valueUserGejala13 = txxtNilaiGejala13.getText().toString().matches("") ? 0 : Double.parseDouble(txxtNilaiGejala13.getText().toString());
 
                                 double valueGejala1 = Double.parseDouble(listH001.get(0));
                                 double valueGejala3 = Double.parseDouble(listH001.get(1));
