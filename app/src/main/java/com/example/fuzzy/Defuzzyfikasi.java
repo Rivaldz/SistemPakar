@@ -64,7 +64,7 @@ public class Defuzzyfikasi {
     DatabaseReference mDatabaseMain,mDatabaseGetDefuzzy,
             mDatabase,mDatabaseSedang,
             mDatabaseTinggi,mDatabaseRendah,
-            mDatabaseAgre, getmDatabaseLastValue;
+            mDatabaseAgre, getmDatabaseLastValue, getLomDB;
 
     List<String > getKeyKeanggotaanRendah = new ArrayList<>();
     List<String > getKeyKeanggotaanSedang = new ArrayList<>();
@@ -310,7 +310,7 @@ public class Defuzzyfikasi {
                 System.out.println("Nilai Max Sedang adalah " + max + "Nilai Zi " + maxZi);
             }
 //        }
-       deleteHash();
+//       deleteHash();
 
    }
 
@@ -438,6 +438,9 @@ public class Defuzzyfikasi {
            }
 
            System.out.println("gejala == " + key + "Dengan hasil " + maxZi + " Nilai keanggotaan " + keanggotaan + " Nilai max " + max);
+           GetAgregation getAgregationLom = new GetAgregation(keanggotaan,String.valueOf(max),String.valueOf(maxZi),String.valueOf(key));
+           getmDatabaseLastValue.child("DefuzzyLOM").child(userId).child(namaPenyakit).setValue(getAgregationLom);
+
            hasilAkhir = tempHasil + max ;
            tempHasil = hasilAkhir;
            sizeOuter++;
@@ -445,16 +448,10 @@ public class Defuzzyfikasi {
        double result = hasilAkhir / sizeOuter;
        System.out.println("Ini adalah hasil akhir yang saya inginkan 000 " + result  + " hasil akhir " + hasilAkhir + " siw outer " + sizeOuter );
 //       String sessionString = mainActivity.sessionString;
-       LastModel lastModel = new LastModel(realNamaPenyakit,String.valueOf(result),"1");
-       getmDatabaseLastValue.child("LastResult").child(userId).child("FM").setValue(lastModel);
+//       LastModel lastModel = new LastModel(realNamaPenyakit,String.valueOf(result),"1");
+//       getmDatabaseLastValue.child("LastResult").child(userId).child("FM").setValue(lastModel);
 
-<<<<<<< HEAD
-//                try {
-//                    TimeUnit.SECONDS.sleep(2);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-=======
+
        getLOMFuzzy();
        lastStep.clear();
 
@@ -462,27 +459,10 @@ public class Defuzzyfikasi {
 
    public void getLOMFuzzy(){
         getLomDB = FirebaseDatabase.getInstance().getReference().child("DefuzzyLOM").child(userId).child(namaPenyakit);
-        getLomDB.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
-                    GetAgregation getAgregationSn = snapshot1.getValue(GetAgregation.class);
-                    if (getAgregationSn.getKeanggotaan().equalsIgnoreCase("RENDAH")){
-                       Log.e("RENDAH",getAgregationSn.getKeanggotaan());
-                    }else if(getAgregationSn.getKeanggotaan().equalsIgnoreCase("SEDANG")) {
-                        Log.e("SEDANG",getAgregationSn.getKeanggotaan());
-                    }else {
-                        Log.e("TINGGI",getAgregationSn.getKeanggotaan());
-                    }
 
-                }
-            }
->>>>>>> 693895f... query select same data
 
 //       LastModel lastModelSes = new LastModel(realNamaPenyakit,"1");
 //        getmDatabaseLastValue.child("LastResult").child(userId).child("SES").child("keyy").setValue(lastModelSes);
-
-       lastStep.clear();
 
    }
 
