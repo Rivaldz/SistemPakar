@@ -22,6 +22,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -447,11 +448,37 @@ public class Defuzzyfikasi {
        LastModel lastModel = new LastModel(realNamaPenyakit,String.valueOf(result),"1");
        getmDatabaseLastValue.child("LastResult").child(userId).child("FM").setValue(lastModel);
 
+<<<<<<< HEAD
 //                try {
 //                    TimeUnit.SECONDS.sleep(2);
 //                } catch (InterruptedException e) {
 //                    e.printStackTrace();
 //                }
+=======
+       getLOMFuzzy();
+       lastStep.clear();
+
+   }
+
+   public void getLOMFuzzy(){
+        getLomDB = FirebaseDatabase.getInstance().getReference().child("DefuzzyLOM").child(userId).child(namaPenyakit);
+        Query
+        getLomDB.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                    GetAgregation getAgregationSn = snapshot1.getValue(GetAgregation.class);
+                    if (getAgregationSn.getKeanggotaan().equalsIgnoreCase("RENDAH")){
+                       Log.e("RENDAH",getAgregationSn.getKeanggotaan());
+                    }else if(getAgregationSn.getKeanggotaan().equalsIgnoreCase("SEDANG")) {
+                        Log.e("SEDANG",getAgregationSn.getKeanggotaan());
+                    }else {
+                        Log.e("TINGGI",getAgregationSn.getKeanggotaan());
+                    }
+
+                }
+            }
+>>>>>>> 693895f... query select same data
 
 //       LastModel lastModelSes = new LastModel(realNamaPenyakit,"1");
 //        getmDatabaseLastValue.child("LastResult").child(userId).child("SES").child("keyy").setValue(lastModelSes);
