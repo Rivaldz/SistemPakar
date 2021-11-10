@@ -462,7 +462,6 @@ public class Defuzzyfikasi {
 
    public void getLOMFuzzy(){
         getLomDB = FirebaseDatabase.getInstance().getReference().child("DefuzzyLOM").child(userId).child(namaPenyakit);
-        Query
         getLomDB.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
