@@ -1,17 +1,18 @@
 package com.example.model;
 
 public class LastModel {
-    public String namaPenyakit, nilaiAkhir, countStatus;
+    public String namaPenyakit, nilaiAkhir, countStatus, nilaiAkhirFM;
 
     public LastModel(String namaPenyakit, String nilaiAkhir) {
         this.namaPenyakit = namaPenyakit;
         this.nilaiAkhir = nilaiAkhir;
     }
 
-    public LastModel(String namaPenyakit, String nilaiAkhir, String countStatus) {
+    public LastModel(String namaPenyakit, String nilaiAkhirFM, String countStatus, String CF) {
         this.namaPenyakit = namaPenyakit;
-        this.nilaiAkhir = nilaiAkhir;
+        this.nilaiAkhirFM = nilaiAkhirFM;
         this.countStatus = countStatus;
+        this.nilaiAkhir = CF;
     }
 
     public LastModel() {

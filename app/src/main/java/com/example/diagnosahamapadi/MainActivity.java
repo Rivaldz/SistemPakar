@@ -53,6 +53,7 @@ import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 import java.lang.reflect.Array;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -153,6 +154,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String userId = null;
     int sessionId = 0;
     public String sessionString = null;
+    private DecimalFormat df = new DecimalFormat("#.00");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -1294,11 +1296,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnProsess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatabaseReference mDatabaseFunsiImp = FirebaseDatabase.getInstance().getReference().child("Fungsiimplikasi").child(userIdPub);
-                DatabaseReference mDatabaseDefuzzy = FirebaseDatabase.getInstance().getReference().child("Defuzzyfikasi").child(userIdPub);
+                DatabaseReference mDatabaseFunsiImp = FirebaseDatabase.getInstance().getReference().child("Fungsiimplikasi").child(userId);
+                DatabaseReference mDatabaseDefuzzy = FirebaseDatabase.getInstance().getReference().child("Defuzzyfikasi").child(userId);
+                DatabaseReference mDatabaseLom = FirebaseDatabase.getInstance().getReference().child("DefuzzLOM").child(userId);
+                DatabaseReference mDatabaseResult = FirebaseDatabase.getInstance().getReference().child("LastResult").child(userId);
                 mDatabaseFunsiImp.removeValue();
                 mDatabaseDefuzzy.removeValue();
-
+                mDatabaseLom.removeValue();
+//                mDatabaseResult.removeValue();
 //                IsNullErrorHandling errorHandMain = new IsNullErrorHandling();
 //                errorHandMain.checkInputUser();
                 if (userHandling() == true && emptySelect() == true) {
@@ -1346,7 +1351,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 double combine_CFold_CF6 = combine_CFold_CF5 + resultCalculateGej6 * (1 - combine_CFold_CF5);
                                 double combine_CFold_CF12 = combine_CFold_CF6 + resultCalculateGej12 * (1 - combine_CFold_CF6);
                                 double combine_CFold_CF13 = combine_CFold_CF12 + resultCalculateGej13 * (1 - combine_CFold_CF12);
-                                String endResult = String.valueOf((combine_CFold_CF13 * 100));
+                                String endResult = String.valueOf(df.format(combine_CFold_CF13 * 100));
                                 createDataCF(endResult, "H001", userId);
 
                                 Fuzzy fuzzy = new Fuzzy("H001", userId);
@@ -1373,8 +1378,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 }
 
                                 Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H001", userId, "Hama pengerek batang padi kuning");
+                                Defuzzyfikasi defuzzyfikasiCons = new Defuzzyfikasi();
                                 defuzzyfikasi.defuzzyFikasi();
                                 defuzzyfikasi.onAgregasi();
+                                defuzzyfikasi.shortAgregations();
+//                                defuzzyfikasi.sumKeanggotaan();
+//                                defuzzyfikasiCons.getLOMFuzzy(userId,"H001");
+//                                defuzzyfikasi.sumKeanggotaan();
                             }
 
                             @Override
@@ -1741,7 +1751,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         });
                     }
                     //Hama H007
-                    if (chkGejala34.isChecked() && chkGejala35.isChecked() && chkGejala36.isChecked()) {
+                    if (chkGejala34.isChecked() || chkGejala35.isChecked() || chkGejala36.isChecked()) {
                             List<String> listGejalaH007 = new ArrayList<>();
 
                             databaseReferenceH007 = FirebaseDatabase.getInstance().getReference().child("Database").child("H007");
@@ -1755,9 +1765,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     }
                                     String namaPentakit = "penyakit";
 
-                                    double valueUserGejala34 = Double.parseDouble(txxtNilaiGejala34.getText().toString());
-                                    double valueUserGejala35 = Double.parseDouble(txxtNilaiGejala35.getText().toString());
-                                    double valueUserGejala36 = Double.parseDouble(txxtNilaiGejala36.getText().toString());
+                                    double valueUserGejala34 = txxtNilaiGejala34.getText().toString().matches("") ? 0 : Double.parseDouble(txxtNilaiGejala34.getText().toString());
+                                    double valueUserGejala35 = txxtNilaiGejala35.getText().toString().matches("") ? 0 : Double.parseDouble(txxtNilaiGejala35.getText().toString());
+                                    double valueUserGejala36 = txxtNilaiGejala36.getText().toString().matches("") ? 0 : Double.parseDouble(txxtNilaiGejala36.getText().toString());
 
                                     double valueGejala34 = Double.parseDouble(listGejalaH007.get(0));
                                     double valueGejala35 = Double.parseDouble(listGejalaH007.get(1));
@@ -1769,7 +1779,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                                     double combine_CF34_CF35 = resultCalculateGej1 + resultCalculateGej2 * (1 - resultCalculateGej1);
                                     double combine_CFold_CF36 = combine_CF34_CF35 + resultCalculateGej4 * (1 - combine_CF34_CF35);
-                                    String endResult = String.valueOf((combine_CFold_CF36 * 100));
+                                    String endResult = String.valueOf(df.format(combine_CFold_CF36 * 100));
                                     createDataCF(endResult, "H007", userId);
 
                                     Fuzzy fuzzy = new Fuzzy("H007", userId);
@@ -1794,8 +1804,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                         e.printStackTrace();
                                     }
                                     Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H007", userId, "Hama ulat grayak");
+                                    Defuzzyfikasi defuzzyfikasiCons = new Defuzzyfikasi();
                                     defuzzyfikasi.defuzzyFikasi();
                                     defuzzyfikasi.onAgregasi();
+                                    defuzzyfikasi.shortAgregations();
+//                                    defuzzyfikasi.sumKeanggotaan();
+//                                    defuzzyfikasiCons.getLOMFuzzy(userId,"H007");
+//                                    defuzzyfikasiCons.sumKeanggotaan();
+
 //                           defuzzyfikasi.shortAgregations();
 
 //                           tcOutput.setText(""+namaPentakit);
@@ -1949,7 +1965,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     }
                     //Hama H010
-                    if (chkGejala47.isChecked() && chkGejala48.isChecked() && chkGejala49.isChecked()) {
+                    if (chkGejala47.isChecked() || chkGejala48.isChecked() || chkGejala49.isChecked()) {
                         List<String> listGejalaH010 = new ArrayList<>();
                         databaseReferenceH0010 = FirebaseDatabase.getInstance().getReference().child("Database").child("H010");
                         databaseReferenceH0010.addValueEventListener(new ValueEventListener() {
@@ -1961,9 +1977,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                                 }
                                 String namaPentakit = "penyakit";
-                                double valueUserGejala34 = Double.parseDouble(txxtNilaiGejala47.getText().toString());
-                                double valueUserGejala35 = Double.parseDouble(txxtNilaiGejala48.getText().toString());
-                                double valueUserGejala36 = Double.parseDouble(txxtNilaiGejala49.getText().toString());
+                                double valueUserGejala34 = txxtNilaiGejala47.getText().toString().matches("") ? 0 : Double.parseDouble(txxtNilaiGejala47.getText().toString());
+                                double valueUserGejala35 = txxtNilaiGejala48.getText().toString().matches("") ? 0 : Double.parseDouble(txxtNilaiGejala48.getText().toString());
+                                double valueUserGejala36 = txxtNilaiGejala49.getText().toString().matches("") ? 0 : Double.parseDouble(txxtNilaiGejala49.getText().toString());
 
                                 double valueGejala34 = Double.parseDouble(listGejalaH010.get(0));
                                 double valueGejala35 = Double.parseDouble(listGejalaH010.get(1));
@@ -1975,7 +1991,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                                 double combine_CF34_CF35 = resultCalculateGej1 + resultCalculateGej2 * (1 - resultCalculateGej1);
                                 double combine_CFold_CF36 = combine_CF34_CF35 + resultCalculateGej4 * (1 - combine_CF34_CF35);
-                                String endResult = String.valueOf((combine_CFold_CF36 * 100));
+                                String endResult = String.valueOf(df.format(combine_CFold_CF36 * 100));
                                 createDataCF(endResult, "H010", userId);
 
                                 Fuzzy fuzzy = new Fuzzy("H010", userId);
@@ -2100,7 +2116,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                    sessionString = sharedPreferencesSession.getString("varSession", null);
 //                    new Defuzzyfikasi(sessionString);
 //                    sessionId++;
-                      startActivity(new Intent(MainActivity.this, LoadingActivity.class));
+                      startActivity(new Intent(MainActivity.this, CFResult.class));
 
                 }
             }
@@ -2113,7 +2129,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         databaseInserFM = FirebaseDatabase.getInstance().getReference();
         DatabaseReference databaseInserSession = FirebaseDatabase.getInstance().getReference();
         LastModel lastModel = new LastModel(penyakit,result);
-        databaseInserFM.child("LastResult").child(userId).child("CF").setValue(lastModel);
+        databaseInserFM.child("LastResult").child(userId).child(penyakit).setValue(lastModel);
 
 //        LastModel lastModelSes = new LastModel(penyakit,"1");
 //        databaseInserSession.child("LastResult").child(userId).child("SES").child("keyy").setValue(lastModelSes);
@@ -2159,7 +2175,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
-
 
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {

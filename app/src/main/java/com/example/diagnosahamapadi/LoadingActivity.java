@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ProgressBar;
 
+import com.example.fuzzy.Defuzzyfikasi;
 import com.example.model.LastModel;
 import com.example.model.ShowUser;
 import com.google.firebase.database.DataSnapshot;
@@ -37,10 +38,15 @@ public class LoadingActivity extends AppCompatActivity {
 
         sharedPreferences = getSharedPreferences("user_details",MODE_PRIVATE);
         userId = sharedPreferences.getString("username",null);
-        moveInten();
+
+        Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi();
+//        defuzzyfikasi.getLOMFuzzy();
+//        defuzzyfikasi.sumKeanggotaan();
+//        moveInten();
 
 //        updateTimerThread.run();
     }
+
 
 //    private Runnable updateTimerThread = new Runnable()
 //    {
@@ -70,10 +76,10 @@ public class LoadingActivity extends AppCompatActivity {
 //                        e.printStackTrace();
 //                    }
 //                        onDestroy();
-                    Intent intent = new Intent(LoadingActivity.this, ResultActivity.class);
+//                    Intent intent = new Intent(LoadingActivity.this, ResultActivity.class);
 
 //                        Intent intent = new Intent(MainActivity.this, LoadingActivity.class);
-                    startActivity(intent);
+//                    startActivity(intent);
                     finish();
 //                    }
                 }
