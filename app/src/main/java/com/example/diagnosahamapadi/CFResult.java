@@ -15,6 +15,7 @@ import android.widget.Button;
 import com.example.diagnosahamapadi.adapter.CFAdapter;
 import com.example.fuzzy.Defuzzyfikasi;
 import com.example.fuzzy.LomDefuzzy;
+import com.example.model.LastModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class CFResult extends AppCompatActivity {
     Context context;
@@ -54,15 +56,16 @@ public class CFResult extends AppCompatActivity {
         userId = sharedPreferences.getString("username",null);
 
 
-        mDatabaseLom = FirebaseDatabase.getInstance().getReference().child("LastResult").child("testUser");
+        mDatabaseLom = FirebaseDatabase.getInstance().getReference().child("LastResult").child(userId);
         mDatabaseLom.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 subjects = new ArrayList<String>();
                 penyakit = new ArrayList<String>();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    String valueSub = dataSnapshot.child("nilaiAkhir").getValue().toString();
-                    String penyakitSt = dataSnapshot.child("namaPenyakit").getValue().toString();
+                    LastModel lastModel = dataSnapshot.getValue(LastModel.class);
+                    String valueSub = lastModel.nilaiAkhir;
+                    String penyakitSt = lastModel.namaPenyakit;
 //                    subjects.add(dataSnapshot.getKey());
                     subjects.add(valueSub);
                     penyakit.add(penyakitSt);
@@ -76,6 +79,7 @@ public class CFResult extends AppCompatActivity {
 
             }
         });
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,10 +87,19 @@ public class CFResult extends AppCompatActivity {
                 getLomDb.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        String nilaiAkhir = snapshot.child("nilaiAkhir").getValue().toString();
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                            defuzzyfikasi.getLOMFuzzy(userId,dataSnapshot.getKey());
-                            defuzzyfikasi.sumKeanggotaan(userId,dataSnapshot.getKey(),nilaiAkhir);
+                            LastModel lastModel = dataSnapshot.getValue(LastModel.class);
+//                            String nilaiAkhir = snapshot.child("nilaiAkhir").getValue().toString();
+                            System.out.println("nama penyakit == " + lastModel.getNamaPenyakit() + " Nilai akhir " + lastModel.getNilaiAkhir());
+                            defuzzyfikasi.getLOMFuzzy(userId,dataSnapshot.getKey(),lastModel.namaPenyakit,lastModel.nilaiAkhir);
+
+//                            try {
+//                                    TimeUnit.SECONDS.sleep(2);
+//                                } catch (InterruptedException e) {
+//                                e.printStackTrace();
+//                                }
+
+//                            defuzzyfikasi.sumKeanggotaan(userId,dataSnapshot.getKey(),lastModel.getNilaiAkhir());
                         }
 
                     }

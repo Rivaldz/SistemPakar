@@ -18,7 +18,6 @@ public class LastModel {
     public LastModel() {
     }
 
-
     public String getNamaPenyakit() {
         return namaPenyakit;
     }
@@ -41,5 +40,13 @@ public class LastModel {
 
     public void setCountStatus(String countStatus) {
         this.countStatus = countStatus;
+    }
+
+    public String getNilaiAkhirFM() {
+        return nilaiAkhirFM;
+    }
+
+    public void setNilaiAkhirFM(String nilaiAkhirFM) {
+        this.nilaiAkhirFM = nilaiAkhirFM;
     }
 }

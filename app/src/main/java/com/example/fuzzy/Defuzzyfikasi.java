@@ -15,6 +15,7 @@ import com.example.model.DefuzzyfikasiModel;
 import com.example.model.GetAgregation;
 import com.example.model.GetKeyDefuzzyfikasi;
 import com.example.model.HashDataShort;
+import com.example.model.HasilAkhir;
 import com.example.model.InputFuzzyDB;
 import com.example.model.KeyGetAgregation;
 import com.example.model.LastModel;
@@ -470,39 +471,43 @@ public class Defuzzyfikasi {
    }
 
 
-   public void getLOMFuzzy(String idUser, String kodePenyakit){
+   public void getLOMFuzzy(String idUser, String kodePenyakit, String namaPenyakit,String nilaiCF){
 //       System.out.println("Ini user ID" + username);
 //       System.out.println("Penyakit" + kodePenykit);
 //       final String[] lihatHasil = new String[1];
        String userID = idUser;
        String penyakit = kodePenyakit;
+       String namaPenyakitSt = namaPenyakit;
+       String nilaiCertainty = nilaiCF;
        getLomDB = FirebaseDatabase.getInstance().getReference().child("DefuzzyLOM").child(userID).child(penyakit);
         getLomDB.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    String anggota = dataSnapshot.child("keanggotaan").getValue().toString();
-                    String key = dataSnapshot.child("key__").getValue().toString();
+                    GetAgregation getLom = dataSnapshot.getValue(GetAgregation.class);
+                    String anggota = getLom.getKeanggotaan();
+                    String key = getLom.getKey__();
                     if (anggota.equalsIgnoreCase("RENDAH")){
                         Log.e("Hasil RENDAH", anggota);
                         Log.e("Hasil key", key);
-                        rendah++;
-//                        getKeyKeanggotaanRendah.add(anggota);
+//                        rendah++;
+                        getKeyKeanggotaanRendah.add(anggota);
                     }else if(anggota.equalsIgnoreCase("SEDANG")){
                         Log.e("Hasil SEDANG", anggota);
                         Log.e("Hasil key", key);
-                        sedang++;
-//                        getKeyKeanggotaanSedang.add(anggota);
+//                        sedang++;
+                        getKeyKeanggotaanSedang.add(anggota);
                     }else {
                         Log.e("Hasil TINGGI", anggota);
                         Log.e("Hasil key", key);
-                        tinggi++;
-//                        getKeyKeanggotaanTinggi.add(anggota);
+//                        tinggi++;
+                        getKeyKeanggotaanTinggi.add(anggota);
                     }
 //                    Log.e("Hasil anggota", anggota);
 //                    Log.e("Hasil key", key);
 //                    lihatHasil[0] = snapshot.getKey();
                 }
+                sumKeanggotaan(getKeyKeanggotaanRendah,getKeyKeanggotaanSedang,getKeyKeanggotaanTinggi,userID,penyakit,namaPenyakitSt,nilaiCertainty);
 
             }
 
@@ -536,46 +541,55 @@ public class Defuzzyfikasi {
 //       sumKeanggotaan();
    }
 
-   public void sumKeanggotaan(String idUser, String kodePenyakit, String nilaiCF){
-        String userId = idUser;
-        String namaPenyakit = kodePenyakit;
-        String certaintyFactor = nilaiCF;
-        insertResult = FirebaseDatabase.getInstance().getReference();
-        int sizeRendah = getKeyKeanggotaanRendah.size();
-        int sizeSedang = getKeyKeanggotaanSedang.size();
-        int sizeTinggi = getKeyKeanggotaanTinggi.size();
+//   void casting(){
+//        Log.e("Casting 1", String.valueOf(a.size()));
+//       Log.e("Casting 2", String.valueOf(b.size()));
+//       Log.e("Casting 3", String.valueOf(c.size()));
+//   }
 
-       Log.e("Hasil Rendah int", String.valueOf(rendah) );
-       Log.e("Hasil Tinggi int", String.valueOf(tinggi) );
-       Log.e("Hasil Sedang int", String.valueOf(sedang) );
-       if (rendah > sedang){
-            if (rendah > tinggi){
+   public void sumKeanggotaan(List<String > a,List<String > b,List<String > c, String IDuser, String penya, String realPenyakiti,String valueCF){
+        String userId = IDuser;
+        String namaPenyakit = penya;
+        String certaintyFactor = valueCF;
+        String realNamaPenyakit1 = realPenyakiti;
+        insertResult = FirebaseDatabase.getInstance().getReference();
+        int sizeRendah = a.size();
+        int sizeSedang = b.size();
+        int sizeTinggi = c.size();
+
+       Log.e("Hasil Rendah int", String.valueOf(sizeRendah) );
+       Log.e("Hasil Tinggi int", String.valueOf(sizeSedang) );
+       Log.e("Hasil Sedang int", String.valueOf(sizeTinggi) );
+       if (sizeRendah >= sizeSedang){
+            if (sizeRendah >= sizeTinggi){
                 Log.e("Hasil tertinggi Rendah", String.valueOf(sizeRendah));
-                LastModel lastModel = new LastModel(realNamaPenyakit, "RENDAH","1");
-                insertResult.child("LastResult")
-                        .child(userId)
-                        .child(namaPenyakit)
-                        .setValue(lastModel);
+                HasilAkhir lastModel = new HasilAkhir(realNamaPenyakit1,certaintyFactor,"RINGAN");
+                insertResult.child("HasilAkhir").child(userId).child(namaPenyakit).setValue(lastModel);
+
+                getKeyKeanggotaanRendah.clear();
+                getKeyKeanggotaanSedang.clear();
+                getKeyKeanggotaanTinggi.clear();
             }
-        }else if(sedang > tinggi){
+        }else if(sizeSedang >= sizeTinggi){
             Log.e("Hasil tertinggi Sedang", String.valueOf(sizeSedang));
-            LastModel lastModel = new LastModel(realNamaPenyakit, "SEDANG","1");
-            insertResult.child("LastResult")
-                    .child(userId)
-                    .child(namaPenyakit)
-                    .setValue(lastModel);
-        }else if(tinggi > rendah){
-            if (tinggi > sedang){
+           HasilAkhir lastModel = new HasilAkhir(realNamaPenyakit1,certaintyFactor,"SEDANG");
+           insertResult.child("HasilAkhir").child(userId).child(namaPenyakit).setValue(lastModel);
+
+           getKeyKeanggotaanRendah.clear();
+           getKeyKeanggotaanSedang.clear();
+           getKeyKeanggotaanTinggi.clear();
+        }else if(sizeTinggi >= sizeRendah){
+            if (sizeTinggi >= sizeSedang){
                 Log.e("Hasil tertinggi Tinggi", String.valueOf(sizeTinggi));
-                LastModel lastModel = new LastModel(realNamaPenyakit, "TINGGI","1");
-                insertResult.child("LastResult")
-                        .child(userId)
-                        .child(namaPenyakit)
-                        .setValue(lastModel);
+                HasilAkhir lastModel = new HasilAkhir(realNamaPenyakit1,certaintyFactor,"TINGGI");
+                insertResult.child("HasilAkhir").child(userId).child(namaPenyakit).setValue(lastModel);
+
+                getKeyKeanggotaanRendah.clear();
+                getKeyKeanggotaanSedang.clear();
+                getKeyKeanggotaanTinggi.clear();
             }
 
         }
-
    }
 
     private void deleteHash(){

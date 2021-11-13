@@ -1,17 +1,13 @@
 package com.example.diagnosahamapadi;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,19 +15,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.example.diagnosahamapadi.adapter.RecyclerViewAdapter;
 //import com.example.model.Fuzzy;
-import com.example.diagnosahamapadi.fragment.ResultFragment;
 import com.example.diagnosahamapadi.webview.JenisPadi;
 import com.example.diagnosahamapadi.webview.Pemasaran;
 import com.example.diagnosahamapadi.webview.PenyakitHama;
@@ -44,24 +36,19 @@ import com.example.model.Gejala;
 import com.example.model.LastModel;
 import com.example.model.ShowUser;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener  {
 
-    private static final String TAG = "MainActivity";
 
     List<DataClass> gejalaList = new ArrayList<>();
     DatabaseReference databaseReference, databaseInserFM, databaseReferenceH001,
@@ -1352,7 +1339,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 double combine_CFold_CF12 = combine_CFold_CF6 + resultCalculateGej12 * (1 - combine_CFold_CF6);
                                 double combine_CFold_CF13 = combine_CFold_CF12 + resultCalculateGej13 * (1 - combine_CFold_CF12);
                                 String endResult = String.valueOf(df.format(combine_CFold_CF13 * 100));
-                                createDataCF(endResult, "H001", userId);
+                                createDataCF(endResult, "H001", userId,"Hama Pengerek Batang Padi Kuning");
 
                                 Fuzzy fuzzy = new Fuzzy("H001", userId);
                                 // counting fuzzyfikasi
@@ -1431,7 +1418,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 double combine_CFold_CF10 = combine_CFold_CF9 + resultCalculateGej10 * (1 - combine_CFold_CF9);
                                 double combine_CFold_CF11 = combine_CFold_CF10 + resultCalculateGej11 * (1 - combine_CFold_CF10);
                                 String endResult = String.valueOf((combine_CFold_CF11 * 100));
-                                createDataCF(endResult, "H002", userId);
+                                createDataCF(endResult, "H002", userId,"Hama Putih Palsu atau Pelipat Daun");
 
                                 Fuzzy fuzzy = new Fuzzy("H002", userId);
                                 // counting fuzzyfikasi
@@ -1505,7 +1492,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 double combine_CFold_CF17 = combine_CFold_CF16 + resultCalculateGej17 * (1 - combine_CFold_CF16);
                                 double combine_CFold_CF18 = combine_CFold_CF17 + resultCalculateGej18 * (1 - combine_CFold_CF17);
                                 String endResult = String.valueOf((combine_CFold_CF18 * 100));
-                                createDataCF(endResult, "H003", userId);
+                                createDataCF(endResult, "H003", userId,"Hama Wereng Batang Coklat");
 
                                 Fuzzy fuzzy = new Fuzzy("H003", userId);
                                 // counting fuzzyfikasi
@@ -1577,7 +1564,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 double combine_CFold_CF22 = combine_CFold_CF21 + resultCalculateGej22 * (1 - combine_CFold_CF21);
                                 double combine_CFold_CF23 = combine_CFold_CF22 + resultCalculateGej23 * (1 - combine_CFold_CF22);
                                 String endResult = String.valueOf((combine_CFold_CF23 * 100));
-                                createDataCF(endResult, "H004", userId);
+                                createDataCF(endResult, "H004", userId,"Bla Bla");
 
                                 Fuzzy fuzzy = new Fuzzy("H004", userId);
                                 // counting fuzzyfikasi
@@ -1646,7 +1633,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 double combine_CFold_CF16 = combine_CF14_CF15 + resultCalculateGej16 * (1 - combine_CF14_CF15);
                                 double combine_CFold_CF17 = combine_CFold_CF16 + resultCalculateGej17 * (1 - combine_CFold_CF16);
                                 String endResult = String.valueOf((combine_CFold_CF17 * 100));
-                                createDataCF(endResult, "H005", userId);
+                                createDataCF(endResult, "H005", userId,"on");
 
                                 Fuzzy fuzzy = new Fuzzy("H005", userId);
                                 // counting fuzzyfikasi
@@ -1717,7 +1704,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 double combine_CFold_CF29 = combine_CFold_CF28 + resultCalculateGej29 * (1 - combine_CFold_CF28);
                                 double combine_CFold_CF30 = combine_CFold_CF29 + resultCalculateGej30 * (1 - combine_CFold_CF29);
                                 String endResult = String.valueOf((combine_CFold_CF30 * 100));
-                                createDataCF(endResult, "H006", userId);
+                                createDataCF(endResult, "H006", userId,"on");
 
                                 Fuzzy fuzzy = new Fuzzy("H006", userId);
                                 // counting fuzzyfikasi
@@ -1780,7 +1767,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     double combine_CF34_CF35 = resultCalculateGej1 + resultCalculateGej2 * (1 - resultCalculateGej1);
                                     double combine_CFold_CF36 = combine_CF34_CF35 + resultCalculateGej4 * (1 - combine_CF34_CF35);
                                     String endResult = String.valueOf(df.format(combine_CFold_CF36 * 100));
-                                    createDataCF(endResult, "H007", userId);
+                                    createDataCF(endResult, "H007", userId,"Hama Ulat Garayak");
 
                                     Fuzzy fuzzy = new Fuzzy("H007", userId);
                                     // counting fuzzyfikasi
@@ -1861,7 +1848,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 double combine_CFold_CF29 = combine_CFold_CF28 + resultCalculateGej29 * (1 - combine_CFold_CF28);
                                 double combine_CFold_CF30 = combine_CFold_CF29 + resultCalculateGej30 * (1 - combine_CFold_CF29);
                                 String endResult = String.valueOf((combine_CFold_CF30 * 100));
-                                createDataCF(endResult, "H008", userId);
+                                createDataCF(endResult, "H008", userId,"n");
 
                                 Fuzzy fuzzy = new Fuzzy("H008", userId);
                                 // counting fuzzyfikasi
@@ -1926,7 +1913,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 double combine_CF34_CF35 = resultCalculateGej1 + resultCalculateGej2 * (1 - resultCalculateGej1);
                                 double combine_CFold_CF36 = combine_CF34_CF35 + resultCalculateGej4 * (1 - combine_CF34_CF35);
                                 String endResult = String.valueOf((combine_CFold_CF36 * 100));
-                                createDataCF(endResult, "H009", userId);
+                                createDataCF(endResult, "H009", userId,"Hama Ganjurj");
 
                                 Fuzzy fuzzy = new Fuzzy("H009", userId);
                                 // counting fuzzyfikasi
@@ -1992,7 +1979,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 double combine_CF34_CF35 = resultCalculateGej1 + resultCalculateGej2 * (1 - resultCalculateGej1);
                                 double combine_CFold_CF36 = combine_CF34_CF35 + resultCalculateGej4 * (1 - combine_CF34_CF35);
                                 String endResult = String.valueOf(df.format(combine_CFold_CF36 * 100));
-                                createDataCF(endResult, "H010", userId);
+                                createDataCF(endResult, "H010", userId,"");
 
                                 Fuzzy fuzzy = new Fuzzy("H010", userId);
                                 // counting fuzzyfikasi
@@ -2066,7 +2053,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 double combine_CFold_CF29 = combine_CFold_CF28 + resultCalculateGej29 * (1 - combine_CFold_CF28);
                                 double combine_CFold_CF30 = combine_CFold_CF29 + resultCalculateGej30 * (1 - combine_CFold_CF29);
                                 String endResult = String.valueOf((combine_CFold_CF30 * 100));
-                                createDataCF(endResult, "H011", userId);
+                                createDataCF(endResult, "H011", userId,"");
 
                                 Fuzzy fuzzy = new Fuzzy("H011", userId);
                                 // counting fuzzyfikasi
@@ -2125,10 +2112,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    private void createDataCF(String result, String penyakit, String userId){
+    private void createDataCF(String result, String penyakit, String userId,String namaPenyakit){
         databaseInserFM = FirebaseDatabase.getInstance().getReference();
         DatabaseReference databaseInserSession = FirebaseDatabase.getInstance().getReference();
-        LastModel lastModel = new LastModel(penyakit,result);
+        LastModel lastModel = new LastModel(namaPenyakit,result);
         databaseInserFM.child("LastResult").child(userId).child(penyakit).setValue(lastModel);
 
 //        LastModel lastModelSes = new LastModel(penyakit,"1");
