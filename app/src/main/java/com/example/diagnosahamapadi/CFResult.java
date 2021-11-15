@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.diagnosahamapadi.adapter.CFAdapter;
+import com.example.diagnosahamapadi.adapter.FMAdapter;
 import com.example.fuzzy.Defuzzyfikasi;
 import com.example.fuzzy.LomDefuzzy;
 import com.example.model.LastModel;
@@ -93,13 +95,6 @@ public class CFResult extends AppCompatActivity {
                             System.out.println("nama penyakit == " + lastModel.getNamaPenyakit() + " Nilai akhir " + lastModel.getNilaiAkhir());
                             defuzzyfikasi.getLOMFuzzy(userId,dataSnapshot.getKey(),lastModel.namaPenyakit,lastModel.nilaiAkhir);
 
-//                            try {
-//                                    TimeUnit.SECONDS.sleep(2);
-//                                } catch (InterruptedException e) {
-//                                e.printStackTrace();
-//                                }
-
-//                            defuzzyfikasi.sumKeanggotaan(userId,dataSnapshot.getKey(),lastModel.getNilaiAkhir());
                         }
 
                     }
@@ -110,10 +105,11 @@ public class CFResult extends AppCompatActivity {
                     }
                 });
 
+                Intent intents = new Intent(CFResult.this, FMResult.class);
+                startActivity(intents);
             }
 
         });
-
 
 
 

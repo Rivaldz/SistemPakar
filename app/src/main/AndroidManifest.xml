@@ -13,6 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+
+        <activity
+            android:name=".FMResult"
+            android:exported="false" />
         <activity
             android:name=".CFResult"
             android:exported="false" />
@@ -30,6 +34,9 @@
         <activity android:name=".WelcomePage" />
         <activity android:name=".MainActivity" />
         <activity android:name=".MyListData" />
+
+
+
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

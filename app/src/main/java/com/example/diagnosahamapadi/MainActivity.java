@@ -1287,9 +1287,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 DatabaseReference mDatabaseDefuzzy = FirebaseDatabase.getInstance().getReference().child("Defuzzyfikasi").child(userId);
                 DatabaseReference mDatabaseLom = FirebaseDatabase.getInstance().getReference().child("DefuzzLOM").child(userId);
                 DatabaseReference mDatabaseResult = FirebaseDatabase.getInstance().getReference().child("LastResult").child(userId);
-                mDatabaseFunsiImp.removeValue();
-                mDatabaseDefuzzy.removeValue();
+                DatabaseReference mDatabaseHasil = FirebaseDatabase.getInstance().getReference().child("HasilAkhir").child(userId);
+
+                mDatabaseHasil.removeValue();
+                mDatabaseResult.removeValue();
                 mDatabaseLom.removeValue();
+                mDatabaseDefuzzy.removeValue();
+                mDatabaseFunsiImp.removeValue();
 //                mDatabaseResult.removeValue();
 //                IsNullErrorHandling errorHandMain = new IsNullErrorHandling();
 //                errorHandMain.checkInputUser();
@@ -1382,7 +1386,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     }
                     //Hama H002
-                    if (chkGejala7.isChecked() && chkGejala8.isChecked() && chkGejala9.isChecked() && chkGejala10.isChecked() && chkGejala11.isChecked()) {
+                    if (chkGejala7.isChecked() || chkGejala8.isChecked() || chkGejala9.isChecked() || chkGejala10.isChecked() || chkGejala11.isChecked()) {
                         List<String> listH002 = new ArrayList<>();
                         databaseReferenceH002 = FirebaseDatabase.getInstance().getReference().child("Database").child("H002");
                         databaseReferenceH002.addValueEventListener(new ValueEventListener() {
@@ -1394,11 +1398,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                                 }
 //                            String namaPentakit = "penyakit";
-                                double UserGejala7 = Double.parseDouble(txxtNilaiGejala7.getText().toString());
-                                double UserGejala8 = Double.parseDouble(txxtNilaiGejala8.getText().toString());
-                                double UserGejala9 = Double.parseDouble(txxtNilaiGejala9.getText().toString());
-                                double UserGejala10 = Double.parseDouble(txxtNilaiGejala10.getText().toString());
-                                double UserGejala11 = Double.parseDouble(txxtNilaiGejala11.getText().toString());
+                                double UserGejala7 = txxtNilaiGejala7.getText().toString().matches("") ? 0 : Double.parseDouble(txxtNilaiGejala7.getText().toString());
+                                double UserGejala8 = txxtNilaiGejala8.getText().toString().matches("") ? 0 : Double.parseDouble(txxtNilaiGejala8.getText().toString());
+                                double UserGejala9 = txxtNilaiGejala9.getText().toString().matches("") ? 0 : Double.parseDouble(txxtNilaiGejala9.getText().toString());
+                                double UserGejala10 = txxtNilaiGejala10.getText().toString().matches("") ? 0 : Double.parseDouble(txxtNilaiGejala10.getText().toString());
+                                double UserGejala11 = txxtNilaiGejala11.getText().toString().matches("") ? 0 : Double.parseDouble(txxtNilaiGejala11.getText().toString());
 
                                 double valueGejala7 = Double.parseDouble(listH002.get(0));
                                 double valueGejala8 = Double.parseDouble(listH002.get(1));
@@ -1456,7 +1460,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     }
                     //Hama H003
-                    if (chkGejala14.isChecked() && chkGejala15.isChecked() && chkGejala16.isChecked() && chkGejala17.isChecked() & chkGejala18.isChecked()) {
+                    if (chkGejala14.isChecked() || chkGejala15.isChecked() || chkGejala16.isChecked() || chkGejala17.isChecked() || chkGejala18.isChecked()) {
                         List<String> listBobotH003 = new ArrayList<>();
                         databaseReferenceH003 = FirebaseDatabase.getInstance().getReference().child("Database").child("H003");
                         databaseReferenceH003.addValueEventListener(new ValueEventListener() {
@@ -1468,11 +1472,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                                 }
                                 String namaPentakit = "penyakit";
-                                double valueUserGejala14 = Double.parseDouble(txxtNilaiGejala14.getText().toString());
-                                double valueUserGejala15 = Double.parseDouble(txxtNilaiGejala15.getText().toString());
-                                double valueUserGejala16 = Double.parseDouble(txxtNilaiGejala16.getText().toString());
-                                double valueUserGejala17 = Double.parseDouble(txxtNilaiGejala17.getText().toString());
-                                double valueUserGejala18 = Double.parseDouble(txxtNilaiGejala18.getText().toString());
+                                double valueUserGejala14 = txxtNilaiGejala14.getText().toString().matches("") ? 0 : Double.parseDouble(txxtNilaiGejala14.getText().toString());
+                                double valueUserGejala15 = txxtNilaiGejala15.getText().toString().matches("") ? 0 :Double.parseDouble(txxtNilaiGejala15.getText().toString());
+                                double valueUserGejala16 = txxtNilaiGejala16.getText().toString().matches("") ? 0 :Double.parseDouble(txxtNilaiGejala16.getText().toString());
+                                double valueUserGejala17 = txxtNilaiGejala17.getText().toString().matches("") ? 0 :Double.parseDouble(txxtNilaiGejala17.getText().toString());
+                                double valueUserGejala18 = txxtNilaiGejala18.getText().toString().matches("") ? 0 : Double.parseDouble(txxtNilaiGejala18.getText().toString());
 
 
                                 double valueGejala14 = Double.parseDouble(listBobotH003.get(0));
@@ -1528,7 +1532,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     }
                     //Hama H004
-                    if (chkGejala19.isChecked() && chkGejala20.isChecked() && chkGejala21.isChecked() && chkGejala22.isChecked() && chkGejala23.isChecked()) {
+                    if (chkGejala19.isChecked() || chkGejala20.isChecked() || chkGejala21.isChecked() || chkGejala22.isChecked() || chkGejala23.isChecked()) {
                         List<String> listBobotH004 = new ArrayList<>();
                         databaseReferenceH004 = FirebaseDatabase.getInstance().getReference().child("Database").child("H004");
                         databaseReferenceH004.addValueEventListener(new ValueEventListener() {
@@ -1540,11 +1544,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                                 }
                                 String namaPentakit = "penyakit";
-                                double valueUserGejala19 = Double.parseDouble(txxtNilaiGejala14.getText().toString());
-                                double valueUserGejala20 = Double.parseDouble(txxtNilaiGejala15.getText().toString());
-                                double valueUserGejala21 = Double.parseDouble(txxtNilaiGejala16.getText().toString());
-                                double valueUserGejala22 = Double.parseDouble(txxtNilaiGejala17.getText().toString());
-                                double valueUserGejala23 = Double.parseDouble(txxtNilaiGejala18.getText().toString());
+                                double valueUserGejala19 =txxtNilaiGejala19.getText().toString().matches("") ? 0 : Double.parseDouble(txxtNilaiGejala19.getText().toString());
+                                double valueUserGejala20 = txxtNilaiGejala20.getText().toString().matches("") ? 0 : Double.parseDouble(txxtNilaiGejala20.getText().toString());
+                                double valueUserGejala21 = txxtNilaiGejala21.getText().toString().matches("") ? 0 : Double.parseDouble(txxtNilaiGejala21.getText().toString());
+                                double valueUserGejala22 = txxtNilaiGejala22.getText().toString().matches("") ? 0 :Double.parseDouble(txxtNilaiGejala22.getText().toString());
+                                double valueUserGejala23 = txxtNilaiGejala23.getText().toString().matches("") ? 0 :Double.parseDouble(txxtNilaiGejala23.getText().toString());
 
 
                                 double valueGejala19 = Double.parseDouble(listBobotH004.get(0));
@@ -1601,7 +1605,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     }
                     //Hama H005
-                    if (chkGejala14.isChecked() && chkGejala15.isChecked() && chkGejala16.isChecked() && chkGejala17.isChecked()) {
+                 /*   if (chkGejala14.isChecked() && chkGejala15.isChecked() && chkGejala16.isChecked() && chkGejala17.isChecked()) {
                         List<String> listBobotH005 = new ArrayList<>();
                         databaseReferenceH005 = FirebaseDatabase.getInstance().getReference().child("Databaase").child("H005");
                         databaseReferenceH005.addValueEventListener(new ValueEventListener() {
@@ -1667,9 +1671,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                             }
                         });
-                    }
+                    } */
                     //Hama H006
-                    if (chkGejala2.isChecked() && chkGejala27.isChecked() && chkGejala28.isChecked() && chkGejala29.isChecked() && chkGejala30.isChecked()) {
+                    if (chkGejala2.isChecked() || chkGejala27.isChecked() || chkGejala28.isChecked() || chkGejala29.isChecked() || chkGejala30.isChecked()) {
                         List<String> listBobotH006 = new ArrayList<>();
                         databaseReferenceH006 = FirebaseDatabase.getInstance().getReference().child("Database").child("H006");
                         databaseReferenceH006.addValueEventListener(new ValueEventListener() {
@@ -1681,11 +1685,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                                 }
                                 String namaPentakit = "penyakit";
-                                double valueUserGejala2 = Double.parseDouble(txxtNilaiGejala2.getText().toString());
-                                double valueUserGejala27 = Double.parseDouble(txxtNilaiGejala27.getText().toString());
-                                double valueUserGejala28 = Double.parseDouble(txxtNilaiGejala28.getText().toString());
-                                double valueUserGejala29 = Double.parseDouble(txxtNilaiGejala29.getText().toString());
-                                double valueUserGejala30 = Double.parseDouble(txxtNilaiGejala30.getText().toString());
+                                double valueUserGejala2 = txxtNilaiGejala2.getText().toString().matches("") ? 0 : Double.parseDouble(txxtNilaiGejala2.getText().toString());
+                                double valueUserGejala27 = txxtNilaiGejala27.getText().toString().matches("") ? 0 :Double.parseDouble(txxtNilaiGejala27.getText().toString());
+                                double valueUserGejala28 = txxtNilaiGejala28.getText().toString().matches("") ? 0 :Double.parseDouble(txxtNilaiGejala28.getText().toString());
+                                double valueUserGejala29 = txxtNilaiGejala29.getText().toString().matches("") ? 0 :Double.parseDouble(txxtNilaiGejala29.getText().toString());
+                                double valueUserGejala30 = txxtNilaiGejala30.getText().toString().matches("") ? 0 :Double.parseDouble(txxtNilaiGejala30.getText().toString());
 
                                 double valueGejala2 = Double.parseDouble(listBobotH006.get(0));
                                 double valueGejala27 = Double.parseDouble(listBobotH006.get(1));
@@ -1704,7 +1708,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 double combine_CFold_CF29 = combine_CFold_CF28 + resultCalculateGej29 * (1 - combine_CFold_CF28);
                                 double combine_CFold_CF30 = combine_CFold_CF29 + resultCalculateGej30 * (1 - combine_CFold_CF29);
                                 String endResult = String.valueOf((combine_CFold_CF30 * 100));
-                                createDataCF(endResult, "H006", userId,"on");
+                                createDataCF(endResult, "H006", userId,"Hama Penggulung Daun");
 
                                 Fuzzy fuzzy = new Fuzzy("H006", userId);
                                 // counting fuzzyfikasi
@@ -1767,7 +1771,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     double combine_CF34_CF35 = resultCalculateGej1 + resultCalculateGej2 * (1 - resultCalculateGej1);
                                     double combine_CFold_CF36 = combine_CF34_CF35 + resultCalculateGej4 * (1 - combine_CF34_CF35);
                                     String endResult = String.valueOf(df.format(combine_CFold_CF36 * 100));
-                                    createDataCF(endResult, "H007", userId,"Hama Ulat Garayak");
+                                    createDataCF(endResult, "H007", userId,"Hama Walang Sangit");
 
                                     Fuzzy fuzzy = new Fuzzy("H007", userId);
                                     // counting fuzzyfikasi
@@ -1813,7 +1817,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     }
                     //Hama H008
-                    if (chkGejala37.isChecked() && chkGejala38.isChecked() && chkGejala39.isChecked() && chkGejala40.isChecked() && chkGejala41.isChecked()) {
+                    if (chkGejala37.isChecked() || chkGejala38.isChecked() || chkGejala39.isChecked() || chkGejala40.isChecked() || chkGejala41.isChecked()) {
                         List<String> listGejalaH008 = new ArrayList<>();
                         databaseReferenceH008 = FirebaseDatabase.getInstance().getReference().child("Database").child("H009");
                         databaseReferenceH008.addValueEventListener(new ValueEventListener() {
@@ -1825,11 +1829,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                                 }
                                 String namaPentakit = "penyakit";
-                                double valueUserGejala2 = Double.parseDouble(txxtNilaiGejala37.getText().toString());
-                                double valueUserGejala27 = Double.parseDouble(txxtNilaiGejala38.getText().toString());
-                                double valueUserGejala28 = Double.parseDouble(txxtNilaiGejala39.getText().toString());
-                                double valueUserGejala29 = Double.parseDouble(txxtNilaiGejala40.getText().toString());
-                                double valueUserGejala30 = Double.parseDouble(txxtNilaiGejala41.getText().toString());
+                                double valueUserGejala2 = txxtNilaiGejala37.getText().toString().matches("") ? 0 : Double.parseDouble(txxtNilaiGejala37.getText().toString());
+                                double valueUserGejala27 = txxtNilaiGejala38.getText().toString().matches("") ? 0 :Double.parseDouble(txxtNilaiGejala38.getText().toString());
+                                double valueUserGejala28 = txxtNilaiGejala39.getText().toString().matches("") ? 0 :Double.parseDouble(txxtNilaiGejala39.getText().toString());
+                                double valueUserGejala29 = txxtNilaiGejala40.getText().toString().matches("") ? 0 :Double.parseDouble(txxtNilaiGejala40.getText().toString());
+                                double valueUserGejala30 = txxtNilaiGejala41.getText().toString().matches("") ? 0 :Double.parseDouble(txxtNilaiGejala41.getText().toString());
 
                                 double valueGejala2 = Double.parseDouble(listGejalaH008.get(0));
                                 double valueGejala27 = Double.parseDouble(listGejalaH008.get(1));
@@ -1848,7 +1852,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 double combine_CFold_CF29 = combine_CFold_CF28 + resultCalculateGej29 * (1 - combine_CFold_CF28);
                                 double combine_CFold_CF30 = combine_CFold_CF29 + resultCalculateGej30 * (1 - combine_CFold_CF29);
                                 String endResult = String.valueOf((combine_CFold_CF30 * 100));
-                                createDataCF(endResult, "H008", userId,"n");
+                                createDataCF(endResult, "H008", userId,"Hama Walang Sangit");
 
                                 Fuzzy fuzzy = new Fuzzy("H008", userId);
                                 // counting fuzzyfikasi
@@ -1913,7 +1917,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 double combine_CF34_CF35 = resultCalculateGej1 + resultCalculateGej2 * (1 - resultCalculateGej1);
                                 double combine_CFold_CF36 = combine_CF34_CF35 + resultCalculateGej4 * (1 - combine_CF34_CF35);
                                 String endResult = String.valueOf((combine_CFold_CF36 * 100));
-                                createDataCF(endResult, "H009", userId,"Hama Ganjurj");
+                                createDataCF(endResult, "H009", userId,"Hama Ganjur");
 
                                 Fuzzy fuzzy = new Fuzzy("H009", userId);
                                 // counting fuzzyfikasi
@@ -1979,7 +1983,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 double combine_CF34_CF35 = resultCalculateGej1 + resultCalculateGej2 * (1 - resultCalculateGej1);
                                 double combine_CFold_CF36 = combine_CF34_CF35 + resultCalculateGej4 * (1 - combine_CF34_CF35);
                                 String endResult = String.valueOf(df.format(combine_CFold_CF36 * 100));
-                                createDataCF(endResult, "H010", userId,"");
+                                createDataCF(endResult, "H010", userId,"Hama Belalang Kemabara");
 
                                 Fuzzy fuzzy = new Fuzzy("H010", userId);
                                 // counting fuzzyfikasi
@@ -2018,7 +2022,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     }
                     //Hama H011
-                    if (chkGejala22.isChecked() && chkGejala50.isChecked() && chkGejala51.isChecked() && chkGejala52.isChecked() && chkGejala53.isChecked()) {
+                    if (chkGejala22.isChecked() || chkGejala50.isChecked() || chkGejala51.isChecked() || chkGejala52.isChecked() || chkGejala53.isChecked()) {
                         List<String> listGejalaH011 = new ArrayList<>();
                         databaseReferenceH0011 = FirebaseDatabase.getInstance().getReference().child("Database").child("H011");
                         databaseReferenceH0011.addValueEventListener(new ValueEventListener() {
@@ -2030,11 +2034,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                                 }
                                 String namaPentakit = "penyakit";
-                                double valueUserGejala2 = Double.parseDouble(txxtNilaiGejala22.getText().toString());
-                                double valueUserGejala27 = Double.parseDouble(txxtNilaiGejala50.getText().toString());
-                                double valueUserGejala28 = Double.parseDouble(txxtNilaiGejala51.getText().toString());
-                                double valueUserGejala29 = Double.parseDouble(txxtNilaiGejala52.getText().toString());
-                                double valueUserGejala30 = Double.parseDouble(txxtNilaiGejala53.getText().toString());
+                                double valueUserGejala2  = txxtNilaiGejala22.getText().toString().matches("") ? 0 : Double.parseDouble(txxtNilaiGejala22.getText().toString());
+                                double valueUserGejala27 = txxtNilaiGejala50.getText().toString().matches("") ? 0 : Double.parseDouble(txxtNilaiGejala50.getText().toString());
+                                double valueUserGejala28 = txxtNilaiGejala51.getText().toString().matches("") ? 0 : Double.parseDouble(txxtNilaiGejala51.getText().toString());
+                                double valueUserGejala29 = txxtNilaiGejala52.getText().toString().matches("") ? 0 : Double.parseDouble(txxtNilaiGejala52.getText().toString());
+                                double valueUserGejala30 = txxtNilaiGejala53.getText().toString().matches("") ? 0 : Double.parseDouble(txxtNilaiGejala53.getText().toString());
 
                                 double valueGejala2 = Double.parseDouble(listGejalaH011.get(0));
                                 double valueGejala27 = Double.parseDouble(listGejalaH011.get(1));
@@ -2053,7 +2057,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 double combine_CFold_CF29 = combine_CFold_CF28 + resultCalculateGej29 * (1 - combine_CFold_CF28);
                                 double combine_CFold_CF30 = combine_CFold_CF29 + resultCalculateGej30 * (1 - combine_CFold_CF29);
                                 String endResult = String.valueOf((combine_CFold_CF30 * 100));
-                                createDataCF(endResult, "H011", userId,"");
+                                createDataCF(endResult, "H011", userId,"Hama Kepinding Tanah");
 
                                 Fuzzy fuzzy = new Fuzzy("H011", userId);
                                 // counting fuzzyfikasi

@@ -9,6 +9,9 @@ public class HasilAkhir {
         this.hasiFM = hasiFM;
     }
 
+    public HasilAkhir() {
+    }
+
     public String getNamaPenyakit() {
         return namaPenyakit;
     }

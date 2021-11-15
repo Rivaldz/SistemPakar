@@ -15,8 +15,8 @@
        <TextView
            android:id="@+id/textItemPenyakit"
            style="@style/TextAppearance.AppCompat.Medium"
-           android:layout_width="129dp"
-           android:layout_height="wrap_content"
+           android:layout_width="168dp"
+           android:layout_height="match_parent"
            android:text="Kode Penyakit: "
            android:textColor="@android:color/black" />
 
