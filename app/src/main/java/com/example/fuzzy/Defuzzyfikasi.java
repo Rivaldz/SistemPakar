@@ -558,36 +558,39 @@ public class Defuzzyfikasi {
        Log.e("Hasil Rendah int", String.valueOf(sizeRendah) );
        Log.e("Hasil Tinggi int", String.valueOf(sizeSedang) );
        Log.e("Hasil Sedang int", String.valueOf(sizeTinggi) );
-       if (sizeRendah >= sizeSedang){
-            if (sizeRendah >= sizeTinggi){
-                Log.e("Hasil tertinggi Rendah", String.valueOf(sizeRendah));
-                HasilAkhir lastModel = new HasilAkhir(realNamaPenyakit1,certaintyFactor,"RINGAN");
-                insertResult.child("HasilAkhir").child(userId).child(namaPenyakit).setValue(lastModel);
+       if (sizeRendah != 0 || sizeSedang != 0 || sizeTinggi != 0 ) {
 
-                getKeyKeanggotaanRendah.clear();
-                getKeyKeanggotaanSedang.clear();
-                getKeyKeanggotaanTinggi.clear();
-            }
-        }else if(sizeSedang >= sizeTinggi){
-            Log.e("Hasil tertinggi Sedang", String.valueOf(sizeSedang));
-           HasilAkhir lastModel = new HasilAkhir(realNamaPenyakit1,certaintyFactor,"SEDANG");
-           insertResult.child("HasilAkhir").child(userId).child(namaPenyakit).setValue(lastModel);
+           if (sizeRendah >= sizeSedang) {
+               if (sizeRendah >= sizeTinggi) {
+                   Log.e("Hasil tertinggi Rendah", String.valueOf(sizeRendah));
+                   HasilAkhir lastModel = new HasilAkhir(realNamaPenyakit1, certaintyFactor, "RINGAN");
+                   insertResult.child("HasilAkhir").child(userId).child(namaPenyakit).setValue(lastModel);
 
-           getKeyKeanggotaanRendah.clear();
-           getKeyKeanggotaanSedang.clear();
-           getKeyKeanggotaanTinggi.clear();
-        }else if(sizeTinggi >= sizeRendah){
-            if (sizeTinggi >= sizeSedang){
-                Log.e("Hasil tertinggi Tinggi", String.valueOf(sizeTinggi));
-                HasilAkhir lastModel = new HasilAkhir(realNamaPenyakit1,certaintyFactor,"TINGGI");
-                insertResult.child("HasilAkhir").child(userId).child(namaPenyakit).setValue(lastModel);
+                   getKeyKeanggotaanRendah.clear();
+                   getKeyKeanggotaanSedang.clear();
+                   getKeyKeanggotaanTinggi.clear();
+               }
+           } else if (sizeSedang >= sizeTinggi) {
+               Log.e("Hasil tertinggi Sedang", String.valueOf(sizeSedang));
+               HasilAkhir lastModel = new HasilAkhir(realNamaPenyakit1, certaintyFactor, "SEDANG");
+               insertResult.child("HasilAkhir").child(userId).child(namaPenyakit).setValue(lastModel);
 
-                getKeyKeanggotaanRendah.clear();
-                getKeyKeanggotaanSedang.clear();
-                getKeyKeanggotaanTinggi.clear();
-            }
+               getKeyKeanggotaanRendah.clear();
+               getKeyKeanggotaanSedang.clear();
+               getKeyKeanggotaanTinggi.clear();
+           } else if (sizeTinggi >= sizeRendah) {
+               if (sizeTinggi >= sizeSedang) {
+                   Log.e("Hasil tertinggi Tinggi", String.valueOf(sizeTinggi));
+                   HasilAkhir lastModel = new HasilAkhir(realNamaPenyakit1, certaintyFactor, "TINGGI");
+                   insertResult.child("HasilAkhir").child(userId).child(namaPenyakit).setValue(lastModel);
 
-        }
+                   getKeyKeanggotaanRendah.clear();
+                   getKeyKeanggotaanSedang.clear();
+                   getKeyKeanggotaanTinggi.clear();
+               }
+
+           }
+       }
 
        a.clear();
        b.clear();

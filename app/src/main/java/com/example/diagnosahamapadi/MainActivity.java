@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String userId = null;
 //    int sessionId = 0;
     public String sessionString = null;
-    private DecimalFormat df = new DecimalFormat("#.00");
+    private DecimalFormat df = new DecimalFormat("##.000");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -1281,10 +1281,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 DatabaseReference mDatabaseDefuzzy = FirebaseDatabase.getInstance().getReference().child("Defuzzyfikasi").child(userId);
                 DatabaseReference mDatabaseLom = FirebaseDatabase.getInstance().getReference().child("DefuzzLOM").child(userId);
                 DatabaseReference mDatabaseResult = FirebaseDatabase.getInstance().getReference().child("LastResult").child(userId);
-                DatabaseReference mDatabaseHasil = FirebaseDatabase.getInstance().getReference().child("HasilAkhir").child(userId);
 
 //                mDatabaseLom.removeValue();
-//                mDatabaseHasil.removeValue();
 //                mDatabaseResult.removeValue();
 //                mDatabaseLom.removeValue();
 //                mDatabaseDefuzzy.removeValue();
@@ -2087,8 +2085,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         });
                     }
 
-                      startActivity(new Intent(MainActivity.this, LoadingActivity.class));
 
+                    startActivity(new Intent(MainActivity.this, LoadingActivity.class));
+//                    Intent i = new Intent(MainActivity.this, LoadingActivity.class);
+//                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                    DatabaseReference mDatabaseHasil = FirebaseDatabase.getInstance().getReference().child("HasilAkhir").child(userId);
+//                    mDatabaseHasil.removeValue();
                 }
             }
 

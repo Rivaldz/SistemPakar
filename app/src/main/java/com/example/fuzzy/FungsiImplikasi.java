@@ -52,8 +52,8 @@ public class FungsiImplikasi {
                         }
 
                         for (int j = 0; j < fungsiImplikasiModelsPakar.size(); j++) {
-                            Log.e("Set -> ",fungsiImplikasiModelsPakar.get(j).getKey());
-                            Log.e("Set -> ",fungsiImplikasiModelsUser.get(j).getKey());
+//                            Log.e("Set -> ",fungsiImplikasiModelsPakar.get(j).getKey());
+//                            Log.e("Set -> ",fungsiImplikasiModelsUser.get(j).getKey());
 
                             //R1 Ringan && Ringan
                             if (Double.parseDouble(fungsiImplikasiModelsPakar.get(j).getHimpunanRingan()) != 0 && Double.parseDouble(fungsiImplikasiModelsUser.get(j).getHimpunanRingan()) != 0 ){

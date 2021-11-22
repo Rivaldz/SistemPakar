@@ -114,12 +114,14 @@ public class FMResult extends AppCompatActivity implements View.OnClickListener 
                 DatabaseReference mDatabaseHasil = FirebaseDatabase.getInstance().getReference().child("HasilAkhir").child(userId);
 
                 mDatabaseLom.removeValue();
-                mDatabaseFuzzyfikasi.removeValue();
+//                mDatabaseFuzzyfikasi.removeValue();
                 mDatabaseResult.removeValue();
                 mDatabaseDefuzzy.removeValue();
                 mDatabaseFunsiImp.removeValue();
                 mDatabaseHasil.removeValue();
-                startActivity(new Intent(FMResult.this, MainActivity.class));
+                Intent i = new Intent(FMResult.this, MainActivity.class);
+//                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(i);
                 break;
         }
     }

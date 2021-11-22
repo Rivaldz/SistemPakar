@@ -118,8 +118,9 @@ public class CFResult extends AppCompatActivity {
                     }
                 });
 
-                Intent intents = new Intent(CFResult.this, FMResult.class);
-                startActivity(intents);
+                Intent i = new Intent(CFResult.this, FMResult.class);
+//                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(i);
             }
 
         });

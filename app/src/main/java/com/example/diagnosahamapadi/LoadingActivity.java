@@ -75,7 +75,9 @@ public class LoadingActivity extends AppCompatActivity {
 //                        } catch (InterruptedException e) {
 //                            e.printStackTrace();
 //                        }
-                        startActivity(new Intent(LoadingActivity.this, CFResult.class));
+                        Intent i = new Intent(LoadingActivity.this, CFResult.class);
+//                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(i);
                         break;
 
                     }
