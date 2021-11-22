@@ -6,11 +6,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.diagnosahamapadi.adapter.CFAdapter;
 import com.example.diagnosahamapadi.adapter.FMAdapter;
+import com.example.diagnosahamapadi.webview.JenisPadi;
+import com.example.diagnosahamapadi.webview.PenyakitHama;
+import com.example.fuzzy.Defuzzyfikasi;
 import com.example.model.HasilAkhir;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,7 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FMResult extends AppCompatActivity {
+public class FMResult extends AppCompatActivity implements View.OnClickListener {
     private Context context;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter recyclerViewAdapter;
@@ -31,11 +38,16 @@ public class FMResult extends AppCompatActivity {
     private String userId ;
     private List<HasilAkhir> hasilAkhirs;
 
-
+    private Button penanganan, kembali;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fmresult);
+
+        penanganan = findViewById(R.id.buttonPenangananFuzzyFM);
+        kembali = findViewById(R.id.buttonKembaliFuzzyFM2);
+        penanganan.setOnClickListener(this);
+        kembali.setOnClickListener(this);
 
         SharedPreferences sharedPreferences = getSharedPreferences("user_details", MODE_PRIVATE);
         userId = sharedPreferences.getString("username",null);
@@ -85,5 +97,30 @@ public class FMResult extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.buttonPenangananFuzzyFM:
+                startActivity(new Intent(FMResult.this, PenyakitHama.class));
+                break;
+            case R.id.buttonKembaliFuzzyFM2:
+                DatabaseReference mDatabaseFunsiImp = FirebaseDatabase.getInstance().getReference().child("Fungsiimplikasi").child(userId);
+                DatabaseReference mDatabaseDefuzzy = FirebaseDatabase.getInstance().getReference().child("Defuzzyfikasi").child(userId);
+                DatabaseReference mDatabaseLom = FirebaseDatabase.getInstance().getReference().child("DefuzzyLOM").child(userId);
+                DatabaseReference mDatabaseResult = FirebaseDatabase.getInstance().getReference().child("LastResult").child(userId);
+                DatabaseReference mDatabaseFuzzyfikasi = FirebaseDatabase.getInstance().getReference().child("Fuzzyfikasi").child(userId);
+                DatabaseReference mDatabaseHasil = FirebaseDatabase.getInstance().getReference().child("HasilAkhir").child(userId);
+
+                mDatabaseLom.removeValue();
+                mDatabaseFuzzyfikasi.removeValue();
+                mDatabaseResult.removeValue();
+                mDatabaseDefuzzy.removeValue();
+                mDatabaseFunsiImp.removeValue();
+                mDatabaseHasil.removeValue();
+                startActivity(new Intent(FMResult.this, MainActivity.class));
+                break;
+        }
     }
 }

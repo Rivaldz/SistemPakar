@@ -50,18 +50,12 @@ import java.util.concurrent.TimeUnit;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener  {
 
 
-    List<DataClass> gejalaList = new ArrayList<>();
+//    List<DataClass> gejalaList = new ArrayList<>();
     DatabaseReference databaseReference, databaseInserFM, databaseReferenceH001,
             databaseReferenceH002, databaseReferenceH003,databaseReferenceH004, databaseReferenceH005,databaseReferenceH006
             ,databaseReferenceH007,databaseReferenceH008,databaseReferenceH009,databaseReferenceH0010,databaseReferenceH0011,databaseReferenceH0012
             ,databaseReferenceH0013,databaseReferenceH0014,databaseReferenceH0015,databaseReferenceH0016,databaseReferenceH0017,databaseReferenceH0018
             ,databaseReferenceH0019;
-
-
-    private ArrayList<Gejala> dataGejala;
-
-    private RecyclerView.Adapter adapter;
-    private RecyclerView recyclerView;
 
     // this navigation layout
     private DrawerLayout draw;
@@ -139,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     SharedPreferences sharedPreferences, sharedPreferencesSession;
     String userId = null;
-    int sessionId = 0;
+//    int sessionId = 0;
     public String sessionString = null;
     private DecimalFormat df = new DecimalFormat("#.00");
 
@@ -1289,11 +1283,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 DatabaseReference mDatabaseResult = FirebaseDatabase.getInstance().getReference().child("LastResult").child(userId);
                 DatabaseReference mDatabaseHasil = FirebaseDatabase.getInstance().getReference().child("HasilAkhir").child(userId);
 
-                mDatabaseHasil.removeValue();
-                mDatabaseResult.removeValue();
-                mDatabaseLom.removeValue();
-                mDatabaseDefuzzy.removeValue();
-                mDatabaseFunsiImp.removeValue();
+//                mDatabaseLom.removeValue();
+//                mDatabaseHasil.removeValue();
+//                mDatabaseResult.removeValue();
+//                mDatabaseLom.removeValue();
+//                mDatabaseDefuzzy.removeValue();
+//                mDatabaseFunsiImp.removeValue();
+
 //                mDatabaseResult.removeValue();
 //                IsNullErrorHandling errorHandMain = new IsNullErrorHandling();
 //                errorHandMain.checkInputUser();
@@ -1421,7 +1417,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 double combine_CFold_CF9 = combine_CF7_CF8 + resultCalculateGej9 * (1 - combine_CF7_CF8);
                                 double combine_CFold_CF10 = combine_CFold_CF9 + resultCalculateGej10 * (1 - combine_CFold_CF9);
                                 double combine_CFold_CF11 = combine_CFold_CF10 + resultCalculateGej11 * (1 - combine_CFold_CF10);
-                                String endResult = String.valueOf((combine_CFold_CF11 * 100));
+                                String endResult = String.valueOf(df.format(combine_CFold_CF11 * 100));
                                 createDataCF(endResult, "H002", userId,"Hama Putih Palsu atau Pelipat Daun");
 
                                 Fuzzy fuzzy = new Fuzzy("H002", userId);
@@ -1460,7 +1456,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     }
                     //Hama H003
-                    if (chkGejala14.isChecked() || chkGejala15.isChecked() || chkGejala16.isChecked() || chkGejala17.isChecked() || chkGejala18.isChecked()) {
+                    if (chkGejala14.isChecked() || chkGejala15.isChecked() || chkGejala16.isChecked() || chkGejala17.isChecked() && chkGejala18.isChecked()) {
                         List<String> listBobotH003 = new ArrayList<>();
                         databaseReferenceH003 = FirebaseDatabase.getInstance().getReference().child("Database").child("H003");
                         databaseReferenceH003.addValueEventListener(new ValueEventListener() {
@@ -1495,7 +1491,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 double combine_CFold_CF16 = combine_CF14_CF15 + resultCalculateGej16 * (1 - combine_CF14_CF15);
                                 double combine_CFold_CF17 = combine_CFold_CF16 + resultCalculateGej17 * (1 - combine_CFold_CF16);
                                 double combine_CFold_CF18 = combine_CFold_CF17 + resultCalculateGej18 * (1 - combine_CFold_CF17);
-                                String endResult = String.valueOf((combine_CFold_CF18 * 100));
+                                String endResult = String.valueOf(df.format(combine_CFold_CF18 * 100));
                                 createDataCF(endResult, "H003", userId,"Hama Wereng Batang Coklat");
 
                                 Fuzzy fuzzy = new Fuzzy("H003", userId);
@@ -1567,8 +1563,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 double combine_CFold_CF21 = combine_CF19_CF20 + resultCalculateGej21 * (1 - combine_CF19_CF20);
                                 double combine_CFold_CF22 = combine_CFold_CF21 + resultCalculateGej22 * (1 - combine_CFold_CF21);
                                 double combine_CFold_CF23 = combine_CFold_CF22 + resultCalculateGej23 * (1 - combine_CFold_CF22);
-                                String endResult = String.valueOf((combine_CFold_CF23 * 100));
-                                createDataCF(endResult, "H004", userId,"Bla Bla");
+                                String endResult = String.valueOf(df.format(combine_CFold_CF23 * 100));
+                                createDataCF(endResult, "H004", userId,"Wereng Hijau");
 
                                 Fuzzy fuzzy = new Fuzzy("H004", userId);
                                 // counting fuzzyfikasi
@@ -1605,9 +1601,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     }
                     //Hama H005
-                 /*   if (chkGejala14.isChecked() && chkGejala15.isChecked() && chkGejala16.isChecked() && chkGejala17.isChecked()) {
+                    if (chkGejala14.isChecked() || chkGejala15.isChecked() || chkGejala16.isChecked() || chkGejala17.isChecked()) {
                         List<String> listBobotH005 = new ArrayList<>();
-                        databaseReferenceH005 = FirebaseDatabase.getInstance().getReference().child("Databaase").child("H005");
+                        databaseReferenceH005 = FirebaseDatabase.getInstance().getReference().child("Database").child("H005");
                         databaseReferenceH005.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -1617,10 +1613,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                                 }
                                 String namaPentakit = "penyakit";
-                                double valueUserGejala14 = Double.parseDouble(txxtNilaiGejala14.getText().toString());
-                                double valueUserGejala15 = Double.parseDouble(txxtNilaiGejala15.getText().toString());
-                                double valueUserGejala16 = Double.parseDouble(txxtNilaiGejala16.getText().toString());
-                                double valueUserGejala17 = Double.parseDouble(txxtNilaiGejala17.getText().toString());
+                                double valueUserGejala14 = txxtNilaiGejala14.getText().toString().matches("")? 0 : Double.parseDouble(txxtNilaiGejala14.getText().toString());
+                                double valueUserGejala15 = txxtNilaiGejala15.getText().toString().matches("")? 0 :Double.parseDouble(txxtNilaiGejala15.getText().toString());
+                                double valueUserGejala16 = txxtNilaiGejala16.getText().toString().matches("")? 0 :Double.parseDouble(txxtNilaiGejala16.getText().toString());
+                                double valueUserGejala17 = txxtNilaiGejala17.getText().toString().matches("")? 0 :Double.parseDouble(txxtNilaiGejala17.getText().toString());
 
 
                                 double valueGejala14 = Double.parseDouble(listBobotH005.get(0));
@@ -1636,8 +1632,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 double combine_CF14_CF15 = resultCalculateGej14 + resultCalculateGej15 * (1 - resultCalculateGej14);
                                 double combine_CFold_CF16 = combine_CF14_CF15 + resultCalculateGej16 * (1 - combine_CF14_CF15);
                                 double combine_CFold_CF17 = combine_CFold_CF16 + resultCalculateGej17 * (1 - combine_CFold_CF16);
-                                String endResult = String.valueOf((combine_CFold_CF17 * 100));
-                                createDataCF(endResult, "H005", userId,"on");
+                                String endResult = String.valueOf(df.format(combine_CFold_CF17 * 100));
+                                createDataCF(endResult, "H005", userId,"Hama Wereng Punggung Putih");
 
                                 Fuzzy fuzzy = new Fuzzy("H005", userId);
                                 // counting fuzzyfikasi
@@ -1671,7 +1667,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                             }
                         });
-                    } */
+                    }
                     //Hama H006
                     if (chkGejala2.isChecked() || chkGejala27.isChecked() || chkGejala28.isChecked() || chkGejala29.isChecked() || chkGejala30.isChecked()) {
                         List<String> listBobotH006 = new ArrayList<>();
@@ -1707,7 +1703,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 double combine_CFold_CF28 = combine_CF2_CF27 + resultCalculateGej28 * (1 - combine_CF2_CF27);
                                 double combine_CFold_CF29 = combine_CFold_CF28 + resultCalculateGej29 * (1 - combine_CFold_CF28);
                                 double combine_CFold_CF30 = combine_CFold_CF29 + resultCalculateGej30 * (1 - combine_CFold_CF29);
-                                String endResult = String.valueOf((combine_CFold_CF30 * 100));
+                                String endResult = String.valueOf(df.format(combine_CFold_CF30 * 100));
                                 createDataCF(endResult, "H006", userId,"Hama Penggulung Daun");
 
                                 Fuzzy fuzzy = new Fuzzy("H006", userId);
@@ -1851,7 +1847,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 double combine_CFold_CF28 = combine_CF2_CF27 + resultCalculateGej28 * (1 - combine_CF2_CF27);
                                 double combine_CFold_CF29 = combine_CFold_CF28 + resultCalculateGej29 * (1 - combine_CFold_CF28);
                                 double combine_CFold_CF30 = combine_CFold_CF29 + resultCalculateGej30 * (1 - combine_CFold_CF29);
-                                String endResult = String.valueOf((combine_CFold_CF30 * 100));
+                                String endResult = String.valueOf(df.format(combine_CFold_CF30 * 100));
                                 createDataCF(endResult, "H008", userId,"Hama Walang Sangit");
 
                                 Fuzzy fuzzy = new Fuzzy("H008", userId);
@@ -1916,7 +1912,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                                 double combine_CF34_CF35 = resultCalculateGej1 + resultCalculateGej2 * (1 - resultCalculateGej1);
                                 double combine_CFold_CF36 = combine_CF34_CF35 + resultCalculateGej4 * (1 - combine_CF34_CF35);
-                                String endResult = String.valueOf((combine_CFold_CF36 * 100));
+                                String endResult = String.valueOf(df.format(combine_CFold_CF36 * 100));
                                 createDataCF(endResult, "H009", userId,"Hama Ganjur");
 
                                 Fuzzy fuzzy = new Fuzzy("H009", userId);
@@ -2056,7 +2052,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 double combine_CFold_CF28 = combine_CF2_CF27 + resultCalculateGej28 * (1 - combine_CF2_CF27);
                                 double combine_CFold_CF29 = combine_CFold_CF28 + resultCalculateGej29 * (1 - combine_CFold_CF28);
                                 double combine_CFold_CF30 = combine_CFold_CF29 + resultCalculateGej30 * (1 - combine_CFold_CF29);
-                                String endResult = String.valueOf((combine_CFold_CF30 * 100));
+                                String endResult = String.valueOf(df.format(combine_CFold_CF30 * 100));
                                 createDataCF(endResult, "H011", userId,"Hama Kepinding Tanah");
 
                                 Fuzzy fuzzy = new Fuzzy("H011", userId);
@@ -2091,23 +2087,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         });
                     }
 
-
-//                try {
-//                    TimeUnit.SECONDS.sleep(2);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-
-//                    moveInten();
-                    // add sharedpreference
-
-//                    SharedPreferences.Editor editorSes = sharedPreferencesSession.edit();
-//                    editorSes.putString("varSession", String.valueOf(sessionId));
-//                    editorSes.apply();
-//                    sessionString = sharedPreferencesSession.getString("varSession", null);
-//                    new Defuzzyfikasi(sessionString);
-//                    sessionId++;
-                      startActivity(new Intent(MainActivity.this, CFResult.class));
+                      startActivity(new Intent(MainActivity.this, LoadingActivity.class));
 
                 }
             }
@@ -2124,47 +2104,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 //        LastModel lastModelSes = new LastModel(penyakit,"1");
 //        databaseInserSession.child("LastResult").child(userId).child("SES").child("keyy").setValue(lastModelSes);
-    }
-    private void moveInten(){
-        List<String> st = new ArrayList<>();
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("LastResult").child(userId).child("SES");
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    ShowUser showUser = dataSnapshot.getValue(ShowUser.class);
-//                    showUser.setKeyMethod(dataSnapshot.getKey());
-                    st.add(showUser.nilaiAkhir);
-
-                    if (showUser.nilaiAkhir.equalsIgnoreCase("1")){
-                        try {
-                            TimeUnit.SECONDS.sleep(2);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-//                        onDestroy();
-                        Intent intent = new Intent(MainActivity.this, ResultActivity.class);
-
-//                        Intent intent = new Intent(MainActivity.this, LoadingActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                }
-
-//                int size = st.size();
-//
-//                if (st.get(0). > 1){
-//                    Intent intent = new Intent(MainActivity.this, ResultActivity.class);
-//                    startActivity(intent);
-//                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -2218,10 +2157,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
             hasil = false;
         }
-//        else if (chkGejala2.isChecked() && txxtNilaiGejala2.getText().toString().matches("")){
-//            Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
-//            hasil = false;
-//        }
         else if (chkGejala2.isChecked() && txxtNilaiGejala2.getText().toString().matches("")){
             Toast.makeText(getBaseContext(),"Silahkan isi nilai dari gejala yang dipilih",Toast.LENGTH_LONG).show();
             hasil = false;

@@ -123,6 +123,9 @@ public class FungsiImplikasi {
                             }
 
                         }
+
+                        fungsiImplikasiModelsPakar.clear();
+                        fungsiImplikasiModelsUser.clear();
                     }
 
                     @Override

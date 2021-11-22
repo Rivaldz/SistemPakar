@@ -26,9 +26,9 @@ public class LoadingActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private String userId;
     private DatabaseReference databaseReference;
-    android.os.Handler customHandler = new android.os.Handler();
-
-    List<ShowUser> st = new ArrayList<>();
+//    android.os.Handler customHandler = new android.os.Handler();
+//
+//    List<ShowUser> st = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +39,11 @@ public class LoadingActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("user_details",MODE_PRIVATE);
         userId = sharedPreferences.getString("username",null);
 
-        Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi();
+
+//        Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi();
 //        defuzzyfikasi.getLOMFuzzy();
 //        defuzzyfikasi.sumKeanggotaan();
-//        moveInten();
+        moveInten();
 
 //        updateTimerThread.run();
     }
@@ -60,16 +61,26 @@ public class LoadingActivity extends AppCompatActivity {
 
     private void moveInten(){
 //        List<String> st = new ArrayList<>();
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("LastResult").child(userId);
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("DefuzzyLOM");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    ShowUser showUser = dataSnapshot.getValue(ShowUser.class);
+//                    ShowUser showUser = dataSnapshot.getValue(ShowUser.class);
 //                  showUser.setKeyMethod(dataSnapshot.getKey());
-                    st.add(showUser);
+//                    st.add(showUser);
+                    if (dataSnapshot.getKey().equals(userId)){
+//                        try {
+//                            TimeUnit.SECONDS.sleep(3);
+//                        } catch (InterruptedException e) {
+//                            e.printStackTrace();
+//                        }
+                        startActivity(new Intent(LoadingActivity.this, CFResult.class));
+                        break;
+
+                    }
                 }
-                if (st.get(1).countStatus.equalsIgnoreCase("1")){
+//                if (){
 //                    try {
 //                        TimeUnit.SECONDS.sleep(2);
 //                    } catch (InterruptedException e) {
@@ -80,9 +91,9 @@ public class LoadingActivity extends AppCompatActivity {
 
 //                        Intent intent = new Intent(MainActivity.this, LoadingActivity.class);
 //                    startActivity(intent);
-                    finish();
+//                    finish();
 //                    }
-                }
+//                }
 //                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 //                    ShowUser showUser = dataSnapshot.getValue(ShowUser.class);
 

@@ -11,7 +11,7 @@
         android:layout_width="411dp"
         android:layout_height="629dp"
         android:scrollbars="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/buttonHitungFuzzyFM"
+        app:layout_constraintBottom_toTopOf="@+id/buttonPenangananFuzzyFM"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -19,13 +19,23 @@
         tools:listitem="@layout/list_cf" />
 
     <Button
-        android:id="@+id/buttonHitungFuzzyFM"
+        android:id="@+id/buttonPenangananFuzzyFM"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="Hitung Fuzzy"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="16dp"
+        android:text="Penanganan"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonKembaliFuzzyFM2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="16dp"
+        android:text="Hitung Kembali"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

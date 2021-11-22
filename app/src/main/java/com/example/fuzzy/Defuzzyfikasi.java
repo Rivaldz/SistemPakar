@@ -235,10 +235,6 @@ public class Defuzzyfikasi {
         mDatabaseSedang = FirebaseDatabase.getInstance().getReference();
         mDatabaseTinggi = FirebaseDatabase.getInstance().getReference();
 
-//        if (databaseChecker()){
-//            DatabaseReference deleteDb = FirebaseDatabase.getInstance().getReference().child("Defuzzyfikasi").child(userId);
-//            deleteDb.removeValue();
-//        }else {
             for (Map.Entry<String, ArrayList<HashDataShort>> entry : multiMapSedang.entrySet()) {
 
                 List<HashDataShort> values = entry.getValue();
@@ -318,8 +314,9 @@ public class Defuzzyfikasi {
                 mDatabaseTinggi.child("Defuzzyfikasi").child(userId).child(namaPenyakit).child(String.valueOf(key)).child("TINGGI").setValue(inputFuzzyDB);
                 System.out.println("Nilai Max Sedang adalah " + max + "Nilai Zi " + maxZi);
             }
-//        }
-//       deleteHash();
+            multiMapRendah.clear();
+            multiMapSedang.clear();
+            multiMapTinggi.clear();
 
    }
 
@@ -466,7 +463,8 @@ public class Defuzzyfikasi {
 
 //       getLOMFuzzy();
 //       sumKeanggotaan();
-       deleteHash();
+//       deleteHash();
+        lastStep.clear();
 
    }
 
@@ -590,12 +588,28 @@ public class Defuzzyfikasi {
             }
 
         }
-   }
 
-    private void deleteHash(){
+       a.clear();
+       b.clear();
+       c.clear();
+       deleteHash();
+    }
+
+    public void deleteHash(){
         multiMapRendah.clear();
         multiMapSedang.clear();
         multiMapTinggi.clear();
+        getKeyKeanggotaanRendah.clear();
+        getKeyKeanggotaanTinggi.clear();
+        getKeyKeanggotaanSedang.clear();
+        shortValueRendah.clear();
+        shortValueSedang.clear();
+        keyGetAgregationList.clear();
+        keyGejalaSt.clear();
+        multiMapRendah.clear();
+        multiMapSedang.clear();
+        multiMapTinggi.clear();
+        lastStep.clear();
     }
 
 //   public boolean databaseChecker(){

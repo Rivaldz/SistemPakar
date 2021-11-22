@@ -85,6 +85,20 @@ public class CFResult extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi();
+//                DatabaseReference mDatabaseFunsiImp = FirebaseDatabase.getInstance().getReference().child("Fungsiimplikasi").child(userId);
+//                DatabaseReference mDatabaseDefuzzy = FirebaseDatabase.getInstance().getReference().child("Defuzzyfikasi").child(userId);
+//                DatabaseReference mDatabaseLom = FirebaseDatabase.getInstance().getReference().child("DefuzzLOM").child(userId);
+//                DatabaseReference mDatabaseResult = FirebaseDatabase.getInstance().getReference().child("LastResult").child(userId);
+//                DatabaseReference mDatabaseFuzzyfikasi = FirebaseDatabase.getInstance().getReference().child("Fuzzyfikasi").child(userId);
+//                DatabaseReference mDatabaseHasil = FirebaseDatabase.getInstance().getReference().child("HasilAkhir").child(userId);
+
+//                mDatabaseHasil.removeValue();
+//                mDatabaseFuzzyfikasi.removeValue();
+//                mDatabaseResult.removeValue();
+//                mDatabaseLom.removeValue();
+//                mDatabaseDefuzzy.removeValue();
+//                mDatabaseFunsiImp.removeValue();
                 getLomDb = FirebaseDatabase.getInstance().getReference().child("LastResult").child(userId);
                 getLomDb.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -93,8 +107,7 @@ public class CFResult extends AppCompatActivity {
                             LastModel lastModel = dataSnapshot.getValue(LastModel.class);
 //                            String nilaiAkhir = snapshot.child("nilaiAkhir").getValue().toString();
                             System.out.println("nama penyakit == " + lastModel.getNamaPenyakit() + " Nilai akhir " + lastModel.getNilaiAkhir());
-                            defuzzyfikasi.getLOMFuzzy(userId,dataSnapshot.getKey(),lastModel.namaPenyakit,lastModel.nilaiAkhir);
-
+                            defuzzyfikasi.getLOMFuzzy(userId,dataSnapshot.getKey(),lastModel.getNamaPenyakit(),lastModel.getNilaiAkhir());
                         }
 
                     }
@@ -110,8 +123,6 @@ public class CFResult extends AppCompatActivity {
             }
 
         });
-
-
 
     }
     private void saveRecycler(List<String> hasil,List<String> result){
