@@ -6,7 +6,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -23,7 +22,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-//import com.example.model.Fuzzy;
 import com.example.diagnosahamapadi.webview.JenisPadi;
 import com.example.diagnosahamapadi.webview.Pemasaran;
 import com.example.diagnosahamapadi.webview.PenyakitHama;
@@ -32,9 +30,7 @@ import com.example.fuzzy.Defuzzyfikasi;
 import com.example.fuzzy.FungsiImplikasi;
 import com.example.fuzzy.Fuzzy;
 import com.example.model.DataClass;
-import com.example.model.Gejala;
 import com.example.model.LastModel;
-import com.example.model.ShowUser;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -50,12 +46,9 @@ import java.util.concurrent.TimeUnit;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener  {
 
 
-//    List<DataClass> gejalaList = new ArrayList<>();
     DatabaseReference databaseReference, databaseInserFM, databaseReferenceH001,
             databaseReferenceH002, databaseReferenceH003,databaseReferenceH004, databaseReferenceH005,databaseReferenceH006
-            ,databaseReferenceH007,databaseReferenceH008,databaseReferenceH009,databaseReferenceH0010,databaseReferenceH0011,databaseReferenceH0012
-            ,databaseReferenceH0013,databaseReferenceH0014,databaseReferenceH0015,databaseReferenceH0016,databaseReferenceH0017,databaseReferenceH0018
-            ,databaseReferenceH0019;
+            ,databaseReferenceH007,databaseReferenceH008,databaseReferenceH009,databaseReferenceH0010,databaseReferenceH0011;
 
     // this navigation layout
     private DrawerLayout draw;
@@ -133,7 +126,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     SharedPreferences sharedPreferences, sharedPreferencesSession;
     String userId = null;
-//    int sessionId = 0;
     public String sessionString = null;
     private DecimalFormat df = new DecimalFormat("##.000");
 
@@ -1277,20 +1269,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnProsess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatabaseReference mDatabaseFunsiImp = FirebaseDatabase.getInstance().getReference().child("Fungsiimplikasi").child(userId);
-                DatabaseReference mDatabaseDefuzzy = FirebaseDatabase.getInstance().getReference().child("Defuzzyfikasi").child(userId);
-                DatabaseReference mDatabaseLom = FirebaseDatabase.getInstance().getReference().child("DefuzzLOM").child(userId);
-                DatabaseReference mDatabaseResult = FirebaseDatabase.getInstance().getReference().child("LastResult").child(userId);
 
-//                mDatabaseLom.removeValue();
-//                mDatabaseResult.removeValue();
-//                mDatabaseLom.removeValue();
-//                mDatabaseDefuzzy.removeValue();
-//                mDatabaseFunsiImp.removeValue();
-
-//                mDatabaseResult.removeValue();
-//                IsNullErrorHandling errorHandMain = new IsNullErrorHandling();
-//                errorHandMain.checkInputUser();
                 if (userHandling() == true && emptySelect() == true) {
 
                     //Hama H001
@@ -1354,7 +1333,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H001", userId);
                                 fungsiImplikasi.onPenyakit();
                                 namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
-//                            Log.i("This value gejala",stringBobotPenyakit1.get(2));
 
                                 try {
                                     TimeUnit.SECONDS.sleep(2);
@@ -1367,9 +1345,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 defuzzyfikasi.defuzzyFikasi();
                                 defuzzyfikasi.onAgregasi();
                                 defuzzyfikasi.shortAgregations();
-//                                defuzzyfikasi.sumKeanggotaan();
-//                                defuzzyfikasiCons.getLOMFuzzy(userId,"H001");
-//                                defuzzyfikasi.sumKeanggotaan();
+
                             }
 
                             @Override
@@ -1431,8 +1407,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 }
                                 FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H002", userId);
                                 fungsiImplikasi.onPenyakit();
-//                            namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
-//                            Log.i("This value gejala",stringBobotPenyakit1.get(2));
+
 
                                 try {
                                     TimeUnit.SECONDS.sleep(2);
@@ -1442,7 +1417,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H002", userId, "Hama putih palsu atau pelipat daun");
                                 defuzzyfikasi.defuzzyFikasi();
                                 defuzzyfikasi.onAgregasi();
-//                           defuzzyfikasi.shortAgregations();
 
                             }
 
@@ -1577,7 +1551,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 }
                                 FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H004", userId);
                                 fungsiImplikasi.onPenyakit();
-                                namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
 
 //                            Log.i("This value gejala",listBobotH004.get(2));
 
@@ -1646,7 +1619,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 }
                                 FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H005", userId);
                                 fungsiImplikasi.onPenyakit();
-                                namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
                                 Log.i("This value gejala", listBobotH005.get(2));
 
                                 try {
@@ -1678,7 +1650,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     listBobotH006.add(gejala.getBobotGejala());
 
                                 }
-                                String namaPentakit = "penyakit";
                                 double valueUserGejala2 = txxtNilaiGejala2.getText().toString().matches("") ? 0 : Double.parseDouble(txxtNilaiGejala2.getText().toString());
                                 double valueUserGejala27 = txxtNilaiGejala27.getText().toString().matches("") ? 0 :Double.parseDouble(txxtNilaiGejala27.getText().toString());
                                 double valueUserGejala28 = txxtNilaiGejala28.getText().toString().matches("") ? 0 :Double.parseDouble(txxtNilaiGejala28.getText().toString());
@@ -1717,7 +1688,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 }
                                 FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H006", userId);
                                 fungsiImplikasi.onPenyakit();
-                                namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
 
                                 try {
                                     TimeUnit.SECONDS.sleep(2);
@@ -1748,7 +1718,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                         listGejalaH007.add(gejala.getBobotGejala());
 
                                     }
-                                    String namaPentakit = "penyakit";
 
                                     double valueUserGejala34 = txxtNilaiGejala34.getText().toString().matches("") ? 0 : Double.parseDouble(txxtNilaiGejala34.getText().toString());
                                     double valueUserGejala35 = txxtNilaiGejala35.getText().toString().matches("") ? 0 : Double.parseDouble(txxtNilaiGejala35.getText().toString());
@@ -1780,8 +1749,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     }
                                     FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H007", userId);
                                     fungsiImplikasi.onPenyakit();
-                                    namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
-//                           Log.i("This value gejala",stringBobotPenyakit1.get(2));
 
                                     try {
                                         TimeUnit.SECONDS.sleep(2);
@@ -1793,13 +1760,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     defuzzyfikasi.defuzzyFikasi();
                                     defuzzyfikasi.onAgregasi();
                                     defuzzyfikasi.shortAgregations();
-//                                    defuzzyfikasi.sumKeanggotaan();
-//                                    defuzzyfikasiCons.getLOMFuzzy(userId,"H007");
-//                                    defuzzyfikasiCons.sumKeanggotaan();
-
-//                           defuzzyfikasi.shortAgregations();
-
-//                           tcOutput.setText(""+namaPentakit);
 
                                 }
 
@@ -1937,9 +1897,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H009", userId, "Hama ganjur");
                                 defuzzyfikasi.defuzzyFikasi();
                                 defuzzyfikasi.onAgregasi();
-//                           defuzzyfikasi.shortAgregations();
-
-//                           tcOutput.setText(""+namaPentakit);
                             }
 
                             @Override
@@ -1993,7 +1950,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("H010", userId);
                                 fungsiImplikasi.onPenyakit();
                                 namaPentakit = "Test Result Penyakit " + "\n" + endResult + " %";
-//                           Log.i("This value gejala",stringBobotPenyakit1.get(2));
 
                                 try {
                                     TimeUnit.SECONDS.sleep(2);
@@ -2003,9 +1959,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("H010", userId, "hama belalang kembara");
                                 defuzzyfikasi.defuzzyFikasi();
                                 defuzzyfikasi.onAgregasi();
-//                           defuzzyfikasi.shortAgregations();
 
-//                           tcOutput.setText(""+namaPentakit);
                             }
 
                             @Override
@@ -2084,13 +2038,143 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             }
                         });
                     }
+                    //Penyakit P001
+                    if (chkGejala24.isChecked() || chkGejala25.isChecked() || chkGejala26.isChecked() || chkGejala44.isChecked()) {
+                        List<String> listBobotP001 = new ArrayList<>();
+                        databaseReferenceH005 = FirebaseDatabase.getInstance().getReference().child("Database").child("P001");
+                        databaseReferenceH005.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                    DataClass gejala = dataSnapshot.getValue(DataClass.class);
+                                    listBobotP001.add(gejala.getBobotGejala());
 
+                                }
+                                String namaPentakit = "penyakit";
+                                double valueUserGejala14 = txxtNilaiGejala24.getText().toString().matches("")? 0 : Double.parseDouble(txxtNilaiGejala24.getText().toString());
+                                double valueUserGejala15 = txxtNilaiGejala25.getText().toString().matches("")? 0 :Double.parseDouble(txxtNilaiGejala25.getText().toString());
+                                double valueUserGejala16 = txxtNilaiGejala26.getText().toString().matches("")? 0 :Double.parseDouble(txxtNilaiGejala26.getText().toString());
+                                double valueUserGejala17 = txxtNilaiGejala44.getText().toString().matches("")? 0 :Double.parseDouble(txxtNilaiGejala44.getText().toString());
+
+
+                                double valueGejala14 = Double.parseDouble(listBobotP001.get(0));
+                                double valueGejala15 = Double.parseDouble(listBobotP001.get(1));
+                                double valueGejala16 = Double.parseDouble(listBobotP001.get(2));
+                                double valueGejala17 = Double.parseDouble(listBobotP001.get(3));
+
+                                double resultCalculateGej14 = valueGejala14 * valueUserGejala14;
+                                double resultCalculateGej15 = valueGejala15 * valueUserGejala15;
+                                double resultCalculateGej16 = valueGejala16 * valueUserGejala16;
+                                double resultCalculateGej17 = valueGejala17 * valueUserGejala17;
+
+                                double combine_CF14_CF15 = resultCalculateGej14 + resultCalculateGej15 * (1 - resultCalculateGej14);
+                                double combine_CFold_CF16 = combine_CF14_CF15 + resultCalculateGej16 * (1 - combine_CF14_CF15);
+                                double combine_CFold_CF17 = combine_CFold_CF16 + resultCalculateGej17 * (1 - combine_CFold_CF16);
+                                String endResult = String.valueOf(df.format(combine_CFold_CF17 * 100));
+                                createDataCF(endResult, "P001", userId,"penyakit menyusul");
+
+                                Fuzzy fuzzy = new Fuzzy("P001", userId);
+                                // counting fuzzyfikasi
+                                fuzzy.penyakitH005_User(valueUserGejala14, valueUserGejala15, valueUserGejala16, valueUserGejala17);
+                                fuzzy.penyakitH005_Pakar(valueGejala14, valueGejala15, valueGejala16, valueGejala17);
+
+                                // fungsi implikasi
+                                try {
+                                    TimeUnit.SECONDS.sleep(2);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("P001", userId);
+                                fungsiImplikasi.onPenyakit();
+                                Log.i("This value gejala", listBobotP001.get(2));
+
+                                try {
+                                    TimeUnit.SECONDS.sleep(2);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("P001", userId, "on progress");
+                                defuzzyfikasi.defuzzyFikasi();
+                                defuzzyfikasi.onAgregasi();
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                    }
+
+                    //Penyakit P002
+                    if (chkGejala31.isChecked() || chkGejala32.isChecked() || chkGejala33.isChecked() || chkGejala42.isChecked()) {
+                        List<String> listBobotP002 = new ArrayList<>();
+                        databaseReferenceH005 = FirebaseDatabase.getInstance().getReference().child("Database").child("P002");
+                        databaseReferenceH005.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                    DataClass gejala = dataSnapshot.getValue(DataClass.class);
+                                    listBobotP002.add(gejala.getBobotGejala());
+
+                                }
+                                String namaPentakit = "penyakit";
+                                double valueUserGejala14 = txxtNilaiGejala31.getText().toString().matches("")? 0 : Double.parseDouble(txxtNilaiGejala31.getText().toString());
+                                double valueUserGejala15 = txxtNilaiGejala32.getText().toString().matches("")? 0 :Double.parseDouble(txxtNilaiGejala32.getText().toString());
+                                double valueUserGejala16 = txxtNilaiGejala33.getText().toString().matches("")? 0 :Double.parseDouble(txxtNilaiGejala33.getText().toString());
+                                double valueUserGejala17 = txxtNilaiGejala42.getText().toString().matches("")? 0 :Double.parseDouble(txxtNilaiGejala42.getText().toString());
+
+
+                                double valueGejala14 = Double.parseDouble(listBobotP002.get(0));
+                                double valueGejala15 = Double.parseDouble(listBobotP002.get(1));
+                                double valueGejala16 = Double.parseDouble(listBobotP002.get(2));
+                                double valueGejala17 = Double.parseDouble(listBobotP002.get(3));
+
+                                double resultCalculateGej14 = valueGejala14 * valueUserGejala14;
+                                double resultCalculateGej15 = valueGejala15 * valueUserGejala15;
+                                double resultCalculateGej16 = valueGejala16 * valueUserGejala16;
+                                double resultCalculateGej17 = valueGejala17 * valueUserGejala17;
+
+                                double combine_CF14_CF15 = resultCalculateGej14 + resultCalculateGej15 * (1 - resultCalculateGej14);
+                                double combine_CFold_CF16 = combine_CF14_CF15 + resultCalculateGej16 * (1 - combine_CF14_CF15);
+                                double combine_CFold_CF17 = combine_CFold_CF16 + resultCalculateGej17 * (1 - combine_CFold_CF16);
+                                String endResult = String.valueOf(df.format(combine_CFold_CF17 * 100));
+                                createDataCF(endResult, "P002", userId,"penyakit menyusul 2");
+                                Fuzzy fuzzy = new Fuzzy("P002", userId);
+                                // counting fuzzyfikasi
+                                fuzzy.penyakitH005_User(valueUserGejala14, valueUserGejala15, valueUserGejala16, valueUserGejala17);
+                                fuzzy.penyakitH005_Pakar(valueGejala14, valueGejala15, valueGejala16, valueGejala17);
+
+                                // fungsi implikasi
+                                try {
+                                    TimeUnit.SECONDS.sleep(2);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                FungsiImplikasi fungsiImplikasi = new FungsiImplikasi("P002", userId);
+                                fungsiImplikasi.onPenyakit();
+                                Log.i("This value gejala", listBobotP002.get(2));
+
+                                try {
+                                    TimeUnit.SECONDS.sleep(2);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                Defuzzyfikasi defuzzyfikasi = new Defuzzyfikasi("P002", userId, "on progress");
+                                defuzzyfikasi.defuzzyFikasi();
+                                defuzzyfikasi.onAgregasi();
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                    }
 
                     startActivity(new Intent(MainActivity.this, LoadingActivity.class));
-//                    Intent i = new Intent(MainActivity.this, LoadingActivity.class);
-//                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                    DatabaseReference mDatabaseHasil = FirebaseDatabase.getInstance().getReference().child("HasilAkhir").child(userId);
-//                    mDatabaseHasil.removeValue();
+
                 }
             }
 
@@ -2104,8 +2188,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         LastModel lastModel = new LastModel(namaPenyakit,result);
         databaseInserFM.child("LastResult").child(userId).child(penyakit).setValue(lastModel);
 
-//        LastModel lastModelSes = new LastModel(penyakit,"1");
-//        databaseInserSession.child("LastResult").child(userId).child("SES").child("keyy").setValue(lastModelSes);
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {

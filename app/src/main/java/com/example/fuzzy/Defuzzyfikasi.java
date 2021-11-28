@@ -1,46 +1,33 @@
 package com.example.fuzzy;
 
-import android.content.SharedPreferences;
 import android.os.Build;
-import android.provider.ContactsContract;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
-import com.example.diagnosahamapadi.MainActivity;
 import com.example.model.AgreHashModel;
-import com.example.model.ArrayListModel;
 import com.example.model.DefuzzyfikasiModel;
 import com.example.model.GetAgregation;
-import com.example.model.GetKeyDefuzzyfikasi;
 import com.example.model.HashDataShort;
 import com.example.model.HasilAkhir;
 import com.example.model.InputFuzzyDB;
 import com.example.model.KeyGetAgregation;
-import com.example.model.LastModel;
 import com.example.model.ShortDataModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 public class Defuzzyfikasi {
 
     String namaPenyakit, userId,idSession,realNamaPenyakit;
-
-    MainActivity mainActivity = new MainActivity();
-
-    SharedPreferences sharedPreferencesSession;
 
     public Defuzzyfikasi() {
     }
@@ -70,28 +57,17 @@ public class Defuzzyfikasi {
             mDatabaseTinggi,mDatabaseRendah,
             mDatabaseAgre, getmDatabaseLastValue, getLomDB, insertResult;
 
-    private int rendah ;
-    private int sedang;
-    private int tinggi ;
-
     List<String > getKeyKeanggotaanRendah = new ArrayList<>();
     List<String > getKeyKeanggotaanSedang = new ArrayList<>();
     List<String > getKeyKeanggotaanTinggi = new ArrayList<>();
-    List<DefuzzyfikasiModel> defuzzyfikasiModels = new ArrayList<>();
-    List<DefuzzyfikasiModel> defuzzyfikasiModelsSedang = new ArrayList<>();
-    List<DefuzzyfikasiModel> defuzzyfikasiModelsTingddi = new ArrayList<>();
     List<ShortDataModel> shortValueSedang = new ArrayList<>();
     List<ShortDataModel> shortValueRendah = new ArrayList<>();
     List<String> keyGetAgregationList = new ArrayList<>();
-    List<GetKeyDefuzzyfikasi> keyGejala = new ArrayList<>();
     List<String> keyGejalaSt = new ArrayList<>();
-
-    ArrayListModel arrayListModel = new ArrayListModel();
 
     public Map<String, ArrayList<HashDataShort>> multiMapRendah = new HashMap<String, ArrayList<HashDataShort>>();
     public Map<String, ArrayList<HashDataShort>> multiMapSedang = new HashMap<String, ArrayList<HashDataShort>>();
     public Map<String, ArrayList<HashDataShort>> multiMapTinggi = new HashMap<String, ArrayList<HashDataShort>>();
-    Map<String, List<String>> objekMap = new HashMap<>();
     Map<String, ArrayList<AgreHashModel>> lastStep = new HashMap<String, ArrayList<AgreHashModel>>();
 
 
@@ -103,8 +79,6 @@ public class Defuzzyfikasi {
            @Override
            public void onDataChange(@NonNull DataSnapshot snapshot) {
                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-//                   DefuzzyfikasiModel defuzzyfikasiModel = dataSnapshot.getValue(DefuzzyfikasiModel.class);
-//                   defuzzyfikasiModels.add(defuzzyfikasiModel);
                    keyGejalaSt.add(dataSnapshot.getKey());
                }
                onQueriesDone(keyGejalaSt);
@@ -161,7 +135,6 @@ public class Defuzzyfikasi {
                             }
                         }
                         if (defuzzyfikasiModel.getKeanggotaan().equalsIgnoreCase("SEDANG")) {
-//                            Log.d("Sedang","");
                             System.out.println("Hasil akhir gejala " + dataSnapshot.getKey() + "Penyakit : " + keyGejalaSt.get(finalJ) +
                                     " Hasil " + defuzzyfikasiModel.getKeanggotaan() + "--Sedang--");
                             ShortDataModel shortDataModel = new ShortDataModel(Double.parseDouble(defuzzyfikasiModel.getMinFunc()), Double.parseDouble(defuzzyfikasiModel.getZiValue()), keyGejalaSt.get(finalJ));
@@ -212,11 +185,9 @@ public class Defuzzyfikasi {
                               }
                             }
 
-//                        Log.e("hasil array akhir", String.valueOf(shortValueSedang.size()));
                         System.out.println("panjang hash " + multiMapSedang.size());
                     }
 
-//                    list.clear();
                     shortDataSedang();
                 }
 
@@ -262,8 +233,6 @@ public class Defuzzyfikasi {
             for (Map.Entry<String, ArrayList<HashDataShort>> entry : multiMapRendah.entrySet()) {
                 List<HashDataShort> values = entry.getValue();
 
-//           System.out.println("ini size " + values.size());
-
                 double min = values.get(0).getMinFunction();
                 double max = values.get(0).getMinFunction();
                 double maxZi = values.get(0).getZiValue();
@@ -289,8 +258,6 @@ public class Defuzzyfikasi {
 
             for (Map.Entry<String, ArrayList<HashDataShort>> entry : multiMapTinggi.entrySet()) {
                 List<HashDataShort> values = entry.getValue();
-
-//           System.out.println("ini size " + values.size());
 
                 double min = values.get(0).getMinFunction();
                 double max = values.get(0).getMinFunction();
@@ -377,33 +344,9 @@ public class Defuzzyfikasi {
                         }
                     }
 
-//                    if (keyList.get(finalJ).equalsIgnoreCase(getAgregation.getKey__())){
-//
-//                        if (lastStep.containsKey(keyList.get(finalJ))){
-//                            ArrayList<AgreHashModel> listNew;
-//                            listNew = lastStep.get(keyList.get(finalJ));
-//                            AgreHashModel hashFinal = new AgreHashModel(getAgregation.getKeanggotaan(),getAgregation.getMaxValue()
-//                                    ,getAgregation.getZiValue());
-//                            listNew.add(hashFinal);
-//                            lastStep.put(keyList.get(finalJ),listNew);
-//
-//                        }else {
-//                            ArrayList<AgreHashModel> listNew = new ArrayList<AgreHashModel>();
-//                            AgreHashModel hashFinal = new AgreHashModel(getAgregation.getKeanggotaan(),getAgregation.getMaxValue(),
-//                                    getAgregation.getZiValue());
-//                            listNew.add(hashFinal);
-//                            lastStep.put(keyList.get(finalJ),listNew);
-//                            listNew=null;
-//                        }
-//                    }
-//                    getAgregations.add(getAgregation);
-
                    shortAgregations();
                 }
-//                   System.out.println("Lihat hasil nilai dari agregasi " + getAgregations.get(0).getMaxValue() + "lihat key hasil agre " + keyList.get(finalJ) );
-//                shortAgregations(getAgregations);
 
-//                   shortAgregations();
                }
 
                @Override
@@ -416,14 +359,10 @@ public class Defuzzyfikasi {
    }
 
     public void shortAgregations(){
-//       sharedPreferencesSession = getSharedPreferences("session",MODE_PRIVATE);
-//       sharedPreferencesSession.contains("varSession");
         double hasilAkhir = 0;
         int sizeOuter = 0;
         double tempHasil = 0;
 
-//        String resultKeanggotaan = "";
-//       System.out.println("short agre");
        getmDatabaseLastValue = FirebaseDatabase.getInstance().getReference();
        for (Map.Entry<String, ArrayList<AgreHashModel>> entry : lastStep.entrySet()) {
 
@@ -436,7 +375,6 @@ public class Defuzzyfikasi {
            String keanggotaan = values.get(0).getKeanggotaan();
 
            int siz = values.size();
-//           sizeOuter = siz;
 
            for (int i = 0; i < siz; i++) {
                if (maxZi < Double.parseDouble(values.get(i).getZiValue())){
@@ -455,24 +393,12 @@ public class Defuzzyfikasi {
            tempHasil = hasilAkhir;
            sizeOuter++;
        }
-       double result = hasilAkhir / sizeOuter;
-       System.out.println("Ini adalah hasil akhir yang saya inginkan 000 " + result  + " hasil akhir " + hasilAkhir + " siw outer " + sizeOuter );
-//       String sessionString = mainActivity.sessionString;
-//       LastModel lastModel = new LastModel(realNamaPenyakit,String.valueOf(result),"1");
-//       getmDatabaseLastValue.child("LastResult").child(userId).child("FM").setValue(lastModel);
-
-//       getLOMFuzzy();
-//       sumKeanggotaan();
-//       deleteHash();
         lastStep.clear();
 
    }
 
 
    public void getLOMFuzzy(String idUser, String kodePenyakit, String namaPenyakit,String nilaiCF){
-//       System.out.println("Ini user ID" + username);
-//       System.out.println("Penyakit" + kodePenykit);
-//       final String[] lihatHasil = new String[1];
        String userID = idUser;
        String penyakit = kodePenyakit;
        String namaPenyakitSt = namaPenyakit;
@@ -486,24 +412,16 @@ public class Defuzzyfikasi {
                     String anggota = getLom.getKeanggotaan();
                     String key = getLom.getKey__();
                     if (anggota.equalsIgnoreCase("RENDAH")){
-                        Log.e("Hasil RENDAH", anggota);
-                        Log.e("Hasil key", key);
-//                        rendah++;
+
                         getKeyKeanggotaanRendah.add(anggota);
                     }else if(anggota.equalsIgnoreCase("SEDANG")){
-                        Log.e("Hasil SEDANG", anggota);
-                        Log.e("Hasil key", key);
-//                        sedang++;
+
                         getKeyKeanggotaanSedang.add(anggota);
                     }else {
-                        Log.e("Hasil TINGGI", anggota);
-                        Log.e("Hasil key", key);
-//                        tinggi++;
+
                         getKeyKeanggotaanTinggi.add(anggota);
                     }
-//                    Log.e("Hasil anggota", anggota);
-//                    Log.e("Hasil key", key);
-//                    lihatHasil[0] = snapshot.getKey();
+
                 }
                 sumKeanggotaan(getKeyKeanggotaanRendah,getKeyKeanggotaanSedang,getKeyKeanggotaanTinggi,userID,penyakit,namaPenyakitSt,nilaiCertainty);
 
@@ -514,36 +432,7 @@ public class Defuzzyfikasi {
 
             }
         });
-    /*    Query getLomQuery = getLomDB.orderByChild("keanggotaan").equalTo("RENDAH");
-        getLomQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    String keyTest = dataSnapshot.getKey();
-                    Log.e("Key Test ", keyTest);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-     */
-
-
-//       LastModel lastModelSes = new LastModel(realNamaPenyakit,"1");
-//        getmDatabaseLastValue.child("LastResult").child(userId).child("SES").child("keyy").setValue(lastModelSes);
-
-//       sumKeanggotaan();
    }
-
-//   void casting(){
-//        Log.e("Casting 1", String.valueOf(a.size()));
-//       Log.e("Casting 2", String.valueOf(b.size()));
-//       Log.e("Casting 3", String.valueOf(c.size()));
-//   }
 
    public void sumKeanggotaan(List<String > a,List<String > b,List<String > c, String IDuser, String penya, String realPenyakiti,String valueCF){
         String userId = IDuser;
@@ -615,21 +504,4 @@ public class Defuzzyfikasi {
         lastStep.clear();
     }
 
-//   public boolean databaseChecker(){
-//       final boolean[] valueData = {false};
-//        DatabaseReference dbChecker = FirebaseDatabase.getInstance().getReference().child("Defuzzyfikasi").child(userId);
-//        dbChecker.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                if (snapshot.exists());
-//                    valueData[0] = true;
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//       return valueData[0];
-//   }
 }

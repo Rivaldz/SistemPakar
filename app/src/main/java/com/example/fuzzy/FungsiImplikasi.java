@@ -13,7 +13,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class FungsiImplikasi {
     public String  namaHama, userId;
@@ -27,17 +26,14 @@ public class FungsiImplikasi {
     }
 
     public  void onPenyakit(){
-//        Log.e("this on ","penyakit007");
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabasePakar = FirebaseDatabase.getInstance().getReference().child("Fuzzyfikasi").child(userId).child(namaHama).child("pakar");
         mDatabaseUser = FirebaseDatabase.getInstance().getReference().child("Fuzzyfikasi").child(userId).child(namaHama).child("user");
         mDatabasePakar.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                fungsiImplikasiModels = new ArrayList<>();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     FungsiImplikasiModel fungsiImplikasiModel = dataSnapshot.getValue(FungsiImplikasiModel.class);
-//                    Log.i("show result model",fungsiImplikasiModel.getHimpunanRingan());
                     fungsiImplikasiModel.setKey(dataSnapshot.getKey());
                     fungsiImplikasiModelsPakar.add(fungsiImplikasiModel);
                 }
@@ -46,15 +42,11 @@ public class FungsiImplikasi {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                             FungsiImplikasiModel fungsiImplikasiModelUser = dataSnapshot.getValue(FungsiImplikasiModel.class);
-//                            Log.i("show result model",fungsiImplikasiModelUser.getHimpunanRingan());
                             fungsiImplikasiModelUser.setKey(dataSnapshot.getKey());
                             fungsiImplikasiModelsUser.add(fungsiImplikasiModelUser);
                         }
 
                         for (int j = 0; j < fungsiImplikasiModelsPakar.size(); j++) {
-//                            Log.e("Set -> ",fungsiImplikasiModelsPakar.get(j).getKey());
-//                            Log.e("Set -> ",fungsiImplikasiModelsUser.get(j).getKey());
-
                             //R1 Ringan && Ringan
                             if (Double.parseDouble(fungsiImplikasiModelsPakar.get(j).getHimpunanRingan()) != 0 && Double.parseDouble(fungsiImplikasiModelsUser.get(j).getHimpunanRingan()) != 0 ){
                                 double minFunction = Math.min(Double.parseDouble(fungsiImplikasiModelsUser.get(j).getHimpunanRingan()),Double.parseDouble(fungsiImplikasiModelsPakar.get(j).getHimpunanRingan()));
@@ -134,10 +126,6 @@ public class FungsiImplikasi {
                     }
                 });
 
-
-
-//                System.out.println("Result from counter : " + String.valueOf(lihathasil));
-
             }
 
             @Override
@@ -145,10 +133,6 @@ public class FungsiImplikasi {
 
             }
         });
-
-//        for (int j = 0; j < fungsiImplikasiModels.size(); j++) {
-//            Log.e("result fungsiimplikasi",fungsiImplikasiModels.get(0).getHimpunanSedang());
-//        }
 
     }
 }

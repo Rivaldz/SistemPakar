@@ -41,9 +41,6 @@ public class FMAdapter extends RecyclerView.Adapter<FMAdapter.ViewHolder> {
         holder.namaPenha.setText(hasilAkhirsvar.get(position).namaPenyakit);
         holder.resultCF.setText(hasilAkhirsvar.get(position).hasilCF);
         holder.resulFM.setText(hasilAkhirsvar.get(position).hasiFM);
-//        holder.namaPenha.setText("sej");
-//        holder.resultCF.setText("sut");
-//        holder.resulFM.setText("sitj");
     }
 
     @Override
